@@ -2,6 +2,9 @@
 
 Work in progress...
 
+![Image of Memory Cards Game board](src/img/readme.png)
+
+
 ## Getting Started
 
 ### Prerequisites
