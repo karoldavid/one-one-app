@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import firebase from "firebase";
+import { connect } from "react-redux";
+import { emailChanged, passwordChanged, loginUser } from "../actions";
 import {
   StyleSheet,
   Text,
@@ -10,37 +11,16 @@ import {
 } from "react-native";
 
 class LoginForm extends Component {
-  state = {
-    email: "@",
-    password: ""
-  };
-
-  handleEmail = text => {
-    this.setState({ email: text });
-  };
-
-  handlePassword = text => {
-    this.setState({ password: text });
-  };
-
-  login = (email, password) => {
-    firebase.auth().onAuthStateChanged(user => {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(user => console.log("login user success"))
-        .catch(error => {
-          console.log(error);
-          firebase
-            .auth()
-            .createUserWithEmailAndPassword(email, password)
-            .then(user => console.log("user created login user success"))
-            .catch(() => console.log("login user fail"));
-        });
-    });
-  };
-
   render() {
+    const {
+      email,
+      password,
+      error,
+      emailChanged,
+      passwordChanged,
+      loginUser
+    } = this.props;
+
     return (
       <KeyboardAvoidingView style={styles.container}>
         <Text>1:1 Appointment Management App</Text>
@@ -51,8 +31,8 @@ class LoginForm extends Component {
           placeholder="Email"
           placeholderTextColor="#9a73ef"
           autoCapitalize="none"
-          value={this.state.email}
-          onChangeText={this.handleEmail}
+          value={email}
+          onChangeText={emailChanged}
         />
 
         <TextInput
@@ -61,15 +41,18 @@ class LoginForm extends Component {
           placeholder="Password"
           placeholderTextColor="#9a73ef"
           autoCapitalize="none"
-          onChangeText={this.handlePassword}
+          secureTextEntry
+          value={password}
+          onChangeText={passwordChanged}
         />
 
         <TouchableOpacity
           style={styles.submitButton}
-          onPress={() => this.login(this.state.email, this.state.password)}
+          onPress={() => loginUser({ email, password })}
         >
           <Text style={styles.submitButtonText}> Submit </Text>
         </TouchableOpacity>
+        <Text>{error}</Text>
       </KeyboardAvoidingView>
     );
   }
@@ -97,8 +80,24 @@ const styles = StyleSheet.create({
     alignSelf: "stretch"
   },
   submitButtonText: {
-    color: "white"
+    color: "white",
+    alignSelf: "center"
   }
 });
 
-export default LoginForm;
+const mapStateToProps = ({ auth }) => {
+  const { email, password, error, loading } = auth;
+  console.log(auth);
+  return {
+    email,
+    password,
+    error,
+    loading
+  };
+};
+
+export default connect(mapStateToProps, {
+  emailChanged,
+  passwordChanged,
+  loginUser
+})(LoginForm);
