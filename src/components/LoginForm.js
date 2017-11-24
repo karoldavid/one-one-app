@@ -18,7 +18,8 @@ class LoginForm extends Component {
       error,
       emailChanged,
       passwordChanged,
-      loginUser
+      loginUser,
+      navigation
     } = this.props;
 
     return (
@@ -48,7 +49,11 @@ class LoginForm extends Component {
 
         <TouchableOpacity
           style={styles.submitButton}
-          onPress={() => loginUser({ email, password })}
+          onPress={() =>
+            loginUser({ email, password }, () => {
+              navigation.navigate("StudentsListView");
+            })
+          }
         >
           <Text style={styles.submitButtonText}> Submit </Text>
         </TouchableOpacity>
@@ -87,7 +92,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = ({ auth }) => {
   const { email, password, error, loading } = auth;
-  console.log(auth);
   return {
     email,
     password,
