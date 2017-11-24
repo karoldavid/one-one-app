@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { emailChanged, passwordChanged, loginUser } from "../actions";
 import {
+  Dimensions,
   StyleSheet,
   Text,
   TextInput,
@@ -23,9 +24,9 @@ class LoginForm extends Component {
     } = this.props;
 
     return (
-      <KeyboardAvoidingView style={styles.container}>
-        <Text>1:1 Appointment Management App</Text>
-
+      <View style={styles.container}>
+      <Text style={styles.header}>1:1 Appointments</Text>
+      <KeyboardAvoidingView style={{flex:0.8}}>
         <TextInput
           style={styles.input}
           underlineColorAndroid="transparent"
@@ -59,6 +60,7 @@ class LoginForm extends Component {
         </TouchableOpacity>
         <Text>{error}</Text>
       </KeyboardAvoidingView>
+      </View>
     );
   }
 }
@@ -68,21 +70,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "space-around"
+  },
+  header: {
+    fontWeight: "bold",
+    color: "#7a42f4",
+    fontSize: 24
   },
   input: {
     margin: 15,
     height: 40,
     borderColor: "#7a42f4",
     borderWidth: 1,
-    alignSelf: "stretch"
+    width: Dimensions.get('window').width * 0.8
   },
   submitButton: {
     backgroundColor: "#7a42f4",
     padding: 10,
     margin: 15,
-    height: 40,
-    alignSelf: "stretch"
+    height: 40
   },
   submitButtonText: {
     color: "white",
