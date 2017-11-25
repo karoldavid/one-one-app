@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { emailChanged, passwordChanged, loginUser } from "../actions";
 import {
-  Dimensions,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
   KeyboardAvoidingView
 } from "react-native";
+
+import styles from "../utils/styles"
 
 class LoginForm extends Component {
   render() {
@@ -64,37 +64,6 @@ class LoginForm extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "space-around"
-  },
-  header: {
-    fontWeight: "bold",
-    color: "#7a42f4",
-    fontSize: 24
-  },
-  input: {
-    margin: 15,
-    height: 40,
-    borderColor: "#7a42f4",
-    borderWidth: 1,
-    width: Dimensions.get('window').width * 0.8
-  },
-  submitButton: {
-    backgroundColor: "#7a42f4",
-    padding: 10,
-    margin: 15,
-    height: 40
-  },
-  submitButtonText: {
-    color: "white",
-    alignSelf: "center"
-  }
-});
 
 const mapStateToProps = ({ auth }) => {
   const { email, password, error, loading } = auth;

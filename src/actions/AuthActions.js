@@ -36,7 +36,6 @@ export const loginSuccess = user => {
 };
 
 export const loginUser = ({ email, password }, callback) => {
-	console.log(callback);
 	return dispatch => {
 		dispatch({ type: LOGIN_USER });
 		firebase
