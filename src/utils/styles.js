@@ -33,12 +33,18 @@ const submitButtonText = {
 	alignSelf: "center"
 };
 
+const loginError = {
+	alignSelf: "center",
+	color: "red"
+};
+
 const styles = StyleSheet.create({
 	container,
 	header,
 	input,
 	submitButton,
-	submitButtonText
+	submitButtonText,
+	loginError
 });
 
 export default styles;

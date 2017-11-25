@@ -68,7 +68,7 @@ class LoginForm extends Component {
           />
 
           <View>{this.renderLoginButton()}</View>
-          <Text>{error}</Text>
+          <Text style={styles.loginError}>{error}</Text>
         </KeyboardAvoidingView>
       </View>
     );
