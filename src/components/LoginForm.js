@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { emailChanged, passwordChanged, loginUser } from "../actions";
+import { resetNavigation } from "../utils/helpers";
 import {
   Text,
   TextInput,
@@ -9,7 +10,6 @@ import {
   KeyboardAvoidingView,
   ActivityIndicator
 } from "react-native";
-
 import styles from "../utils/styles";
 
 class LoginForm extends Component {
@@ -24,7 +24,7 @@ class LoginForm extends Component {
         style={styles.submitButton}
         onPress={() =>
           loginUser({ email, password }, () => {
-            navigation.navigate("StudentsListView");
+            resetNavigation(navigation, "StudentsListView");
           })
         }
       >
