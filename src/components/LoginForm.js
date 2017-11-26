@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { emailChanged, passwordChanged, loginUser } from "../actions";
+import {
+  loggedIn,
+  removeFromStorage,
+  emailChanged,
+  passwordChanged,
+  loginUser
+} from "../actions";
 import { resetNavigation } from "../utils/helpers";
 import {
   Text,
@@ -13,6 +19,10 @@ import {
 import styles from "../utils/styles";
 
 class LoginForm extends Component {
+  componentWillMount() {
+    //this.props.removeFromStorage()
+    this.props.loggedIn();
+  }
   renderLoginButton() {
     const { email, password, loading, loginUser, navigation } = this.props;
 
@@ -76,7 +86,10 @@ class LoginForm extends Component {
 }
 
 const mapStateToProps = ({ auth }) => {
-  const { email, password, error, loading } = auth;
+  const { email, password, error, loading, user } = auth;
+
+  //if (auth.user !== null) console.log(auth.user.uid)
+  //if (auth.user !== null) console.log(auth)
   return {
     email,
     password,
@@ -86,6 +99,8 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps, {
+  removeFromStorage,
+  loggedIn,
   emailChanged,
   passwordChanged,
   loginUser

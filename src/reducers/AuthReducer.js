@@ -3,7 +3,8 @@ import {
 	PASSWORD_CHANGED,
 	LOGIN_USER_SUCCESS,
 	LOGIN_USER_FAIL,
-	LOGIN_USER
+	LOGIN_USER,
+	LOGGED_IN
 } from "../actions/types";
 
 const INITIAL_AUTH_STATE = {

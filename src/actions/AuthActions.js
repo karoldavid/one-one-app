@@ -3,10 +3,33 @@ import {
 	PASSWORD_CHANGED,
 	LOGIN_USER_SUCCESS,
 	LOGIN_USER_FAIL,
-	LOGIN_USER
+	LOGIN_USER,
+	LOGGED_IN
 } from "./types";
+import { getUser, saveUser, removeUser } from "../utils/api";
 import firebase from "firebase";
 import { NavigationActions } from "react-navigation";
+
+export const removeFromStorage = () => {
+	return dispatch => {
+		removeUser();
+	};
+};
+
+export const loggedIn = () => {
+	return dispatch => {
+		getUser()
+			.then(data => {
+				if (data !== null) {
+					const key = Object.keys(data)[0];
+					const { email, password } = data[key];
+					dispatch(emailChanged(email));
+					dispatch(passwordChanged(password));
+				}
+			})
+			.catch(err => console.log("err:", err));
+	};
+};
 
 export const emailChanged = text => {
 	return {
@@ -36,6 +59,7 @@ export const loginSuccess = user => {
 };
 
 export const loginUser = ({ email, password }, callback) => {
+	saveUser({ email, password });
 	return dispatch => {
 		dispatch({ type: LOGIN_USER });
 		firebase
