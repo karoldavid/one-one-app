@@ -21,8 +21,7 @@ export const loggedIn = () => {
 		getUser()
 			.then(data => {
 				if (data !== null) {
-					const key = Object.keys(data)[0];
-					const { email, password } = data[key];
+					const { email, password } = data;
 					dispatch(emailChanged(email));
 					dispatch(passwordChanged(password));
 				}
@@ -59,19 +58,18 @@ export const loginSuccess = user => {
 };
 
 export const loginUser = ({ email, password }, callback) => {
-	saveUser({ email, password });
 	return dispatch => {
 		dispatch({ type: LOGIN_USER });
 		firebase
 			.auth()
 			.signInWithEmailAndPassword(email, password)
-			.then(user => loginUserSuccess(dispatch, user, callback))
+			.then(user => loginUserSuccess(dispatch, { email, password }, user, callback))
 			.catch(error => {
 				console.log(error);
 				firebase
 					.auth()
 					.createUserWithEmailAndPassword(email, password)
-					.then(user => loginUserSuccess(dispatch, user, callback))
+					.then(user => loginUserSuccess(dispatch, { email, password }, user, callback))
 					.catch(() => loginUserFail(dispatch));
 			});
 	};
@@ -81,7 +79,8 @@ const loginUserFail = dispatch => {
 	dispatch(loginFail());
 };
 
-const loginUserSuccess = (dispatch, user, callback) => {
+const loginUserSuccess = (dispatch, { email, password }, user, callback) => {
+	saveUser({ email, password });
 	dispatch(loginSuccess(user));
 	callback();
 };

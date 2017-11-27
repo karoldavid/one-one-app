@@ -18,11 +18,9 @@ export function saveUser({ email, password }) {
 	return AsyncStorage.mergeItem(
 		ONEONE_STORAGE_KEY,
 		JSON.stringify({
-			[uuidv1()]: {
-				email: email,
-				password: password,
-				timestamp: Date.now()
-			}
+			email: email,
+			password: password,
+			timestamp: Date.now()
 		})
 	).catch(() => {
 		console.log("error");

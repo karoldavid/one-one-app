@@ -20,7 +20,7 @@ import styles from "../utils/styles";
 
 class LoginForm extends Component {
   componentWillMount() {
-    //this.props.removeFromStorage()
+   // this.props.removeFromStorage()
     this.props.loggedIn();
   }
   renderLoginButton() {
