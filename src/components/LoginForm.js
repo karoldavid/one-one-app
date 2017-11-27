@@ -88,8 +88,6 @@ class LoginForm extends Component {
 const mapStateToProps = ({ auth }) => {
   const { email, password, error, loading, user } = auth;
 
-  //if (auth.user !== null) console.log(auth.user.uid)
-  //if (auth.user !== null) console.log(auth)
   return {
     email,
     password,

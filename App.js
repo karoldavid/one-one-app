@@ -7,6 +7,7 @@ import { Tabs, MainNavigator } from "./src/utils/navigation";
 
 export default class App extends Component {
   componentWillMount() {
+    console.ignoredYellowBox = ["Setting a timer"];
     firebase.initializeApp({
       apiKey: "AIzaSyBOxbSD_kd9y0wAbrLXOmuqNl93rA5WA6M",
       authDomain: "auth-ccf04.firebaseapp.com",

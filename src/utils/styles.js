@@ -38,13 +38,20 @@ const loginError = {
 	color: "red"
 };
 
+const item = {
+	padding: 10,
+	fontSize: 18,
+	height: 44
+};
+
 const styles = StyleSheet.create({
 	container,
 	header,
 	input,
 	submitButton,
 	submitButtonText,
-	loginError
+	loginError,
+	item
 });
 
 export default styles;
