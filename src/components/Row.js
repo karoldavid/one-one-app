@@ -1,9 +1,10 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, Image, View, Text } from "react-native";
 import { blue } from "../utils/colors";
 
 const Row = props => (
   <View style={styles.container}>
+    <Image source={{ uri: props.image }} style={styles.photo} />
     <Text style={styles.text}>{`${props.name.first} ${props.name.last}`}</Text>
   </View>
 );
