@@ -1,24 +1,43 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { FlatList, View, Text } from "react-native";
+import { ListView, View, Text } from "react-native";
 import { studentsFetch } from "../actions";
 import { makeArray } from "../utils/helpers";
 import styles from "../utils/styles";
 
 class StudentsListView extends Component {
+
 	componentWillMount() {
 		this.props.studentsFetch();
+		this.createDataSource(this.props);
 	}
-	render() {
-		const { students } = this.props;
 
+	componentWillReceiveProps(nextProps) {
+		this.createDataSource(nextProps);
+	}
+
+	createDataSource({ students }) {
+		const ds = new ListView.DataSource({
+			rowHasChanged: (r1, r2) => r1 !== r2
+		});
+
+		this.dataSource = ds.cloneWithRows(students);
+	}
+
+	renderRow(student) {
+		const { name } = student;
+		return (
+			<Text>{name}</Text>
+		)
+	}
+
+	render() {
 		return (
 			<View style={styles.container}>
-				<FlatList
-					data={students}
-					renderItem={({ item }) => (
-						<Text style={styles.item}>{item.name}</Text>
-					)}
+				<ListView
+					enableEmptySections
+					dataSource={this.dataSource}
+					renderRow={this.renderRow}
 				/>
 			</View>
 		);
