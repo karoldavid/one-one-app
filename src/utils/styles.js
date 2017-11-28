@@ -44,6 +44,17 @@ const item = {
 	height: 44
 };
 
+const text = {
+	marginLeft: 12,
+	fontSize: 16
+};
+
+const separator = {
+	flex: 1,
+	height: StyleSheet.hairlineWidth,
+	backgroundColor: "#8E8E8E"
+};
+
 const styles = StyleSheet.create({
 	container,
 	header,
@@ -51,7 +62,9 @@ const styles = StyleSheet.create({
 	submitButton,
 	submitButtonText,
 	loginError,
-	item
+	item,
+	text,
+	separator
 });
 
 export default styles;
