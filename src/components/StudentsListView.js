@@ -9,10 +9,12 @@ import ListItem from "./ListItem";
 class StudentsListView extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		headerRight: (
-			<Button
-				title={"Add"}
-				onPress={() => navigation.navigate("CreateStudentView")}
-			/>
+			<View style={{marginRight: 16}}>
+				<Button
+					title={"Add"}
+					onPress={() => navigation.navigate("CreateStudentView")}
+				/>
+			</View>
 		)
 	});
 
