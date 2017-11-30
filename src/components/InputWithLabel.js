@@ -17,14 +17,13 @@ class InputWithLabel extends Component {
 
 const styles = StyleSheet.create({
   labelContainer: {
-    flexDirection: "column",
-    marginVertical: 2,
-    flex: 1
+    marginVertical: 2
   },
   label: {
     width: 115,
     alignItems: "flex-start",
-    marginLeft: 15
+    marginLeft: 15,
+    marginBottom: 5
   },
   labelText: {
     color: blueMagenta
