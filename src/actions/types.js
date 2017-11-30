@@ -6,3 +6,5 @@ export const LOGIN_USER = "LOGIN_USER";
 export const LOGGED_IN = "LOGGED_IN";
 
 export const STUDENTS_FETCH_SUCCESS = "STUDENTS_FETCH_SUCCESS";
+
+export const STUDENT_SELECTED = "STUDENT_SELECTED";

@@ -3,6 +3,7 @@ import { blue, lightPurp, purple, white } from "./colors";
 import { Ionicons } from "@expo/vector-icons";
 import LoginForm from "../components/LoginForm";
 import StudentsListView from "../components/StudentsListView";
+import StudentView from "../components/StudentView";
 
 export const Tabs = TabNavigator(
   {
@@ -51,6 +52,16 @@ export const MainNavigator = StackNavigator({
     screen: StudentsListView,
     navigationOptions: {
       title: "All Students",
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue
+      }
+    }
+  },
+  StudentView: {
+    screen: StudentView,
+    navigationOptions: {
+      title: "Student",
       headerTintColor: white,
       headerStyle: {
         backgroundColor: blue

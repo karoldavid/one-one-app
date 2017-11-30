@@ -4,7 +4,7 @@ import { StyleSheet, ListView, View, Text } from "react-native";
 import { studentsFetch } from "../actions";
 import { makeArray } from "../utils/helpers";
 import { blue, white } from "../utils/colors";
-import Row from "./Row";
+import ListItem from "./ListItem";
 
 class StudentsListView extends Component {
 	componentWillMount() {
@@ -30,7 +30,7 @@ class StudentsListView extends Component {
 				<ListView
 					enableEmptySections
 					dataSource={this.dataSource}
-					renderRow={data => <Row {...data} />}
+					renderRow={student => <ListItem student={student} navigation={this.props.navigation} />}
 				/>
 			</View>
 		);

@@ -1,10 +1,20 @@
-import { STUDENTS_FETCH_SUCCESS } from "../actions/types"
+import {
+	STUDENT_SELECTED
+} from "../actions/types";
 
-const INITIAL_STUDENTS_STATE = {};
+const INITIAL_STATE = {
+	name: {
+		first: "",
+		last: ""
+	},
+	email: "",
+	program: "",
+	image: ""
+};
 
-export default (state = INITIAL_STUDENTS_STATE, action) => {
+export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case STUDENTS_FETCH_SUCCESS:
+		case STUDENT_SELECTED:
 			return action.payload;
 		default:
 			return state;
