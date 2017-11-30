@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import LoginForm from "../components/LoginForm";
 import StudentsListView from "../components/StudentsListView";
 import StudentView from "../components/StudentView";
+import CreateStudentForm from "../components/CreateStudentForm";
 
 export const Tabs = TabNavigator(
   {
@@ -67,5 +68,15 @@ export const MainNavigator = StackNavigator({
         backgroundColor: blue
       }
     }
-  }
+  },
+  CreateStudentView: {
+    screen: CreateStudentForm,
+    navigationOptions: {
+      title: "Add",
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue
+      }
+    }
+  },  
 });

@@ -1,12 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { StyleSheet, ListView, View, Text } from "react-native";
+import { StyleSheet, ListView, View, Text, Button } from "react-native";
 import { studentsFetch } from "../actions";
 import { makeArray } from "../utils/helpers";
 import { blue, white } from "../utils/colors";
 import ListItem from "./ListItem";
 
 class StudentsListView extends Component {
+	static navigationOptions = ({ navigation }) => ({
+		headerRight: (
+			<Button
+				title={"Add"}
+				onPress={() => navigation.navigate("CreateStudentView")}
+			/>
+		)
+	});
+
 	componentWillMount() {
 		this.props.studentsFetch();
 		this.createDataSource(this.props);
@@ -30,7 +39,12 @@ class StudentsListView extends Component {
 				<ListView
 					enableEmptySections
 					dataSource={this.dataSource}
-					renderRow={student => <ListItem student={student} navigation={this.props.navigation} />}
+					renderRow={student => (
+						<ListItem
+							student={student}
+							navigation={this.props.navigation}
+						/>
+					)}
 				/>
 			</View>
 		);
