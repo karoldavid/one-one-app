@@ -5,7 +5,7 @@ import { blueMagenta } from "../utils/colors";
 class InputWithLabel extends Component {
   render() {
     return (
-      <View style={styles.labelContainer}>
+      <View style={[styles.labelContainer, this.props.style]}>
         <View style={styles.label}>
           <Text style={styles.labelText}>{this.props.label}</Text>
         </View>
@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
   },
   label: {
     width: 115,
-    alignItems: "flex-start",
     marginLeft: 15,
     marginBottom: 5
   },

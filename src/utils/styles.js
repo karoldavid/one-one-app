@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
-import { blueMagenta, red, white } from "./colors"
+import { blueMagenta, red, white } from "./colors";
 
 const container = {
 	flex: 1,
@@ -65,6 +65,19 @@ const formInput = {
 	width: Dimensions.get("window").width * 0.8
 };
 
+const picker = {
+	width: Dimensions.get("window").width * 0.5,
+	backgroundColor: blueMagenta,
+	color: white
+};
+
+const pickerItem = {
+	fontSize: 15,
+	height: 75,
+	textAlign: "center",
+	fontWeight: "bold"
+};
+
 const styles = StyleSheet.create({
 	container,
 	header,
@@ -75,7 +88,9 @@ const styles = StyleSheet.create({
 	item,
 	text,
 	separator,
-	formInput
+	formInput,
+	picker,
+	pickerItem
 });
 
 export default styles;
