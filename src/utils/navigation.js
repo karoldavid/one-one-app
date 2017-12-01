@@ -5,6 +5,7 @@ import LoginForm from "../components/LoginForm";
 import StudentsListView from "../components/StudentsListView";
 import StudentView from "../components/StudentView";
 import CreateStudentForm from "../components/CreateStudentForm";
+import EditStudentForm from "../components/EditStudentForm";
 
 export const Tabs = TabNavigator(
   {
@@ -78,5 +79,15 @@ export const MainNavigator = StackNavigator({
         backgroundColor: blue
       }
     }
-  },  
+  },
+  EditStudentView: {
+    screen: EditStudentForm,
+    navigationOptions: {
+      title: "Add",
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue
+      }
+    }
+  }
 });

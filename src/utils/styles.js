@@ -78,6 +78,17 @@ const pickerItem = {
 	fontWeight: "bold"
 };
 
+const viewText = {
+	marginLeft: 12,
+	paddingBottom: 10,
+	fontSize: 16,
+	color: blueMagenta
+};
+const photo = {
+	height: 150,
+	width: 100
+};
+
 const styles = StyleSheet.create({
 	container,
 	header,
@@ -90,7 +101,9 @@ const styles = StyleSheet.create({
 	separator,
 	formInput,
 	picker,
-	pickerItem
+	pickerItem,
+	viewText,
+	photo
 });
 
 export default styles;
