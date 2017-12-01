@@ -17,6 +17,7 @@ import {
   ActivityIndicator
 } from "react-native";
 import styles from "../utils/styles";
+import Button from "./Button"
 
 class LoginForm extends Component {
   componentWillMount() {
@@ -30,16 +31,11 @@ class LoginForm extends Component {
       return <ActivityIndicator />;
     }
     return (
-      <TouchableOpacity
-        style={styles.submitButton}
-        onPress={() =>
+      <Button title={"Submit"} onPress={() =>
           loginUser({ email, password }, () => {
             resetNavigation(navigation, "StudentsListView");
           })
-        }
-      >
-        <Text style={styles.submitButtonText}> Submit </Text>
-      </TouchableOpacity>
+        } />
     );
   }
 

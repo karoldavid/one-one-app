@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-	Text,
 	View,
 	TextInput,
-	TouchableOpacity,
 	Picker,
 	KeyboardAvoidingView
 } from "react-native";
 import styles from "../utils/styles";
 import InputWithLabel from "./InputWithLabel";
+import Button from "./Button";
 import { updateStudent, createStudent } from "../actions";
 import { resetNavigation } from "../utils/helpers";
 
@@ -111,16 +110,14 @@ class CreateStudentForm extends Component {
 							}
 						/>
 					</InputWithLabel>
-					<TouchableOpacity
-						style={styles.submitButton}
+					<Button
+						title={"Submit"}
 						onPress={() =>
 							this.props.createStudent(this.props.student, () => {
 								resetNavigation(navigation, "StudentsListView");
 							})
 						}
-					>
-						<Text style={styles.submitButtonText}> Submit </Text>
-					</TouchableOpacity>
+					/>
 				</KeyboardAvoidingView>
 			</View>
 		);
