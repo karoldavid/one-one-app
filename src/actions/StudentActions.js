@@ -15,10 +15,8 @@ export const updateStudent = ({ prop, value }) => {
 	};
 };
 
-export const createStudent = student => {
+export const createStudent = (student, callback) => {
 	const { currentUser } = firebase.auth();
-
-	console.log(student);
 
 	return dispatch => {
 		firebase
@@ -27,7 +25,7 @@ export const createStudent = student => {
 			.push(student)
 			.then(() => {
 				dispatch({ type: STUDENT_CREATE });
-				// redirect to students list view
+				callback();
 			});
 	};
 };
