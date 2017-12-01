@@ -1,4 +1,5 @@
-import { STUDENT_SELECT, STUDENT_CHANGE } from "./types";
+import { STUDENT_SELECT, STUDENT_CHANGE, STUDENT_CREATE } from "./types";
+import firebase from "firebase";
 
 export const selectStudent = student => {
 	return {
@@ -11,5 +12,22 @@ export const updateStudent = ({ prop, value }) => {
 	return {
 		type: STUDENT_CHANGE,
 		payload: { prop, value }
+	};
+};
+
+export const createStudent = student => {
+	const { currentUser } = firebase.auth();
+
+	console.log(student);
+
+	return dispatch => {
+		firebase
+			.database()
+			.ref(`/users/${currentUser.uid}/students`)
+			.push(student)
+			.then(() => {
+				dispatch({ type: STUDENT_CREATE });
+				// redirect to students list view
+			});
 	};
 };
