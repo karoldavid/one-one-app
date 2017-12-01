@@ -3,14 +3,9 @@ import { connect } from "react-redux";
 import { Text, View, TextInput, Button } from "react-native";
 import styles from "../utils/styles";
 import InputWithLabel from "./InputWithLabel";
+import { updateStudent } from "../actions"
 
 class CreateStudentForm extends Component {
-	state = {
-		first: "",
-		last: "",
-		email: "",
-		program: ""
-	};
 
 	render() {
 		return (
@@ -19,28 +14,32 @@ class CreateStudentForm extends Component {
 					<TextInput
 						style={styles.formInput}
 						placeholder="first name"
-						onChangeText={first => this.setState({ first })}
+						value={this.props.firstName}
+						onChangeText={value => this.props.updateStudent({ prop: "firstName", value })}
 					/>
 				</InputWithLabel>
 				<InputWithLabel label={"Last Name"}>
 					<TextInput
 						style={styles.formInput}
+						value={this.props.lastName}
 						placeholder="last name"
-						onChangeText={last => this.setState({ last })}
+						onChangeText={value => this.props.updateStudent({ prop: "lastName", value })}
 					/>
 				</InputWithLabel>
 				<InputWithLabel label={"Email"}>
 					<TextInput
 						style={styles.formInput}
 						placeholder="email"
-						onChangeText={email => this.setState({ email })}
+						value={this.props.email}
+						onChangeText={value => this.props.updateStudent({ prop: "email", value })}
 					/>
 				</InputWithLabel>
 				<InputWithLabel label={"Program"}>
 					<TextInput
 						style={styles.formInput}
 						placeholder="program"
-						onChangeText={program => this.setState({ program })}
+						value={this.props.program}
+						onChangeText={value => this.props.updateStudent({ prop: "program", value })}
 					/>
 				</InputWithLabel>
 				<Button title={"Submit"} onPress={() => alert("submit")} />
@@ -50,13 +49,14 @@ class CreateStudentForm extends Component {
 }
 
 const mapStateToProps = state => {
-	const { name, email, program, image } = state.student;
+	const { firstName, lastName, email, program, image } = state.student;
 	return {
-		name,
+		firstName,
+		lastName,
 		email,
 		program,
 		image
 	};
 };
 
-export default connect(mapStateToProps)(CreateStudentForm);
+export default connect(mapStateToProps, { updateStudent })(CreateStudentForm);

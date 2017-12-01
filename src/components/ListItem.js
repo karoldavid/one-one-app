@@ -12,12 +12,12 @@ class ListItem extends Component {
   };
 
   render() {
-    const { image, name } = this.props.student;
+    const { image, firstName, lastName } = this.props.student;
     return (
       <TouchableOpacity onPress={this.onListItemPress}>
         <View style={styles.container}>
           <Image source={{ uri: image }} style={styles.photo} />
-          <Text style={styles.text}>{`${name.first} ${name.last}`}</Text>
+          <Text style={styles.text}>{`${firstName} ${lastName}`}</Text>
         </View>
       </TouchableOpacity>
     );
