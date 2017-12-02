@@ -2,7 +2,8 @@ import {
 	STUDENT_SELECT,
 	STUDENT_CHANGE,
 	STUDENT_CREATE,
-	STUDENT_SAVE_SUCCESS
+	STUDENT_SAVE_SUCCESS,
+	STUDENT_DELETE_SUCCESS
 } from "./types";
 import firebase from "firebase";
 
@@ -45,6 +46,20 @@ export const saveStudent = (student, callback) => {
 			.set(data)
 			.then(() => {
 				dispatch({ type: STUDENT_SAVE_SUCCESS });
+				callback();
+			});
+	};
+};
+
+export const deleteStudent = (uid, callback) => {
+	const { currentUser } = firebase.auth();
+	return dispatch => {
+		firebase
+			.database()
+			.ref(`/users/${currentUser.uid}/students/${uid}`)
+			.remove()
+			.then(() => {
+				dispatch({ type: STUDENT_DELETE_SUCCESS });
 				callback();
 			});
 	};

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Dimensions, Image, Text, View } from "react-native";
 import styles from "../utils/styles";
 import Button from "./Button";
+import { deleteStudent } from "../actions";
 
 class StudentView extends Component {
 	render() {
@@ -11,8 +12,10 @@ class StudentView extends Component {
 			lastName,
 			email,
 			program,
-			image
+			image,
+			uid
 		} = this.props.student;
+		const { deleteStudent, navigation } = this.props;
 		return (
 			<View
 				style={[
@@ -48,10 +51,11 @@ class StudentView extends Component {
 					/>
 					<Button
 						title={"Delete"}
-						onPress={() => {
-							console.log("Delete")
-							//this.props.navigation.navigate("EditStudentView");
-						}}
+						onPress={() =>
+							deleteStudent(uid, () =>
+								navigation.navigate("StudentsListView")
+							)
+						}
 					/>
 				</View>
 			</View>
@@ -65,4 +69,4 @@ const mapStateToProps = ({ student }) => {
 	};
 };
 
-export default connect(mapStateToProps)(StudentView);
+export default connect(mapStateToProps, { deleteStudent })(StudentView);
