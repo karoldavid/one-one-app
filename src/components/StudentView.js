@@ -46,6 +46,13 @@ class StudentView extends Component {
 							this.props.navigation.navigate("EditStudentView");
 						}}
 					/>
+					<Button
+						title={"Delete"}
+						onPress={() => {
+							console.log("Delete")
+							//this.props.navigation.navigate("EditStudentView");
+						}}
+					/>
 				</View>
 			</View>
 		);
