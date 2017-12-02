@@ -7,7 +7,7 @@ import { saveStudent } from "../actions";
 import { resetNavigation } from "../utils/helpers";
 import StudentForm from "./StudentForm";
 
-class EditStudentForm extends Component {
+class EditStudentView extends Component {
 	render() {
 		const { navigation, student } = this.props;
 
@@ -36,4 +36,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, { saveStudent })(EditStudentForm);
+export default connect(mapStateToProps, { saveStudent })(EditStudentView);
