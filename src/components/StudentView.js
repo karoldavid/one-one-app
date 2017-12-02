@@ -52,9 +52,9 @@ class StudentView extends Component {
 	}
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ student }) => {
 	return {
-		student: state.student
+		student
 	};
 };
 

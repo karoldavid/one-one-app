@@ -29,8 +29,7 @@ class EditStudentView extends Component {
 	}
 }
 
-const mapStateToProps = state => {
-	const { student } = state;
+const mapStateToProps = ({ student }) => {
 	return {
 		student
 	};
