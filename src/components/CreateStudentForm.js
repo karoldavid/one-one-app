@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-	View,
-	TextInput,
-	Picker,
-	KeyboardAvoidingView
-} from "react-native";
+import { View, TextInput, Picker, KeyboardAvoidingView } from "react-native";
 import styles from "../utils/styles";
 import InputWithLabel from "./InputWithLabel";
 import Button from "./Button";
@@ -113,9 +108,9 @@ class CreateStudentForm extends Component {
 					<Button
 						title={"Submit"}
 						onPress={() =>
-							this.props.createStudent(this.props.student, () => {
-								resetNavigation(navigation, "StudentsListView");
-							})
+							this.props.createStudent(this.props.student, () =>
+								resetNavigation(navigation, "StudentsListView")
+							)
 						}
 					/>
 				</KeyboardAvoidingView>

@@ -1,15 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-	View,
-	TextInput,
-	Picker,
-	KeyboardAvoidingView
-} from "react-native";
+import { View, TextInput, Picker, KeyboardAvoidingView } from "react-native";
 import styles from "../utils/styles";
 import InputWithLabel from "./InputWithLabel";
 import Button from "./Button";
-import { updateStudent } from "../actions";
+import { updateStudent, saveStudent } from "../actions";
 import { resetNavigation } from "../utils/helpers";
 
 class EditStudentForm extends Component {
@@ -113,9 +108,9 @@ class EditStudentForm extends Component {
 					<Button
 						title={"Update"}
 						onPress={() =>
-							// update student
-						    // resetNavigation(navigation, "StudentsListView");
-							alert("update student!")
+							this.props.saveStudent(this.props.student, () =>
+								resetNavigation(navigation, "StudentsListView")
+							)
 						}
 					/>
 				</KeyboardAvoidingView>
@@ -131,6 +126,6 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, { updateStudent })(
+export default connect(mapStateToProps, { updateStudent, saveStudent })(
 	EditStudentForm
 );

@@ -1,4 +1,9 @@
-import { STUDENT_SELECT, STUDENT_CHANGE, STUDENT_CREATE } from "./types";
+import {
+	STUDENT_SELECT,
+	STUDENT_CHANGE,
+	STUDENT_CREATE,
+	STUDENT_SAVE_SUCCESS
+} from "./types";
 import firebase from "firebase";
 
 export const selectStudent = student => {
@@ -25,6 +30,21 @@ export const createStudent = (student, callback) => {
 			.push(student)
 			.then(() => {
 				dispatch({ type: STUDENT_CREATE });
+				callback();
+			});
+	};
+};
+
+export const saveStudent = (student, callback) => {
+	const { currentUser } = firebase.auth();
+	let { uid, ...data } = student;
+	return dispatch => {
+		firebase
+			.database()
+			.ref(`/users/${currentUser.uid}/students/${uid}`)
+			.set(data)
+			.then(() => {
+				dispatch({ type: STUDENT_SAVE_SUCCESS });
 				callback();
 			});
 	};
