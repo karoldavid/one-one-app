@@ -3,9 +3,28 @@ import { connect } from "react-redux";
 import { Dimensions, Image, Text, View } from "react-native";
 import styles from "../utils/styles";
 import Button from "./Button";
-import { deleteStudent } from "../actions";
+import ArrowBack from "./ArrowBack";
+import { deleteStudent, deselectStudent } from "../actions";
 
 class StudentView extends Component {
+	componentWillMount() {
+		const { deselectStudent, navigation } = this.props;
+		navigation.setParams({
+			deselectStudent
+		});
+	}
+
+	static navigationOptions = ({ navigation }) => ({
+		headerLeft: (
+			<ArrowBack
+				onPress={() => {
+					navigation.state.params.deselectStudent();
+					navigation.goBack();
+				}}
+			/>
+		)
+	});
+
 	render() {
 		const {
 			firstName,
@@ -69,4 +88,6 @@ const mapStateToProps = ({ student }) => {
 	};
 };
 
-export default connect(mapStateToProps, { deleteStudent })(StudentView);
+export default connect(mapStateToProps, { deleteStudent, deselectStudent })(
+	StudentView
+);

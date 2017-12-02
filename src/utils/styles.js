@@ -34,6 +34,11 @@ const submitButtonText = {
 	alignSelf: "center"
 };
 
+const arrowStyles = {
+	paddingLeft: 20,
+	paddingRight: 20
+};
+
 const loginError = {
 	alignSelf: "center",
 	color: red
@@ -95,6 +100,7 @@ const styles = StyleSheet.create({
 	input,
 	submitButton,
 	submitButtonText,
+	arrowStyles,
 	loginError,
 	item,
 	text,
