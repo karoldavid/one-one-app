@@ -37,7 +37,7 @@ class StudentsListView extends Component {
 			rowHasChanged: (r1, r2) => r1 !== r2
 		});
 
-		this.dataSource = ds.cloneWithRows(_.orderBy(students, orderBy, sortDirection));
+		this.dataSource = ds.cloneWithRows(_.orderBy(students, [student => student[orderBy].toLowerCase()], [sortDirection]));
 	}
 
 	render() {
