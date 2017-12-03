@@ -94,6 +94,12 @@ const photo = {
 	width: 100
 };
 
+const overlay = {
+		position: "absolute",
+		bottom: 0,
+		right: 0
+	}
+
 const styles = StyleSheet.create({
 	container,
 	header,
@@ -109,7 +115,8 @@ const styles = StyleSheet.create({
 	picker,
 	pickerItem,
 	viewText,
-	photo
+	photo,
+	overlay
 });
 
 export default styles;
