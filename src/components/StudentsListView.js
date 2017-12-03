@@ -5,13 +5,13 @@ import { studentsFetch } from "../actions";
 import { makeArray } from "../utils/helpers";
 import { blue, white } from "../utils/colors";
 import ListItem from "./ListItem";
+import AddButton from "./AddButton"
 
 class StudentsListView extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		headerRight: (
 			<View style={{marginRight: 16}}>
-				<Button
-					title={"Add"}
+				<AddButton
 					onPress={() => navigation.navigate("CreateStudentView")}
 				/>
 			</View>
