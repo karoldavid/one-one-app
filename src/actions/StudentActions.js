@@ -43,14 +43,13 @@ export const createStudent = (student, callback) => {
 	};
 };
 
-export const saveStudent = (student, callback) => {
+export const saveStudent = ({ uid, ...student}, callback) => {
 	const { currentUser } = firebase.auth();
-	let { uid, ...data } = student;
 	return dispatch => {
 		firebase
 			.database()
 			.ref(`/users/${currentUser.uid}/students/${uid}`)
-			.set(data)
+			.set(student)
 			.then(() => {
 				dispatch({ type: STUDENT_SAVE_SUCCESS });
 				callback();

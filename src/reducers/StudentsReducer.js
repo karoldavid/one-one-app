@@ -1,5 +1,4 @@
 import { STUDENTS_FETCH_SUCCESS } from "../actions/types";
-import _ from "lodash";
 
 const INITIAL_STUDENTS_STATE = {
 	students: {},
@@ -13,7 +12,7 @@ export default (state = INITIAL_STUDENTS_STATE, action) => {
 		case STUDENTS_FETCH_SUCCESS:
 			return {
 				...state,
-				students: _.orderBy(action.payload, [orderBy], [sortDirection])
+				students: action.payload
 			};
 		default:
 			return state;

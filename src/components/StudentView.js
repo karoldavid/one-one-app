@@ -21,8 +21,8 @@ class StudentView extends Component {
 			    size={30}
 			    color="white"
 				onPress={() => {
-					navigation.state.params.deselectStudent();
 					navigation.goBack();
+					navigation.state.params.deselectStudent();
 				}}
 			/>
 		)

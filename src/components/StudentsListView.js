@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import _ from "lodash";
 import { connect } from "react-redux";
 import { StyleSheet, ListView, View, Text, Button } from "react-native";
 import { studentsFetch } from "../actions";
@@ -31,11 +32,12 @@ class StudentsListView extends Component {
 	}
 
 	createDataSource({ students }) {
+		const { orderBy, sortDirection } = this.props;
 		const ds = new ListView.DataSource({
 			rowHasChanged: (r1, r2) => r1 !== r2
 		});
 
-		this.dataSource = ds.cloneWithRows(students);
+		this.dataSource = ds.cloneWithRows(_.orderBy(students, orderBy, sortDirection));
 	}
 
 	render() {
@@ -66,9 +68,11 @@ const styles = StyleSheet.create({
 	}
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ studentList: {students, orderBy, sortDirection} }) => {
 	return {
-		students: makeArray(state.studentList.students)
+		students: makeArray(students),
+		orderBy,
+		sortDirection
 	};
 };
 
