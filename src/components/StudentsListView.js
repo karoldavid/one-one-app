@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
 	return {
-		students: makeArray(state.students)
+		students: makeArray(state.studentList.students)
 	};
 };
 

@@ -5,6 +5,6 @@ import StudentReducer from "./StudentReducer";
 
 export default combineReducers({
 	auth: AuthReducer,
-	students: StudentsReducer,
+	studentList: StudentsReducer,
 	student: StudentReducer
 });
