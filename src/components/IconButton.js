@@ -4,14 +4,14 @@ import styles from "../utils/styles";
 import { white } from "../utils/colors";
 import { Ionicons } from "@expo/vector-icons";
 
-const AddButton = ({ onPress }) => {
+const IconButton = ({ onPress, ionicon, size, color }) => {
    return (
       <View style={styles.arrowStyles}>
          <TouchableOpacity onPress={onPress}>
-            <Ionicons name="md-add-circle" size={30} color={white} />
+            <Ionicons name={ionicon} size={size} color={color} />
          </TouchableOpacity>
       </View>
    );
 };
 
-export default AddButton;
+export default IconButton;

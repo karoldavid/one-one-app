@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Dimensions, Image, Text, View } from "react-native";
 import styles from "../utils/styles";
 import Button from "./Button";
-import ArrowBack from "./ArrowBack";
+import IconButton from "./IconButton";
 import { deleteStudent, deselectStudent } from "../actions";
 
 class StudentView extends Component {
@@ -16,7 +16,10 @@ class StudentView extends Component {
 
 	static navigationOptions = ({ navigation }) => ({
 		headerLeft: (
-			<ArrowBack
+			<IconButton
+			    ionicon="md-arrow-round-back"
+			    size={30}
+			    color="white"
 				onPress={() => {
 					navigation.state.params.deselectStudent();
 					navigation.goBack();

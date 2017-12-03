@@ -5,13 +5,16 @@ import { studentsFetch } from "../actions";
 import { makeArray } from "../utils/helpers";
 import { blue, white } from "../utils/colors";
 import ListItem from "./ListItem";
-import AddButton from "./AddButton"
+import IconButton from "./IconButton"
 
 class StudentsListView extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		headerRight: (
 			<View style={{marginRight: 16}}>
-				<AddButton
+				<IconButton
+					ionicon="md-add-circle"
+					size={30}
+					color="white"
 					onPress={() => navigation.navigate("CreateStudentView")}
 				/>
 			</View>
