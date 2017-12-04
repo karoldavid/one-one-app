@@ -1,25 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Dimensions, Image, Text, View } from "react-native";
+import { deleteStudent, deselectStudent } from "../actions";
 import styles from "../utils/styles";
 import Button from "./Button";
 import IconButton from "./IconButton";
-import { deleteStudent, deselectStudent } from "../actions";
+import ModalConfirm from "./ModalConfirm";
 
 class StudentView extends Component {
-	componentWillMount() {
-		const { deselectStudent, navigation } = this.props;
-		navigation.setParams({
-			deselectStudent
-		});
-	}
+	state = {
+		modalVisible: false
+	};
 
 	static navigationOptions = ({ navigation }) => ({
 		headerLeft: (
 			<IconButton
-			    ionicon="md-arrow-round-back"
-			    size={30}
-			    color="white"
+				ionicon="md-arrow-round-back"
+				size={30}
+				color="white"
 				onPress={() => {
 					navigation.goBack();
 					navigation.state.params.deselectStudent();
@@ -27,6 +25,27 @@ class StudentView extends Component {
 			/>
 		)
 	});
+
+	componentWillMount() {
+		const { deselectStudent, navigation } = this.props;
+		navigation.setParams({
+			deselectStudent
+		});
+	}
+
+	showModal() {
+		this.setState({ modalVisible: true });
+	}
+
+	hideModal() {
+		this.setState({ modalVisible: false });
+	}
+
+	deleteStudent() {
+		const { deleteStudent, navigation, student } = this.props;
+		this.setState({ modalVisible: false });
+		deleteStudent(student.uid, () => navigation.navigate("StudentsListView"));
+	}
 
 	render() {
 		const {
@@ -37,7 +56,6 @@ class StudentView extends Component {
 			image,
 			uid
 		} = this.props.student;
-		const { deleteStudent, navigation } = this.props;
 		return (
 			<View
 				style={[
@@ -71,14 +89,14 @@ class StudentView extends Component {
 							this.props.navigation.navigate("EditStudentView");
 						}}
 					/>
-					<Button
-						title={"Delete"}
-						onPress={() =>
-							deleteStudent(uid, () =>
-								navigation.navigate("StudentsListView")
-							)
-						}
-					/>
+					<Button title={"Delete"} onPress={() => this.showModal()} />
+					<ModalConfirm
+						modalVisible={this.state.modalVisible}
+						onConfirm={this.deleteStudent.bind(this)}
+						onDecline={this.hideModal.bind(this)}
+					>
+						Do you really want to delete this student?
+					</ModalConfirm>
 				</View>
 			</View>
 		);

@@ -89,16 +89,33 @@ const viewText = {
 	fontSize: 16,
 	color: blueMagenta
 };
+
 const photo = {
 	height: 150,
 	width: 100
 };
 
 const overlay = {
-		position: "absolute",
-		bottom: 0,
-		right: 0
-	}
+	position: "absolute",
+	bottom: 0,
+	right: 0
+};
+
+const modal = {
+	flex: 1,
+	justifyContent: "center",
+	backgroundColor: white,
+	padding: 15,
+	width: Dimensions.get("window").width
+};
+
+const modalText = {
+	textAlign: "center",
+	fontSize: 18,
+	lineHeight: 40,
+	paddingBottom: 20,
+	color: blueMagenta
+};
 
 const styles = StyleSheet.create({
 	container,
@@ -116,7 +133,9 @@ const styles = StyleSheet.create({
 	pickerItem,
 	viewText,
 	photo,
-	overlay
+	overlay,
+	modal,
+	modalText
 });
 
 export default styles;
