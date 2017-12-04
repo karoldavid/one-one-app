@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { KeyboardAvoidingView, View } from "react-native";
 import styles from "../utils/styles";
-import Button from "./Button";
+import { Button } from "./common";
 import StudentForm from "./StudentForm";
 import { createStudent } from "../actions";
 import { resetNavigation } from "../utils/helpers";

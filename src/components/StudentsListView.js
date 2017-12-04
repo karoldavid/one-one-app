@@ -6,7 +6,7 @@ import { studentsFetch } from "../actions";
 import { makeArray } from "../utils/helpers";
 import styles from "../utils/styles";
 import ListItem from "./ListItem";
-import IconButton from "./IconButton";
+import { IconButton } from "./common";
 
 class StudentsListView extends Component {
 	componentWillMount() {

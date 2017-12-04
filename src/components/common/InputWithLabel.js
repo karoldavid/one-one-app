@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { blueMagenta } from "../utils/colors";
+import { blueMagenta } from "../../utils/colors";
 
 class InputWithLabel extends Component {
   render() {
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default InputWithLabel;
+export { InputWithLabel };

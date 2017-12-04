@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, TextInput, Picker } from "react-native";
-import styles from "../utils/styles";
-import InputWithLabel from "./InputWithLabel";
 import { updateStudent } from "../actions";
+import styles from "../utils/styles";
+import { InputWithLabel } from "./common";
 
 class StudentForm extends Component {
 	selectProgram() {

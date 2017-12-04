@@ -17,7 +17,7 @@ import {
   ActivityIndicator
 } from "react-native";
 import styles from "../utils/styles";
-import Button from "./Button"
+import  { Button } from "./common"
 
 class LoginForm extends Component {
   componentWillMount() {

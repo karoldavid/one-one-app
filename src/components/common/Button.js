@@ -1,6 +1,6 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
-import styles from "../utils/styles";
+import styles from "../../utils/styles";
 
 const Button = ({ onPress, title }) => {
    return (
@@ -12,4 +12,4 @@ const Button = ({ onPress, title }) => {
    );
 };
 
-export default Button;
+export { Button };

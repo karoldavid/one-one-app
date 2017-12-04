@@ -3,9 +3,7 @@ import { connect } from "react-redux";
 import { Dimensions, Image, Text, View } from "react-native";
 import { deleteStudent, deselectStudent } from "../actions";
 import styles from "../utils/styles";
-import Button from "./Button";
-import IconButton from "./IconButton";
-import ModalConfirm from "./ModalConfirm";
+import { Button, IconButton, ModalConfirm } from "./common";
 
 class StudentView extends Component {
 	state = {
@@ -44,7 +42,9 @@ class StudentView extends Component {
 	deleteStudent() {
 		const { deleteStudent, navigation, student } = this.props;
 		this.setState({ modalVisible: false });
-		deleteStudent(student.uid, () => navigation.navigate("StudentsListView"));
+		deleteStudent(student.uid, () =>
+			navigation.navigate("StudentsListView")
+		);
 	}
 
 	render() {
