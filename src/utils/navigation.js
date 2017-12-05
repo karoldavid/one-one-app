@@ -1,10 +1,10 @@
 import React from "react";
 import { StackNavigator, DrawerNavigator } from "react-navigation";
 
-import { Text } from "react-native";
+import { Animated, Text } from "react-native";
 import { blue, lightPurp, purple, white } from "./colors";
 import { Ionicons } from "@expo/vector-icons";
-import { IconButton } from "../components/common";
+import { DrawerButton } from "../components/common";
 
 import LoginForm from "../components/LoginForm";
 import StudentsListView from "../components/StudentsListView";
@@ -16,21 +16,6 @@ import Drawer from "../components/Drawer";
 import UserView from "../components/UserView";
 import AboutView from "../components/AboutView";
 import LogoutView from "../components/LogoutView";
-
-const drawerButton = navigation => (
-  <IconButton
-    ionicon="md-menu"
-    size={30}
-    color="white"
-    onPress={() => {
-      if (navigation.state.index === 0) {
-        navigation.navigate("DrawerOpen");
-      } else {
-        navigation.navigate("DrawerClose");
-      }
-    }}
-  />
-);
 
 const DrawerStack = DrawerNavigator(
   {
@@ -56,7 +41,7 @@ const DrawerNavigation = StackNavigator({
       headerStyle: { backgroundColor: lightPurp },
       headerTintColor: white,
       gesturesEnabled: false,
-      headerRight: drawerButton(navigation)
+      headerRight: <DrawerButton navigation={navigation} />
     })
   }
 });
