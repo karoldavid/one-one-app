@@ -19,7 +19,7 @@ class CreateStudentForm extends Component {
 						title={"Submit"}
 						onPress={() =>
 							this.props.createStudent(student, () =>
-								resetNavigation(navigation, "StudentsListView")
+								resetNavigation(navigation, "DrawerView")
 							)
 						}
 					/>

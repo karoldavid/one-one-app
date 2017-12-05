@@ -19,7 +19,7 @@ class EditStudentView extends Component {
 						title={"Update"}
 						onPress={() =>
 							this.props.saveStudent(student, () =>
-								resetNavigation(navigation, "StudentsListView")
+								resetNavigation(navigation, "DrawerView")
 							)
 						}
 					/>
