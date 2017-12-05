@@ -17,11 +17,11 @@ import {
   ActivityIndicator
 } from "react-native";
 import styles from "../utils/styles";
-import  { Button } from "./common"
+import { Button } from "./common";
 
 class LoginForm extends Component {
   componentWillMount() {
-   // this.props.removeFromStorage()
+    // this.props.removeFromStorage()
     this.props.loggedIn();
   }
   renderLoginButton() {
@@ -31,11 +31,14 @@ class LoginForm extends Component {
       return <ActivityIndicator />;
     }
     return (
-      <Button title={"Submit"} onPress={() =>
+      <Button
+        title={"Submit"}
+        onPress={() =>
           loginUser({ email, password }, () => {
-            resetNavigation(navigation, "StudentsListView");
+            resetNavigation(navigation, "DrawerView");
           })
-        } />
+        }
+      />
     );
   }
 

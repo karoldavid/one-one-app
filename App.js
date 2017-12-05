@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 import firebase from "firebase";
 import store from "./src/reducers/store";
-import { StyleSheet, View } from "react-native";
-import { Tabs, MainNavigator } from "./src/utils/navigation";
+import { View } from "react-native";
+import { MainNavigator } from "./src/utils/navigation";
 
 export default class App extends Component {
   componentWillMount() {
@@ -21,16 +21,10 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <View style={styles.container}>
+        <View style={{ flex: 1 }}>
           <MainNavigator />
         </View>
       </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-});

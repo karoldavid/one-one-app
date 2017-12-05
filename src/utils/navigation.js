@@ -1,47 +1,68 @@
-import { StackNavigator, TabNavigator } from "react-navigation";
+import React from "react";
+import { StackNavigator, DrawerNavigator } from "react-navigation";
+
+import { Text } from "react-native";
 import { blue, lightPurp, purple, white } from "./colors";
 import { Ionicons } from "@expo/vector-icons";
+import { IconButton } from "../components/common";
+
 import LoginForm from "../components/LoginForm";
 import StudentsListView from "../components/StudentsListView";
 import StudentView from "../components/StudentView";
 import CreateStudentView from "../components/CreateStudentView";
 import EditStudentView from "../components/EditStudentView";
 
-export const Tabs = TabNavigator(
+import Drawer from "../components/Drawer";
+import UserView from "../components/UserView";
+import AboutView from "../components/AboutView";
+import LogoutView from "../components/LogoutView";
+
+const drawerButton = navigation => (
+  <IconButton
+    ionicon="md-menu"
+    size={30}
+    color="white"
+    onPress={() => {
+      if (navigation.state.index === 0) {
+        navigation.navigate("DrawerOpen");
+      } else {
+        navigation.navigate("DrawerClose");
+      }
+    }}
+  />
+);
+
+const DrawerStack = DrawerNavigator(
   {
     StudentsListView: {
       screen: StudentsListView,
       navigationOptions: {
-        tabBarLabel: "Students",
-        tabBarIcon: ({ tintColor }) => (
-          <Ionicons name="ios-bookmarks" size={30} color={tintColor} />
-        )
+        title: "All Students"
       }
-    }
+    },
+    UserView: { screen: UserView },
+    AboutView: { screen: AboutView },
+    LogoutView: { screen: LogoutView }
   },
   {
-    tabBarOptions: {
-      activeTintColor: white,
-      style: {
-        height: 56,
-        backgroundColor: blue,
-        shadowColor: "rgba(0,0,0,0.24)",
-        shadowOffset: {
-          width: 0,
-          height: 3
-        },
-        shadowRadius: 6,
-        shadowOpacity: 1
-      }
-    }
+    contentComponent: Drawer
   }
 );
 
+const DrawerNavigation = StackNavigator({
+  DrawerStack: {
+    screen: DrawerStack,
+    navigationOptions: ({ navigation }) => ({
+      headerStyle: { backgroundColor: lightPurp },
+      headerTintColor: white,
+      gesturesEnabled: false,
+      headerRight: drawerButton(navigation)
+    })
+  }
+});
+
 export const MainNavigator = StackNavigator({
-  Home: {
-    screen: LoginForm
-  },
-  UserAuthenticationView: {
+  LoginView: {
     screen: LoginForm,
     navigationOptions: {
       headerTintColor: white,
@@ -50,14 +71,10 @@ export const MainNavigator = StackNavigator({
       }
     }
   },
-  StudentsListView: {
-    screen: StudentsListView,
+  DrawerView: {
+    screen: DrawerNavigation,
     navigationOptions: {
-      title: "All Students",
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: blue
-      }
+      header: null
     }
   },
   StudentView: {

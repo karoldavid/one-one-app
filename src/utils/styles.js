@@ -117,6 +117,24 @@ const modalText = {
 	color: blueMagenta
 };
 
+const drawerContainer = {
+	flex: 1,
+	backgroundColor: blueMagenta,
+	justifyContent: "space-around"
+};
+
+const drawerItem = {
+	margin: 10,
+	padding: 20,
+	textAlign: "center",
+	fontSize: 18,
+	fontWeight: "bold",
+	color: white,
+	borderRadius: 2,
+	borderColor: white,
+	borderWidth: 1
+};
+
 const styles = StyleSheet.create({
 	container,
 	header,
@@ -135,7 +153,9 @@ const styles = StyleSheet.create({
 	photo,
 	overlay,
 	modal,
-	modalText
+	modalText,
+	drawerContainer,
+	drawerItem
 });
 
 export default styles;
