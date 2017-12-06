@@ -35,11 +35,16 @@ class StudentsListView extends Component {
 
 	render() {
 		const { navigation } = this.props;
+
 		return (
 			<View
 				style={[
 					styles.container,
-					{ flexDirection: "row", padding: 12 }
+					{
+						flexDirection: "row",
+						alignItems: "flex-start",
+						padding: 12
+					}
 				]}
 			>
 				<ListView
