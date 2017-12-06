@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
-import { ListView, View } from "react-native";
+import { ActivityIndicator, ListView, View, Text } from "react-native";
 import { studentsFetch } from "../actions";
 import { makeArray } from "../utils/helpers";
 import styles from "../utils/styles";
@@ -34,49 +34,72 @@ class StudentsListView extends Component {
 	}
 
 	render() {
-		const { navigation } = this.props;
+		const { loading, navigation, students } = this.props;
 
 		return (
-			<View
-				style={[
-					styles.container,
-					{
-						flexDirection: "row",
-						alignItems: "flex-start",
-						padding: 12
-					}
-				]}
-			>
-				<ListView
-					enableEmptySections
-					dataSource={this.dataSource}
-					renderRow={student => (
-						<ListItem
-							student={student}
-							navigation={this.props.navigation}
-						/>
-					)}
-				/>
-				<View style={styles.overlay}>
-					<IconButton
-						ionicon="md-add-circle"
-						size={50}
-						color="blue"
-						onPress={() => navigation.navigate("CreateStudentView")}
-					/>
-				</View>
+			<View style={{ flex: 1 }}>
+				{loading ? (
+					<View
+						style={[
+							styles.container,
+							{
+								flexDirection: "row",
+								padding: 12
+							}
+						]}
+					>
+						<ActivityIndicator />
+					</View>
+				) : (
+					<View
+						style={[
+							styles.container,
+							{
+								flexDirection: "row",
+								alignItems: "flex-start",
+								padding: 12
+							}
+						]}
+					>
+						{students.length > 0 ? (
+							<ListView
+								enableEmptySections
+								dataSource={this.dataSource}
+								renderRow={student => (
+									<ListItem
+										student={student}
+										navigation={this.props.navigation}
+									/>
+								)}
+							/>
+						) : (
+							<Text>no data</Text>
+						)}
+						<View style={styles.overlay}>
+							<IconButton
+								ionicon="md-add-circle"
+								size={50}
+								color="blue"
+								onPress={() =>
+									navigation.navigate("CreateStudentView")
+								}
+							/>
+						</View>
+					</View>
+				)}
 			</View>
 		);
 	}
 }
 
 const mapStateToProps = ({
-	studentList: { students, orderBy, sortDirection }
+	studentList: { students, orderBy, sortDirection, loading }
 }) => {
 	return {
 		students: makeArray(students),
 		orderBy,
-		sortDirection
+		sortDirection,
+		loading
 	};
 };
 
