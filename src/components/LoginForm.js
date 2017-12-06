@@ -21,7 +21,7 @@ import { Button } from "./common";
 
 class LoginForm extends Component {
   componentWillMount() {
-    // this.props.removeFromStorage()
+    //this.props.removeFromStorage()
     this.props.loggedIn();
   }
   renderLoginButton() {

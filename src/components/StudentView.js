@@ -5,7 +5,7 @@ import { deleteStudent, deselectStudent } from "../actions";
 import styles from "../utils/styles";
 import { Button, IconButton, ModalConfirm } from "./common";
 
-import Communications from 'react-native-communications';
+import Communications from "react-native-communications";
 
 class StudentView extends Component {
 	state = {
@@ -49,6 +49,14 @@ class StudentView extends Component {
 		);
 	}
 
+	sendEmail() {
+		const { email, firstName, lastName } = this.props.student;
+		const { userEmail } = this.props.userEmail;
+		const subject = "1:1 Appointment";
+		const body = `Dear ${firstName} ${lastName},`;
+		Communications.email([userEmail, email], null, null, subject, body);
+	}
+
 	render() {
 		const {
 			firstName,
@@ -86,10 +94,14 @@ class StudentView extends Component {
 					}}
 				>
 					<Button
+						title={"Send Email"}
+						onPress={() => this.sendEmail()}
+					/>
+					<Button
 						title={"Edit"}
-						onPress={() => {
-							this.props.navigation.navigate("EditStudentView");
-						}}
+						onPress={() =>
+							this.props.navigation.navigate("EditStudentView")
+						}
 					/>
 					<Button title={"Delete"} onPress={() => this.showModal()} />
 					<ModalConfirm
@@ -105,9 +117,10 @@ class StudentView extends Component {
 	}
 }
 
-const mapStateToProps = ({ student }) => {
+const mapStateToProps = ({ student, auth }) => {
 	return {
-		student
+		student,
+		userEmail: auth.user.email
 	};
 };
 
