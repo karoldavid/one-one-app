@@ -15,7 +15,7 @@ import EditStudentView from "../components/EditStudentView";
 import Drawer from "../components/Drawer";
 import UserView from "../components/UserView";
 import AboutView from "../components/AboutView";
-import LogoutView from "../components/LogoutView";
+import AppointmentsView from "../components/AppointmentsView";
 
 const DrawerStack = DrawerNavigator(
   {
@@ -27,7 +27,7 @@ const DrawerStack = DrawerNavigator(
     },
     UserView: { screen: UserView },
     AboutView: { screen: AboutView },
-    LogoutView: { screen: LogoutView }
+    AppointmentsView: { screen: AppointmentsView }
   },
   {
     contentComponent: Drawer

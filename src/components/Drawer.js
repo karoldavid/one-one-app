@@ -6,6 +6,7 @@ import { logOut } from "../actions";
 
 const VIEWS = [
   { StudentsListView: "All Students" },
+  { AppointmentsView: "1:1 Appointments"},
   { UserView: "User" },
   { AboutView: "About" }
 ];
