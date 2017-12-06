@@ -1,12 +1,13 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Text, View } from "react-native";
 import styles from "../utils/styles";
+import { logOut } from "../actions";
 
 const VIEWS = [
   { StudentsListView: "All Students" },
   { UserView: "User" },
-  { AboutView: "About" },
-  { LogoutView: "Log Out" }
+  { AboutView: "About" }
 ];
 
 class Drawer extends Component {
@@ -25,12 +26,23 @@ class Drawer extends Component {
   }
 
   render() {
+    const { logOut, navigation } = this.props;
     return (
       <View style={styles.drawerContainer}>
         {VIEWS.map(view => this.makeMenuItem(view))}
+        <Text
+          key={"logOut"}
+          onPress={() => {
+            logOut();
+            navigation.navigate("LoginView");
+          }}
+          style={styles.drawerItem}
+        >
+          Log Out
+        </Text>
       </View>
     );
   }
 }
 
-export default Drawer;
+export default connect(null, { logOut })(Drawer);

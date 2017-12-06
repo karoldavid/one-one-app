@@ -30,6 +30,18 @@ export const loggedIn = () => {
 	};
 };
 
+export const logOut = () => {
+	return dispatch => {
+		firebase
+			.auth()
+			.signOut()
+			.then(
+				() => console.log("signed out"),
+				err => console.log("err:", err)
+			);
+	};
+};
+
 export const emailChanged = text => {
 	return {
 		type: EMAIL_CHANGED,
@@ -63,13 +75,22 @@ export const loginUser = ({ email, password }, callback) => {
 		firebase
 			.auth()
 			.signInWithEmailAndPassword(email, password)
-			.then(user => loginUserSuccess(dispatch, { email, password }, user, callback))
+			.then(user =>
+				loginUserSuccess(dispatch, { email, password }, user, callback)
+			)
 			.catch(error => {
 				console.log(error);
 				firebase
 					.auth()
 					.createUserWithEmailAndPassword(email, password)
-					.then(user => loginUserSuccess(dispatch, { email, password }, user, callback))
+					.then(user =>
+						loginUserSuccess(
+							dispatch,
+							{ email, password },
+							user,
+							callback
+						)
+					)
 					.catch(() => loginUserFail(dispatch));
 			});
 	};

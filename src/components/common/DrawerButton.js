@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, Animated } from "react-native";
+import { Text, Animated } from "react-native";
 import styles from "../../utils/styles";
 import { IconButton } from "../common";
 
