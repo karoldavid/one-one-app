@@ -5,6 +5,8 @@ import { deleteStudent, deselectStudent } from "../actions";
 import styles from "../utils/styles";
 import { Button, IconButton, ModalConfirm } from "./common";
 
+import Communications from 'react-native-communications';
+
 class StudentView extends Component {
 	state = {
 		modalVisible: false
