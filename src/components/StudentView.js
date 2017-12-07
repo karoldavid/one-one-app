@@ -45,7 +45,7 @@ class StudentView extends Component {
 		const { deleteStudent, navigation, student } = this.props;
 		this.setState({ modalVisible: false });
 		deleteStudent(student.uid, () =>
-			navigation.navigate("StudentsListView")
+			navigation.navigate("DrawerView")
 		);
 	}
 
