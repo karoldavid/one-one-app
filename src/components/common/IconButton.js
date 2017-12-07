@@ -6,7 +6,7 @@ import { white } from "../../utils/colors";
 
 const IconButton = ({ onPress, ionicon, size, color }) => {
 	return (
-		<View style={styles.arrowStyles}>
+		<View style={styles.iconButton}>
 			<TouchableOpacity onPress={onPress}>
 				<Ionicons name={ionicon} size={size} color={color} />
 			</TouchableOpacity>

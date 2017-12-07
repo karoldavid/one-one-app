@@ -34,7 +34,7 @@ const submitButtonText = {
 	alignSelf: "center"
 };
 
-const arrowStyles = {
+const iconButton = {
 	paddingLeft: 20,
 	paddingRight: 20
 };
@@ -123,16 +123,31 @@ const drawerContainer = {
 	justifyContent: "space-around"
 };
 
+// const drawerItem = {
+// 	margin: 10,
+// 	padding: 20,
+// 	textAlign: "center",
+// 	fontSize: 18,
+// 	fontWeight: "bold",
+// 	color: white,
+// 	borderRadius: 2,
+// 	borderColor: white,
+// 	borderWidth: 1
+// };
+
 const drawerItem = {
-	margin: 10,
-	padding: 20,
-	textAlign: "center",
+	flexDirection: "row",
+	alignItems: "center"
+};
+
+const drawerItemText = {
 	fontSize: 18,
 	fontWeight: "bold",
-	color: white,
-	borderRadius: 2,
-	borderColor: white,
-	borderWidth: 1
+	color: white
+};
+
+const drawerItemIcon = {
+	paddingRight: 10
 };
 
 const styles = StyleSheet.create({
@@ -141,7 +156,7 @@ const styles = StyleSheet.create({
 	input,
 	submitButton,
 	submitButtonText,
-	arrowStyles,
+	iconButton,
 	loginError,
 	item,
 	text,
@@ -155,7 +170,9 @@ const styles = StyleSheet.create({
 	modal,
 	modalText,
 	drawerContainer,
-	drawerItem
+	drawerItem,
+	drawerItemText,
+	drawerItemIcon
 });
 
 export default styles;
