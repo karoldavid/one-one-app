@@ -19,18 +19,11 @@ class StudentsListView extends Component {
 	}
 
 	createDataSource({ students }) {
-		const { orderBy, sortDirection } = this.props;
 		const ds = new ListView.DataSource({
 			rowHasChanged: (r1, r2) => r1 !== r2
 		});
 
-		this.dataSource = ds.cloneWithRows(
-			_.orderBy(
-				students,
-				[student => student[orderBy].toLowerCase()],
-				[sortDirection]
-			)
-		);
+		this.dataSource = ds.cloneWithRows(students);
 	}
 
 	render() {
@@ -96,7 +89,7 @@ const mapStateToProps = ({
 	studentList: { students, orderBy, sortDirection, loading }
 }) => {
 	return {
-		students: makeArray(students),
+		students: students,
 		orderBy,
 		sortDirection,
 		loading

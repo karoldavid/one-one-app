@@ -43,7 +43,7 @@ export const createStudent = (student, callback) => {
 	};
 };
 
-export const saveStudent = ({ uid, ...student}, callback) => {
+export const saveStudent = ({ uid, ...student }, callback) => {
 	const { currentUser } = firebase.auth();
 	return dispatch => {
 		firebase

@@ -1,4 +1,6 @@
+import _ from "lodash";
 import { STUDENTS_FETCH, STUDENTS_FETCH_SUCCESS } from "../actions/types";
+import { makeArray } from "../utils/helpers";
 
 const INITIAL_STUDENTS_STATE = {
 	students: {},
@@ -13,11 +15,15 @@ export default (state = INITIAL_STUDENTS_STATE, action) => {
 			return {
 				...state,
 				loading: true
-			}
+			};
 		case STUDENTS_FETCH_SUCCESS:
 			return {
 				...state,
-				students: action.payload,
+				students: _.orderBy(
+					makeArray(action.payload),
+					[student => student[state.orderBy].toLowerCase()],
+					[state.sortDirection]
+				),
 				loading: false
 			};
 		default:

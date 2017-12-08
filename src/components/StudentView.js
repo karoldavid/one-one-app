@@ -1,17 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Dimensions, Image, Text, View } from "react-native";
-import { deleteStudent, deselectStudent } from "../actions";
+import {
+	Dimensions,
+	Image,
+	Text,
+	View,
+	Animated,
+	PanResponder
+} from "react-native";
+import { deleteStudent, deselectStudent, selectStudent } from "../actions";
 import styles from "../utils/styles";
 import { Button, IconButton, ModalConfirm } from "./common";
-
 import Communications from "react-native-communications";
 
-class StudentView extends Component {
-	state = {
-		modalVisible: false
-	};
+const SCREEN_WIDTH = Dimensions.get("window").width;
+const SWIPE_THRESHOLD = 0.25 * SCREEN_WIDTH;
+const SWIPE_OUT_DURATION = 250;
 
+class StudentView extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		headerLeft: (
 			<IconButton
@@ -25,6 +31,34 @@ class StudentView extends Component {
 			/>
 		)
 	});
+
+	constructor(props) {
+		super(props);
+
+		const position = new Animated.ValueXY();
+
+		const panResponder = PanResponder.create({
+			onStartShouldSetPanResponder: () => true,
+			onPanResponderMove: (event, gesture) => {
+				position.setValue({ x: gesture.dx });
+			},
+			onPanResponderRelease: (event, gesture) => {
+				if (gesture.dx > SWIPE_THRESHOLD) {
+					this.forceSwipe("right");
+				} else if (gesture.dx < -SWIPE_THRESHOLD)
+					this.forceSwipe("left");
+				else {
+					this.resetPosition();
+				}
+			}
+		});
+
+		this.state = {
+			modalVisible: false,
+			panResponder,
+			position
+		};
+	}
 
 	componentWillMount() {
 		const { deselectStudent, navigation } = this.props;
@@ -44,9 +78,7 @@ class StudentView extends Component {
 	deleteStudent() {
 		const { deleteStudent, navigation, student } = this.props;
 		this.setState({ modalVisible: false });
-		deleteStudent(student.uid, () =>
-			navigation.navigate("DrawerView")
-		);
+		deleteStudent(student.uid, () => navigation.navigate("DrawerView"));
 	}
 
 	sendEmail() {
@@ -55,6 +87,41 @@ class StudentView extends Component {
 		const subject = "1:1 Appointment";
 		const body = `Dear ${firstName} ${lastName},`;
 		Communications.email([userEmail, email], null, null, subject, body);
+	}
+
+	forceSwipe(direction) {
+		const x = direction === "right" ? SCREEN_WIDTH : -SCREEN_WIDTH;
+		Animated.timing(this.state.position, {
+			toValue: { x, y: 0 },
+			duration: SWIPE_OUT_DURATION
+		}).start(() => this.onSwipeComplete(direction));
+	}
+
+	onSwipeComplete(direction) {
+		const { selectStudent, students, student } = this.props;
+		let index = students.findIndex(stud => stud.uid === student.uid);
+
+		if (direction === "right" && index + 1 <= students.length - 1) {
+			index++;
+		} else if (direction === "left" && index - 1 >= 0) {
+			index--;
+		}
+
+		selectStudent(students[index]);
+
+		this.state.position.setValue({ x: 0, y: 0 });
+	}
+
+	resetPosition() {
+		Animated.spring(this.state.position, {
+			toValue: { x: 0, y: 0 }
+		}).start();
+	}
+
+	getCardStyle() {
+		return {
+			...this.state.position.getLayout()
+		};
 	}
 
 	render() {
@@ -77,7 +144,10 @@ class StudentView extends Component {
 					}
 				]}
 			>
-				<View style={{ flexDirection: "row" }}>
+				<Animated.View
+					style={[this.getCardStyle(), { flexDirection: "row" }]}
+					{...this.state.panResponder.panHandlers}
+				>
 					<Image source={{ uri: image }} style={styles.photo} />
 					<View style={{ flexDirection: "column" }}>
 						<Text style={styles.viewText}>{`${firstName} ${
@@ -86,7 +156,7 @@ class StudentView extends Component {
 						<Text style={styles.viewText}>{email}</Text>
 						<Text style={styles.viewText}>{program}</Text>
 					</View>
-				</View>
+				</Animated.View>
 				<View
 					style={{
 						alignSelf: "center",
@@ -117,13 +187,16 @@ class StudentView extends Component {
 	}
 }
 
-const mapStateToProps = ({ student, auth }) => {
+const mapStateToProps = ({ student, auth, studentList }) => {
 	return {
 		student,
-		userEmail: auth.user.email
+		userEmail: auth.user.email,
+		students: studentList.students
 	};
 };
 
-export default connect(mapStateToProps, { deleteStudent, deselectStudent })(
-	StudentView
-);
+export default connect(mapStateToProps, {
+	deleteStudent,
+	deselectStudent,
+	selectStudent
+})(StudentView);

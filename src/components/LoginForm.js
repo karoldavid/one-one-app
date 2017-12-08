@@ -24,6 +24,7 @@ class LoginForm extends Component {
     //this.props.removeFromStorage()
     this.props.loggedIn();
   }
+
   renderLoginButton() {
     const { email, password, loading, loginUser, navigation } = this.props;
 
