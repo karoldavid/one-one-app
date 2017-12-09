@@ -164,6 +164,10 @@ class StudentView extends Component {
 					}}
 				>
 					<Button
+						title={"New Appointment"}
+						onPress={() => this.props.navigation.navigate("CreateAppointmentView")}
+					/>
+					<Button
 						title={"Send Email"}
 						onPress={() => this.sendEmail()}
 					/>

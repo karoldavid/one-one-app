@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Text, View } from "react-native";
+import AgendaScreen from "./AgendaScreen";
 import styles from "../utils/styles";
 
 class AppointmentsView extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>1:1 Appointments</Text>
+      <View style={{flex: 1}}>
+        <AgendaScreen />
       </View>
     );
   }
