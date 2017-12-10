@@ -16,10 +16,10 @@ class CreateAppointmentForm extends Component {
 					<AppointmentForm />
 					<Button
 						title={"Submit"}
-						onPress={() =>
+						onPress={() => {
 							this.props.createAppointment(appointment, () =>
 								resetNavigation(navigation, "DrawerView")
-							)
+							)}
 						}
 					/>
 				</KeyboardAvoidingView>
@@ -34,4 +34,6 @@ const mapStateToProps = ({ appointment, student }) => {
 	};
 };
 
-export default connect(mapStateToProps, { createAppointment })(CreateAppointmentForm);
+export default connect(mapStateToProps, { createAppointment })(
+	CreateAppointmentForm
+);

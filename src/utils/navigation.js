@@ -96,7 +96,7 @@ export const MainNavigator = StackNavigator({
    CreateAppointmentView: {
     screen: CreateAppointmentView,
     navigationOptions: {
-      title: "Add",
+      title: "New Appointment",
       headerTintColor: white,
       headerStyle: {
         backgroundColor: blue

@@ -1,45 +1,61 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, Text, TextInput, DatePickerAndroid } from "react-native";
+import {
+	View,
+	Text,
+	TextInput,
+	TouchableOpacity,
+	Dimensions
+} from "react-native";
+import { DatePickerDialog } from "react-native-datepicker-dialog";
+import moment from "moment";
 import { updateAppointment } from "../actions";
-import styles from "../utils/styles";
 import { InputWithLabel } from "./common";
+import styles from "../utils/styles";
+import { Button } from "./common";
 
 class AppointmentForm extends Component {
-	componentDidMount() {
-		this.showAndroidDatePicker();
-	}
+	openDatePickerDialog() {
+		let { date } = this.props.appointment;
 
-	setDate(value) {
-		this.props.updateAppointment({
-			prop: "date",
-			value: value.toLocaleDateString()
+		if (!date || date == null) {
+			date = new Date();
+			this.props.updateAppointment({
+				prop: "date",
+				value: date.toLocaleDateString()
+			});
+		}
+
+		this.refs.DatePickerDialog.open({
+			date
 		});
 	}
 
-	showAndroidDatePicker = async () => {
-		try {
-			const { action, year, month, day } = await DatePickerAndroid.open({
-				date: new Date()
-			});
-			if (action !== DatePickerAndroid.dismissedAction) {
-				var date = new Date(year, month, day);
-
-				this.setDate(date);
-			}
-		} catch ({ code, message }) {
-			console.warn("Cannot open date picker", message);
-		}
-	};
-
-	render() {
+	makeDatePicker() {
 		const { date } = this.props.appointment;
 
 		return (
 			<View>
-				<Text>Date: {date}</Text>
+				<Button
+					title={date != null ? date : "Choose A Date"}
+					onPress={() => this.openDatePickerDialog()}
+				/>
+
+				<DatePickerDialog
+					ref="DatePickerDialog"
+					onDatePicked={date =>
+						this.props.updateAppointment({
+							prop: "date",
+							value: date.toLocaleDateString()
+						})
+					}
+				/>
 			</View>
 		);
+	}
+
+	render() {
+		return <View style={{ flex: 1, width: Dimensions.get("window").width }}>{this.makeDatePicker()}</View>;
 	}
 }
 

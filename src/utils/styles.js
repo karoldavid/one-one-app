@@ -123,18 +123,6 @@ const drawerContainer = {
 	justifyContent: "space-around"
 };
 
-// const drawerItem = {
-// 	margin: 10,
-// 	padding: 20,
-// 	textAlign: "center",
-// 	fontSize: 18,
-// 	fontWeight: "bold",
-// 	color: white,
-// 	borderRadius: 2,
-// 	borderColor: white,
-// 	borderWidth: 1
-// };
-
 const drawerItem = {
 	flexDirection: "row",
 	alignItems: "center"
@@ -148,6 +136,31 @@ const drawerItemText = {
 
 const drawerItemIcon = {
 	paddingRight: 10
+};
+
+const content = {
+	fontSize: 20,
+	textAlign: "center",
+	margin: 10
+};
+
+const datePickerBox = {
+	marginTop: 9,
+	backgroundColor: blueMagenta,
+	padding: 10,
+	borderTopLeftRadius: 4,
+	borderTopRightRadius: 4,
+	borderBottomLeftRadius: 4,
+	borderBottomRightRadius: 4,
+	height: 38,
+	justifyContent: "center"
+};
+
+const datePickerText = {
+	fontSize: 18,
+	borderWidth: 0,
+	color: white,
+	textAlign: "center"
 };
 
 const styles = StyleSheet.create({
@@ -172,7 +185,10 @@ const styles = StyleSheet.create({
 	drawerContainer,
 	drawerItem,
 	drawerItemText,
-	drawerItemIcon
+	drawerItemIcon,
+	content,
+	datePickerBox,
+	datePickerText
 });
 
 export default styles;

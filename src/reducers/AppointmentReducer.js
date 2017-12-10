@@ -5,7 +5,7 @@ import {
 } from "../actions/types";
 
 const INITIAL_APPOINTMENT_STATE = {
-	date: "",
+	date: null,
 	studentUID: null
 };
 
