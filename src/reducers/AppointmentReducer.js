@@ -6,6 +6,7 @@ import {
 
 const INITIAL_APPOINTMENT_STATE = {
 	date: null,
+	time: null,
 	studentUID: null
 };
 

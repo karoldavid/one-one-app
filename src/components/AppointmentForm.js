@@ -5,7 +5,8 @@ import {
 	Text,
 	TextInput,
 	TouchableOpacity,
-	Dimensions
+	Dimensions,
+	TimePickerAndroid
 } from "react-native";
 import { DatePickerDialog } from "react-native-datepicker-dialog";
 import moment from "moment";
@@ -14,7 +15,26 @@ import { InputWithLabel } from "./common";
 import styles from "../utils/styles";
 import { Button } from "./common";
 
+const DATE = new Date();
+
 class AppointmentForm extends Component {
+	async openTimePickerAndroud() {
+		let { time } = this.props.appointment;
+		try {
+			const { action, hour, minute } = await TimePickerAndroid.open({
+				hour: DATE.getHours(),
+				minute: DATE.getMinutes(),
+				is24Hour: false // Will display '2 PM'
+			});
+			if (action !== TimePickerAndroid.dismissedAction) {
+				time = `${hour}:${minute}`;
+				this.props.updateAppointment({ prop: "time", value: time });
+			}
+		} catch ({ code, message }) {
+			console.warn("Cannot open time picker", message);
+		}
+	}
+
 	openDatePickerDialog() {
 		let { date } = this.props.appointment;
 
@@ -55,7 +75,16 @@ class AppointmentForm extends Component {
 	}
 
 	render() {
-		return <View style={{ flex: 1, width: Dimensions.get("window").width }}>{this.makeDatePicker()}</View>;
+		const { time } = this.props.appointment;
+		return (
+			<View style={{ flex: 1, width: Dimensions.get("window").width }}>
+				{this.makeDatePicker()}
+				<Button
+					title={time != null ? time : "Choose A Time"}
+					onPress={() => this.openTimePickerAndroud()}
+				/>
+			</View>
+		);
 	}
 }
 
