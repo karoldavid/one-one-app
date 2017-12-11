@@ -17,6 +17,7 @@ import Drawer from "../components/Drawer";
 import UserView from "../components/UserView";
 import AboutView from "../components/AboutView";
 import AppointmentsView from "../components/AppointmentsView";
+import StatsView from "../components/StatsView";
 
 const DrawerStack = DrawerNavigator(
   {
@@ -28,7 +29,8 @@ const DrawerStack = DrawerNavigator(
     },
     UserView: { screen: UserView },
     AboutView: { screen: AboutView },
-    AppointmentsView: { screen: AppointmentsView }
+    AppointmentsView: { screen: AppointmentsView },
+    StatsView: { screen: StatsView }
   },
   {
     contentComponent: Drawer
@@ -93,7 +95,7 @@ export const MainNavigator = StackNavigator({
       }
     }
   },
-   CreateAppointmentView: {
+  CreateAppointmentView: {
     screen: CreateAppointmentView,
     navigationOptions: {
       title: "New Appointment",
@@ -102,5 +104,5 @@ export const MainNavigator = StackNavigator({
         backgroundColor: blue
       }
     }
-  },
+  }
 });

@@ -8,6 +8,7 @@ import { DrawerIcon } from "./common";
 const VIEWS = [
   { StudentsListView: "All Students", icon: "md-list" },
   { AppointmentsView: "1:1 Appointments", icon: "md-people" },
+  { StatsView: "Stats", icon: "md-stats"},
   { UserView: "User", icon: "md-body" },
   { AboutView: "About", icon: "md-information" }
 ];
