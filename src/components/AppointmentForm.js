@@ -18,7 +18,7 @@ import { Button } from "./common";
 const DATE = new Date();
 
 class AppointmentForm extends Component {
-	async openTimePickerAndroud() {
+	async openTimePickerAndroid() {
 		let { time } = this.props.appointment;
 		try {
 			const { action, hour, minute } = await TimePickerAndroid.open({
@@ -83,7 +83,7 @@ class AppointmentForm extends Component {
 				{this.makeDatePicker()}
 				<Button
 					title={time != null ? time : "Choose A Time"}
-					onPress={() => this.openTimePickerAndroud()}
+					onPress={() => this.openTimePickerAndroid()}
 				/>
 			</View>
 		);
