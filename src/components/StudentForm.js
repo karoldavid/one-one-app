@@ -37,6 +37,8 @@ class StudentForm extends Component {
 			lastName,
 			email,
 			program,
+			slack,
+			github,
 			image
 		} = this.props.student;
 
@@ -76,6 +78,32 @@ class StudentForm extends Component {
 						onChangeText={value =>
 							this.props.updateStudent({
 								prop: "email",
+								value
+							})
+						}
+					/>
+				</InputWithLabel>
+				<InputWithLabel label={"Github Account"}>
+					<TextInput
+						style={styles.formInput}
+						placeholder="github account"
+						value={github}
+						onChangeText={value =>
+							this.props.updateStudent({
+								prop: "github",
+								value
+							})
+						}
+					/>
+				</InputWithLabel>
+				<InputWithLabel label={"Slack Handle"}>
+					<TextInput
+						style={styles.formInput}
+						placeholder="slack handle"
+						value={slack}
+						onChangeText={value =>
+							this.props.updateStudent({
+								prop: "slack",
 								value
 							})
 						}

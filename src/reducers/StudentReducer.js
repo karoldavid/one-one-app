@@ -12,6 +12,8 @@ const INITIAL_STUDENT_STATE = {
 	lastName: "",
 	email: "@",
 	program: "",
+	github: "",
+	slack: "",
 	image: "http://via.placeholder.com/100x150"
 };
 
