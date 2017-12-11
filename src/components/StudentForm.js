@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, TextInput, Picker } from "react-native";
+import { ScrollView, TextInput, Picker } from "react-native";
 import { updateStudent } from "../actions";
 import styles from "../utils/styles";
 import { InputWithLabel } from "./common";
@@ -43,7 +43,7 @@ class StudentForm extends Component {
 		} = this.props.student;
 
 		return (
-			<View>
+			<ScrollView>
 				<InputWithLabel label={"First Name"}>
 					<TextInput
 						style={styles.formInput}
@@ -128,7 +128,7 @@ class StudentForm extends Component {
 						}
 					/>
 				</InputWithLabel>
-			</View>
+			</ScrollView>
 		);
 	}
 }
@@ -139,6 +139,4 @@ const mapStateToProps = ({ student }) => {
 	};
 };
 
-export default connect(mapStateToProps, { updateStudent })(
-	StudentForm
-);
+export default connect(mapStateToProps, { updateStudent })(StudentForm);
