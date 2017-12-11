@@ -24,7 +24,7 @@ class AppointmentForm extends Component {
 			const { action, hour, minute } = await TimePickerAndroid.open({
 				hour: DATE.getHours(),
 				minute: DATE.getMinutes(),
-				is24Hour: false // Will display '2 PM'
+				is24Hour: true
 			});
 			if (action !== TimePickerAndroid.dismissedAction) {
 				time = `${hour}:${minute}`;
@@ -44,6 +44,8 @@ class AppointmentForm extends Component {
 				prop: "date",
 				value: date.toLocaleDateString()
 			});
+		} else {
+			date = new Date(date);
 		}
 
 		this.refs.DatePickerDialog.open({
