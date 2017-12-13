@@ -17,7 +17,7 @@ class StudentsListView extends Component {
 	componentWillReceiveProps(nextProps) {
 		this.createDataSource(nextProps);
 	}
-
+	
 	createDataSource({ students }) {
 		const ds = new ListView.DataSource({
 			rowHasChanged: (r1, r2) => r1 !== r2

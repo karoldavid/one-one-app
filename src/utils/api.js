@@ -1,34 +1,31 @@
 import uuidv1 from "uuid";
-import { AsyncStorage } from "react-native";
+import { SecureStore } from "expo";
 
-const ONEONE_STORAGE_KEY = "ONEONE:user";
-
-export function getUser() {
-	return AsyncStorage.getItem(ONEONE_STORAGE_KEY)
-		.then(results => {
-			const data = JSON.parse(results);
-			return data;
-		})
-		.catch(() => {
-			console.log("error");
-		});
-}
+const key = "ONEONE-user";
 
 export function saveUser({ email, password }) {
-	return AsyncStorage.mergeItem(
-		ONEONE_STORAGE_KEY,
+	SecureStore.setItemAsync(
+		key,
 		JSON.stringify({
 			email: email,
 			password: password,
 			timestamp: Date.now()
 		})
-	).catch(() => {
-		console.log("error");
-	});
+	)
+		.then(() => console.log("saved"))
+		.catch(err => console.log(err));
+}
+
+export function getUser() {
+	return SecureStore.getItemAsync(key)
+		.then(result => {
+			return JSON.parse(result);
+		})
+		.catch(err => console.log({ error: err }));
 }
 
 export function removeUser() {
-	return AsyncStorage.removeItem(ONEONE_STORAGE_KEY, err => {
-		console.log("err:", err);
-	});
+	return SecureStore.deleteItemAsync(key).catch(err =>
+		console.log({ error: err })
+	);
 }
