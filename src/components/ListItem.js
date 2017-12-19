@@ -16,7 +16,7 @@ class ListItem extends Component {
     return (
       <TouchableOpacity onPress={this.onListItemPress}>
         <View style={styles.container}>
-          <Image source={{ uri: image }} style={styles.photo} />
+          <Image source={{ uri: image || "http://via.placeholder.com/100x150" }} style={styles.photo} />
           <Text style={styles.text}>{`${firstName} ${lastName}`}</Text>
         </View>
       </TouchableOpacity>
