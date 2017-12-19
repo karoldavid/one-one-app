@@ -12,6 +12,7 @@ import StudentView from "../components/StudentView";
 import CreateStudentView from "../components/CreateStudentView";
 import EditStudentView from "../components/EditStudentView";
 import CreateAppointmentView from "../components/CreateAppointmentView";
+import StudentAppointmentsView from "../components/StudentAppointmentsView";
 
 import Drawer from "../components/Drawer";
 import UserView from "../components/UserView";
@@ -99,6 +100,16 @@ export const MainNavigator = StackNavigator({
     screen: CreateAppointmentView,
     navigationOptions: {
       title: "New Appointment",
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue
+      }
+    }
+  },
+  StudentAppointmentsView: {
+    screen: StudentAppointmentsView,
+    navigationOptions: {
+      title: "All Appointments",
       headerTintColor: white,
       headerStyle: {
         backgroundColor: blue
