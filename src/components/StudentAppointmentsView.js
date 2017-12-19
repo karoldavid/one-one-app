@@ -1,22 +1,60 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { connect } from "react-redux";
+import moment from "moment";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { Card, Button } from "react-native-elements";
+import { Deck } from "./common";
+import { getStudentAppointments } from "../actions";
 
 class StudentAppointmentsView extends Component {
-	render() {
+
+	componentWillMount() {
+		const { uid } = this.props.student;
+		this.props.getStudentAppointments(uid)
+	}
+
+	renderCard(item) {
+		const { uid, timeDateUtc, project } = item;
 		return (
-			<View style={styles.container}>
-				<Text>StudentAppointmentsView!</Text>
-			</View>
+			<Card key={uid} title={project}>
+				<Text style={styles.text}>{moment(timeDateUtc).format("LLLL")}</Text>
+				<Button
+					icon={{ name: "code" }}
+					backgroundColor="#03A9F4"
+					title="More"
+				/>
+			</Card>
+		);
+	}
+
+	render() {
+		const { studentAppointments } = this.props;
+		return (
+			<ScrollView style={styles.container}>
+				<Deck data={studentAppointments} renderCard={this.renderCard} />
+			</ScrollView>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
 	container: {
+		marginTop: 20,
 		flex: 1,
-		justifyContent: "center",
-		alignItems: "center"
+		backgroundColor: "#fff"
+	},
+	text: {
+		textAlign: "center"
 	}
 });
 
-export default StudentAppointmentsView;
+const mapStateToProps = ({ student, appointmentList }) => {
+	return {
+		student,
+		studentAppointments: appointmentList.studentAppointments
+	};
+};
+
+export default connect(mapStateToProps, { getStudentAppointments })(
+	StudentAppointmentsView
+);

@@ -1,14 +1,16 @@
 import {
 	APPOINTMENTS_FETCH,
 	APPOINTMENTS_FETCH_SUCCESS,
-	APPOINTMENTS_STUDENT_NUMBER
+	APPOINTMENTS_STUDENT_NUMBER,
+	APPOINTMENTS_STUDENT
 } from "../actions/types";
 import { makeArray } from "../utils/helpers";
 
 const INITIAL_APPOINTMENTS_STATE = {
 	appointments: [],
 	loading: false,
-	currentStudentAppointments: 0
+	currentStudentAppointments: 0,
+	studentAppointments: []
 };
 
 export default (state = INITIAL_APPOINTMENTS_STATE, action) => {
@@ -36,6 +38,13 @@ export default (state = INITIAL_APPOINTMENTS_STATE, action) => {
 						: accumulator;
 				},
 				0)
+			};
+		case APPOINTMENTS_STUDENT:
+			return {
+				...state,
+				studentAppointments: state.appointments.filter(appointment => {
+					return appointment.studentUid === action.payload;
+				})
 			};
 		default:
 			return state;
