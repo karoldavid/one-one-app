@@ -8,7 +8,12 @@ import {
 	Animated,
 	PanResponder
 } from "react-native";
-import { deleteStudent, deselectStudent, selectStudent } from "../actions";
+import {
+	deleteStudent,
+	deselectStudent,
+	selectStudent,
+	appointmentsFetch
+} from "../actions";
 import styles from "../utils/styles";
 import { Button, IconButton, ModalConfirm } from "./common";
 import Communications from "react-native-communications";
@@ -65,6 +70,7 @@ class StudentView extends Component {
 		navigation.setParams({
 			deselectStudent
 		});
+		this.props.appointmentsFetch();
 	}
 
 	showModal() {
@@ -124,6 +130,19 @@ class StudentView extends Component {
 		};
 	}
 
+	getNumberOfAppointments() {
+		const { appointments } = this.props;
+		const { uid } = this.props.student;
+
+		const number = appointments.reduce(function(accumulator, appointment) {
+			return appointment.studentUid === uid
+				? accumulator + 1
+				: accumulator;
+		}, 0);
+
+		return number;
+	}
+
 	render() {
 		const {
 			firstName,
@@ -148,13 +167,23 @@ class StudentView extends Component {
 					style={[this.getCardStyle(), { flexDirection: "row" }]}
 					{...this.state.panResponder.panHandlers}
 				>
-					<Image source={{ uri: image || "http://via.placeholder.com/100x150" }} style={styles.photo} />
+					<Image
+						source={{
+							uri: image || "http://via.placeholder.com/100x150"
+						}}
+						style={styles.photo}
+					/>
 					<View style={{ flexDirection: "column" }}>
-						<Text style={styles.viewText}>{`${firstName} ${
-							lastName
-						}`}</Text>
-						<Text style={styles.viewText}>{email}</Text>
-						<Text style={styles.viewText}>{program}</Text>
+						<Text style={styles.viewText}>
+							Name: {`${firstName} ${lastName}`}
+						</Text>
+						<Text style={styles.viewText}>Email: {email}</Text>
+						<Text style={styles.viewText}>
+							Program: {program || "-"}
+						</Text>
+						<Text style={styles.viewText}>
+							Appointments: {this.getNumberOfAppointments()}
+						</Text>
 					</View>
 				</Animated.View>
 				<View
@@ -165,7 +194,11 @@ class StudentView extends Component {
 				>
 					<Button
 						title={"New Appointment"}
-						onPress={() => this.props.navigation.navigate("CreateAppointmentView")}
+						onPress={() =>
+							this.props.navigation.navigate(
+								"CreateAppointmentView"
+							)
+						}
 					/>
 					<Button
 						title={"Send Email"}
@@ -191,16 +224,18 @@ class StudentView extends Component {
 	}
 }
 
-const mapStateToProps = ({ student, auth, studentList }) => {
+const mapStateToProps = ({ student, auth, studentList, appointmentList }) => {
 	return {
 		student,
 		userEmail: auth.user.email,
-		students: studentList.students
+		students: studentList.students,
+		appointments: appointmentList.appointments
 	};
 };
 
 export default connect(mapStateToProps, {
 	deleteStudent,
 	deselectStudent,
-	selectStudent
+	selectStudent,
+	appointmentsFetch
 })(StudentView);
