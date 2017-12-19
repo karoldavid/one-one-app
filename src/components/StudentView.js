@@ -12,7 +12,7 @@ import {
 	deleteStudent,
 	deselectStudent,
 	selectStudent,
-	appointmentsFetch
+	studentAppointmentsNumber
 } from "../actions";
 import styles from "../utils/styles";
 import { Button, IconButton, ModalConfirm } from "./common";
@@ -70,7 +70,7 @@ class StudentView extends Component {
 		navigation.setParams({
 			deselectStudent
 		});
-		this.props.appointmentsFetch();
+		this.props.numberOfAppointments(this.props.student.uid)
 	}
 
 	showModal() {
@@ -182,7 +182,7 @@ class StudentView extends Component {
 							Program: {program || "-"}
 						</Text>
 						<Text style={styles.viewText}>
-							Appointments: {this.getNumberOfAppointments()}
+							Appointments: { this.props.currentStudentAppointments }
 						</Text>
 					</View>
 				</Animated.View>
@@ -229,13 +229,17 @@ const mapStateToProps = ({ student, auth, studentList, appointmentList }) => {
 		student,
 		userEmail: auth.user.email,
 		students: studentList.students,
-		appointments: appointmentList.appointments
+		currentStudentAppointments: appointmentList.currentStudentAppointments
 	};
 };
 
-export default connect(mapStateToProps, {
-	deleteStudent,
-	deselectStudent,
-	selectStudent,
-	appointmentsFetch
-})(StudentView);
+const mapDispatchToProps = dispatch => {
+	return {
+		deleteStudent,
+		deselectStudent,
+		selectStudent,
+		numberOfAppointments: uid => dispatch(studentAppointmentsNumber(uid))
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentView);

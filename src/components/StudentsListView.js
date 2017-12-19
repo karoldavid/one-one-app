@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { ActivityIndicator, ListView, View, Text } from "react-native";
-import { studentsFetch } from "../actions";
+import { studentsFetch, appointmentsFetch } from "../actions";
 import { makeArray } from "../utils/helpers";
 import styles from "../utils/styles";
 import ListItem from "./ListItem";
@@ -11,6 +11,7 @@ import { IconButton } from "./common";
 class StudentsListView extends Component {
 	componentWillMount() {
 		this.props.studentsFetch();
+		this.props.appointmentsFetch();
 		this.createDataSource(this.props);
 	}
 
@@ -96,4 +97,4 @@ const mapStateToProps = ({
 	};
 };
 
-export default connect(mapStateToProps, { studentsFetch })(StudentsListView);
+export default connect(mapStateToProps, { studentsFetch, appointmentsFetch })(StudentsListView);

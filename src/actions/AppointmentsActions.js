@@ -1,5 +1,9 @@
 import firebase from "firebase";
-import { APPOINTMENTS_FETCH, APPOINTMENTS_FETCH_SUCCESS } from "./types";
+import {
+	APPOINTMENTS_FETCH,
+	APPOINTMENTS_FETCH_SUCCESS,
+	APPOINTMENTS_STUDENT_NUMBER
+} from "./types";
 
 export const appointmentsFetch = () => {
 	const { currentUser } = firebase.auth();
@@ -14,5 +18,12 @@ export const appointmentsFetch = () => {
 					payload: snapshot.val()
 				});
 			});
+	};
+};
+
+export const studentAppointmentsNumber = uid => {
+	return {
+		type: APPOINTMENTS_STUDENT_NUMBER,
+		payload: uid
 	};
 };
