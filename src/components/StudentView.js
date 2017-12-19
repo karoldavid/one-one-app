@@ -148,7 +148,7 @@ class StudentView extends Component {
 					style={[this.getCardStyle(), { flexDirection: "row" }]}
 					{...this.state.panResponder.panHandlers}
 				>
-					<Image source={{ uri: image }} style={styles.photo} />
+					<Image source={{ uri: image || "http://via.placeholder.com/100x150" }} style={styles.photo} />
 					<View style={{ flexDirection: "column" }}>
 						<Text style={styles.viewText}>{`${firstName} ${
 							lastName
