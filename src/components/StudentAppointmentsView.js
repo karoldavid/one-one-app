@@ -15,6 +15,7 @@ class StudentAppointmentsView extends Component {
 
 	renderCard(item) {
 		const { uid, timeDateUtc, project } = item;
+		console.log(item)
 		return (
 			<Card key={uid} title={project}>
 				<Text style={styles.text}>{moment(timeDateUtc).format("LLLL")}</Text>
