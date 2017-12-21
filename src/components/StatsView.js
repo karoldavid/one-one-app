@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Text, View } from "react-native";
 import styles from "../utils/styles";
 import { getNumberOfAppointments, getProjectTypes } from "../actions";
-import PieChart from "./ChartView";
+import PieChart from "./PieChart";
 
 class StatsView extends Component {
 	componentWillMount() {
