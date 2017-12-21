@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Text, View } from "react-native";
 import styles from "../utils/styles";
 import { getNumberOfAppointments, getProjectTypes } from "../actions";
+import PieChart from "./ChartView";
 
 class StatsView extends Component {
 	componentWillMount() {
@@ -24,13 +25,14 @@ class StatsView extends Component {
 					Number of Project Types:{" "}
 					{statistics.types ? statistics.types.length : 0}
 				</Text>
+				<PieChart />
 			</View>
 		);
 	}
 }
 
 const mapStateToProps = ({ appointmentList, statistics }) => {
-	console.log(statistics);
+//	console.log(statistics);
 	return {
 		appointments: appointmentList.appointments,
 		statistics

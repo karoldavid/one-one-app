@@ -1,4 +1,8 @@
-import { PROJECT_TYPES, NUMBER_OF_APPOINTMENTS } from "../actions/types";
+import {
+	PROJECT_TYPES,
+	NUMBER_OF_APPOINTMENTS,
+	ATTENDANCE
+} from "../actions/types";
 
 export default function(state = {}, action) {
 	switch (action.type) {
@@ -18,6 +22,11 @@ export default function(state = {}, action) {
 				},
 				[])
 			};
+		case ATTENDANCE:
+			return { ...state, attendance: result = action.payload.reduce(function(attendance, appointment) {
+				 attendance[appointment.meeting] = (attendance[appointment.meeting] || 0) + 1 ;
+				 return attendance;
+			}, {})};
 		default:
 			return state;
 	}
