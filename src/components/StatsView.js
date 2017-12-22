@@ -2,14 +2,35 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Text, View } from "react-native";
 import styles from "../utils/styles";
-import { getNumberOfAppointments, getProjectTypes } from "../actions";
-import PieChart from "./PieChart";
+import {
+	getNumberOfAppointments,
+	getProjectTypes,
+	getAttendance
+} from "../actions";
+import { PieChart } from "./PieChart";
 
 class StatsView extends Component {
 	componentWillMount() {
 		const { appointments } = this.props;
 		this.props.getProjectTypes(appointments);
 		this.props.getNumberOfAppointments(appointments);
+		this.props.getAttendance(appointments);
+	}
+
+	makeData() {
+		const { attendance } = this.props.statistics;
+		let data = [];
+
+		if (attendance) {
+			Object.keys(attendance).map(key => {
+				data.push({
+					name: key,
+					times: attendance[key]
+				});
+			});
+		}
+
+		return data;
 	}
 
 	render() {
@@ -25,14 +46,13 @@ class StatsView extends Component {
 					Number of Project Types:{" "}
 					{statistics.types ? statistics.types.length : 0}
 				</Text>
-				<PieChart />
+				<PieChart data={this.makeData()} accessorKey={"times"}/>
 			</View>
 		);
 	}
 }
 
 const mapStateToProps = ({ appointmentList, statistics }) => {
-//	console.log(statistics);
 	return {
 		appointments: appointmentList.appointments,
 		statistics
@@ -41,5 +61,6 @@ const mapStateToProps = ({ appointmentList, statistics }) => {
 
 export default connect(mapStateToProps, {
 	getNumberOfAppointments,
-	getProjectTypes
+	getProjectTypes,
+	getAttendance
 })(StatsView);
