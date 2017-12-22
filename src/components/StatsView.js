@@ -120,7 +120,7 @@ class StatsView extends Component {
 				}
 			},
 			{
-				text: "Set your location, then swipe away",
+				text: "Students Per Project",
 				color: "#03A9F4",
 				data: this.makeBarData(),
 				makeChart: barData => {
