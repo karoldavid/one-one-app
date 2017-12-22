@@ -3,7 +3,8 @@ import {
 	NUMBER_OF_APPOINTMENTS,
 	ATTENDANCE,
 	STUDENTS_PER_DAY,
-	STUDENTS_PER_MONTH
+	STUDENTS_PER_MONTH,
+	STUDENTS_PER_PROJECT
 } from "./types";
 
 export const getNumberOfAppointments = appointments => {
@@ -40,3 +41,11 @@ export const getStudentsPerMonth = appointments => {
 		payload: appointments
 	};
 };
+
+
+export const getStudentsPerProject = appointments => {
+	return {
+		type: STUDENTS_PER_PROJECT,
+		payload: appointments
+	}
+}

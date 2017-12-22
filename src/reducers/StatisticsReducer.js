@@ -3,7 +3,8 @@ import {
 	NUMBER_OF_APPOINTMENTS,
 	ATTENDANCE,
 	STUDENTS_PER_DAY,
-	STUDENTS_PER_MONTH
+	STUDENTS_PER_MONTH,
+	STUDENTS_PER_PROJECT
 } from "../actions/types";
 
 export default function(state = {}, action) {
@@ -45,8 +46,7 @@ export default function(state = {}, action) {
 					appointment
 				) {
 					const strDay = appointment.timeDateUtc.split("T")[0];
-					studentsPerDay[strDay] =
-						(studentsPerDay[strDay] || 0) + 1;
+					studentsPerDay[strDay] = (studentsPerDay[strDay] || 0) + 1;
 					return studentsPerDay;
 				},
 				{})
@@ -58,10 +58,23 @@ export default function(state = {}, action) {
 					studentsPerMonth,
 					appointment
 				) {
-					const strMonth = appointment.timeDateUtc.slice(0,7)
+					const strMonth = appointment.timeDateUtc.slice(0, 7);
 					studentsPerMonth[strMonth] =
 						(studentsPerMonth[strMonth] || 0) + 1;
 					return studentsPerMonth;
+				},
+				{})
+			};
+		case STUDENTS_PER_PROJECT:
+			return {
+				...state,
+				studentsPerProject: action.payload.reduce(function(
+					studentsPerProject,
+					appointment
+				) {
+					studentsPerProject[appointment.project] =
+						(studentsPerProject[appointment.project] || 0) + 1;
+					return studentsPerProject;
 				},
 				{})
 			};

@@ -7,7 +7,8 @@ import {
 	getProjectTypes,
 	getAttendance,
 	getStudentsPerDay,
-	getStudentsPerMonth
+	getStudentsPerMonth,
+	getStudentsPerProject
 } from "../actions";
 import { PieChart } from "./PieChart";
 import { BarChart } from "./BarChart";
@@ -17,10 +18,11 @@ import Slides from "./Slides";
 class StatsView extends Component {
 	componentWillMount() {
 		const { appointments } = this.props;
-		this.props.getProjectTypes(appointments);
-		this.props.getNumberOfAppointments(appointments);
+		//this.props.getProjectTypes(appointments);
+		//this.props.getNumberOfAppointments(appointments);
 		this.props.getAttendance(appointments);
 		this.props.getStudentsPerMonth(appointments);
+		this.props.getStudentsPerProject(appointments);
 	}
 
 	makePieData() {
@@ -40,19 +42,15 @@ class StatsView extends Component {
 	}
 
 	makeBarData() {
-		const { attendance } = this.props.statistics;
+		const { studentsPerProject } = this.props.statistics;
 		let data = [];
 
-		if (attendance) {
-			Object.keys(attendance).map(key => {
+		if (studentsPerProject) {
+			Object.keys(studentsPerProject).map(key => {
 				let bar = [];
 				bar.push({
 					name: key,
-					times: attendance[key]
-				});
-				bar.push({
-					name: key,
-					times: attendance[key]
+					students: studentsPerProject[key]
 				});
 				data.push(bar);
 			});
@@ -120,11 +118,11 @@ class StatsView extends Component {
 				}
 			},
 			{
-				text: "Students Per Project",
+				text: "Students/ Project",
 				color: "#03A9F4",
 				data: this.makeBarData(),
 				makeChart: barData => {
-					return <BarChart data={barData} accessorKey="times" />;
+					return <BarChart data={barData} accessorKey="students" />;
 				}
 			}
 		];
@@ -149,5 +147,6 @@ export default connect(mapStateToProps, {
 	getProjectTypes,
 	getAttendance,
 	getStudentsPerDay,
-	getStudentsPerMonth
+	getStudentsPerMonth,
+	getStudentsPerProject
 })(StatsView);

@@ -22,7 +22,7 @@ export const BarChart = ({ data, accessorKey }) => {
     axisX: {
       showAxis: true,
       showLines: true,
-      showLabels: true,
+      showLabels: false,
       showTicks: true,
       zeroAxis: false,
       orient: "bottom",
