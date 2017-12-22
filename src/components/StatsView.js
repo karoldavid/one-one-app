@@ -12,8 +12,7 @@ import {
 import { PieChart } from "./PieChart";
 import { BarChart } from "./BarChart";
 import { SmoothLineChart } from "./SmoothLineChart";
-
-import { data } from "../utils/data";
+import Slides from "./Slides";
 
 class StatsView extends Component {
 	componentWillMount() {
@@ -21,11 +20,10 @@ class StatsView extends Component {
 		this.props.getProjectTypes(appointments);
 		this.props.getNumberOfAppointments(appointments);
 		this.props.getAttendance(appointments);
-		//this.props.getStudentsPerDay(appointments)
 		this.props.getStudentsPerMonth(appointments);
 	}
 
-	makeChartData() {
+	makePieData() {
 		const { attendance } = this.props.statistics;
 		let data = [];
 
@@ -79,7 +77,6 @@ class StatsView extends Component {
 				let months = [];
 				Object.keys(studentsPerMonth).map(key => {
 					if (key.indexOf(year) > -1) {
-						console.log(key);
 						const month = parseInt(
 							key.slice(key.length - 2, key.length)
 						);
@@ -99,39 +96,48 @@ class StatsView extends Component {
 	render() {
 		const { statistics } = this.props;
 
-		const show = false;
-
-		const chartData = this.makeChartData();
-		const barData = this.makeBarData();
-		const smoothLineData = this.makeSmoothLineData();
-
-		//	console.log(this.makeSmoothLineData())
+		let slideData = [
+			{
+				text: "Appointments/ Month",
+				color: "#03A9F4",
+				data: this.makeSmoothLineData(),
+				makeChart: smoothLineData => {
+					return (
+						<SmoothLineChart
+							data={smoothLineData}
+							xKey="x"
+							yKey="y"
+						/>
+					);
+				}
+			},
+			{
+				text: "Student Attendance",
+				color: "#009688",
+				data: this.makePieData(),
+				makeChart: pieData => {
+					return <PieChart data={pieData} accessorKey="times" />;
+				}
+			},
+			{
+				text: "Set your location, then swipe away",
+				color: "#03A9F4",
+				data: this.makeBarData(),
+				makeChart: barData => {
+					return <BarChart data={barData} accessorKey="times" />;
+				}
+			}
+		];
 
 		return (
 			<View style={[styles.container, { justifyContent: "center" }]}>
-				<Text>
-					Number of Appointments:{" "}
-					{statistics.length ? statistics.length : 0}
-				</Text>
-				<Text>
-					Number of Project Types:{" "}
-					{statistics.types ? statistics.types.length : 0}
-				</Text>
-				{smoothLineData.length > 0 && (
-					<SmoothLineChart data={smoothLineData} xKey="x" yKey="y" />
-				)}
-
-				{show && <PieChart data={chartData} accessorKey="times" />}
-
-				{show && <BarChart data={barData} accessorKey="times" />}
+				<Slides data={slideData} />
 			</View>
 		);
 	}
 }
 
 const mapStateToProps = ({ appointmentList, statistics }) => {
-	//console.log(statistics.studentsPerDay)
-	//console.log(statistics.studentsPerMonth)
 	return {
 		appointments: appointmentList.appointments,
 		statistics
