@@ -8,6 +8,7 @@ import {
 	getAttendance
 } from "../actions";
 import { PieChart } from "./PieChart";
+import { BarChart } from "./BarChart";
 
 class StatsView extends Component {
 	componentWillMount() {
@@ -17,7 +18,7 @@ class StatsView extends Component {
 		this.props.getAttendance(appointments);
 	}
 
-	makeData() {
+	makeChartData() {
 		const { attendance } = this.props.statistics;
 		let data = [];
 
@@ -33,8 +34,33 @@ class StatsView extends Component {
 		return data;
 	}
 
+	makeBarData() {
+		const { attendance } = this.props.statistics;
+		let data = [];
+
+		if (attendance) {
+			Object.keys(attendance).map(key => {
+				let bar = [];
+				bar.push({
+					name: key,
+					times: attendance[key]
+				});
+				bar.push({
+					name: key,
+					times: attendance[key]
+				});
+				data.push(bar);
+			});
+		}
+
+		return data;
+	}
+
 	render() {
 		const { statistics } = this.props;
+
+		const chartData = this.makeChartData();
+		const barData = this.makeBarData();
 
 		return (
 			<View style={[styles.container, { justifyContent: "center" }]}>
@@ -46,7 +72,10 @@ class StatsView extends Component {
 					Number of Project Types:{" "}
 					{statistics.types ? statistics.types.length : 0}
 				</Text>
-				<PieChart data={this.makeData()} accessorKey={"times"}/>
+				<PieChart data={chartData} accessorKey="times" />
+				{barData.length > 0 && (
+					<BarChart data={barData} accessorKey="times" />
+				)}
 			</View>
 		);
 	}

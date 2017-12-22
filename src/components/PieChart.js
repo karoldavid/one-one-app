@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { Pie } from "react-native-pathjs-charts";
 
 export const PieChart = ({ data, accessorKey }) => {
