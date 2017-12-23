@@ -10,12 +10,12 @@ import {
 	getStudentsPerMonth,
 	getStudentsPerProject
 } from "../actions";
-import { PieChart } from "./PieChart";
-import { BarChart } from "./BarChart";
-import { SmoothLineChart } from "./SmoothLineChart";
-import Slides from "./Slides";
+import { PieChart } from "../components/charts/PieChart";
+import { BarChart } from "../components/charts/BarChart";
+import { SmoothLineChart } from "../components/charts/SmoothLineChart";
+import Slides from "../components/Slides";
 
-class StatsView extends Component {
+class StatsScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
 			title: "Stats",
@@ -156,4 +156,4 @@ export default connect(mapStateToProps, {
 	getStudentsPerDay,
 	getStudentsPerMonth,
 	getStudentsPerProject
-})(StatsView);
+})(StatsScreen);

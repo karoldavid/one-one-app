@@ -1,34 +1,33 @@
-import React, { Component } from "react";
+import React from "react";
 import { View } from "react-native";
-import { Bar } from "react-native-pathjs-charts";
+import { SmoothLine } from "react-native-pathjs-charts";
 
-export const BarChart = ({ data, accessorKey }) => {
+export const SmoothLineChart = ({ data, xKey, yKey }) => {
+ 
   let options = {
-    width: 300,
-    height: 300,
+    width: 280,
+    height: 280,
+    color: "#2980B9",
     margin: {
       top: 20,
-      left: 25,
-      bottom: 50,
+      left: 45,
+      bottom: 25,
       right: 20
     },
-    color: "#2980B9",
-    gutter: 20,
     animate: {
-      type: "oneByOne",
-      duration: 200,
-      fillTransition: 3
+      type: "delayed",
+      duration: 200
     },
     axisX: {
       showAxis: true,
       showLines: true,
-      showLabels: false,
+      showLabels: true,
       showTicks: true,
       zeroAxis: false,
       orient: "bottom",
       label: {
         fontFamily: "Arial",
-        fontSize: 8,
+        fontSize: 14,
         fontWeight: true,
         fill: "#34495E"
       }
@@ -42,7 +41,7 @@ export const BarChart = ({ data, accessorKey }) => {
       orient: "left",
       label: {
         fontFamily: "Arial",
-        fontSize: 8,
+        fontSize: 14,
         fontWeight: true,
         fill: "#34495E"
       }
@@ -51,7 +50,7 @@ export const BarChart = ({ data, accessorKey }) => {
 
   return (
     <View>
-      <Bar data={data} options={options} accessorKey={accessorKey} />
+      <SmoothLine data={data} options={options} xKey={xKey} yKey={yKey} />
     </View>
   );
 };
