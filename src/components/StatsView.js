@@ -16,6 +16,13 @@ import { SmoothLineChart } from "./SmoothLineChart";
 import Slides from "./Slides";
 
 class StatsView extends Component {
+	static navigationOptions = ({ navigation }) => {
+		return {
+			title: "Stats",
+			visible: true
+		};
+	};
+
 	componentWillMount() {
 		const { appointments } = this.props;
 		//this.props.getProjectTypes(appointments);
