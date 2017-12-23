@@ -37,7 +37,7 @@ class Drawer extends Component {
         <DrawerIcon
           onPress={() => {
             logOut();
-            navigation.navigate("LoginView");
+            navigation.navigate("LoginScreen");
           }}
           ionicon={"ios-log-out"}
           size={30}

@@ -6,7 +6,7 @@ import { blue, lightPurp, purple, white } from "./colors";
 import { Ionicons } from "@expo/vector-icons";
 import { DrawerButton } from "../components/common";
 
-import LoginForm from "../components/LoginForm";
+import LoginScreen from "../screens/LoginScreen";
 import StudentsListView from "../components/StudentsListView";
 import StudentView from "../components/StudentView";
 import CreateStudentView from "../components/CreateStudentView";
@@ -51,8 +51,8 @@ const DrawerNavigation = StackNavigator({
 });
 
 export const MainNavigator = StackNavigator({
-  LoginView: {
-    screen: LoginForm,
+  login: {
+    screen: LoginScreen,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {

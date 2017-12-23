@@ -1,14 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  loggedIn,
-  removeFromStorage,
-  emailChanged,
-  passwordChanged,
-  loginUser
-} from "../actions";
-import { resetNavigation } from "../utils/helpers";
-import {
   Text,
   TextInput,
   TouchableOpacity,
@@ -16,8 +8,16 @@ import {
   KeyboardAvoidingView,
   ActivityIndicator
 } from "react-native";
-import styles from "../utils/styles";
-import { Button } from "./common";
+import {
+  loggedIn,
+  removeFromStorage,
+  emailChanged,
+  passwordChanged,
+  loginUser
+} from "../../actions";
+import { resetNavigation } from "../../utils/helpers";
+import styles from "../../utils/styles";
+import { Button } from "../common";
 
 class LoginForm extends Component {
   componentWillMount() {
@@ -28,7 +28,7 @@ class LoginForm extends Component {
   renderLoginButton() {
     const { email, password, loading, loginUser, navigation } = this.props;
 
-    if (this.props.loading) {
+    if (loading) {
       return <ActivityIndicator />;
     }
     return (
