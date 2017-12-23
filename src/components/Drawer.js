@@ -4,6 +4,7 @@ import { Text, View } from "react-native";
 import styles from "../utils/styles";
 import { logOut } from "../actions";
 import { DrawerIcon } from "./common";
+import { resetNavigation } from "../utils/helpers";
 
 const VIEWS = [
   { StudentsListView: "Students", icon: "md-list" },
@@ -37,7 +38,7 @@ class Drawer extends Component {
         <DrawerIcon
           onPress={() => {
             logOut();
-            navigation.navigate("LoginScreen");
+            navigation.navigate("login");
           }}
           ionicon={"ios-log-out"}
           size={30}

@@ -57,7 +57,8 @@ export const MainNavigator = StackNavigator({
       headerTintColor: white,
       headerStyle: {
         backgroundColor: blue
-      }
+      },
+      headerLeft: null
     }
   },
   DrawerView: {
