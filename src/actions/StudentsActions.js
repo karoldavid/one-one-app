@@ -1,5 +1,5 @@
 import firebase from "firebase";
-import { STUDENTS_FETCH, STUDENTS_FETCH_SUCCESS } from "./types";
+import { STUDENTS_FETCH, STUDENTS_FETCH_SUCCESS, FILTER_STUDENTS } from "./types";
 
 export const studentsFetch = () => {
 	const { currentUser } = firebase.auth();
@@ -16,3 +16,10 @@ export const studentsFetch = () => {
 			});
 	};
 };
+
+export const filterStudents = filter => {
+	return {
+		type: FILTER_STUDENTS,
+		payload: filter
+	}
+}

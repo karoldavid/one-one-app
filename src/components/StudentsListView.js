@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { ActivityIndicator, ListView, View, Text } from "react-native";
-import { studentsFetch, appointmentsFetch } from "../actions";
+import { studentsFetch, appointmentsFetch, filterStudents } from "../actions";
 import { makeArray } from "../utils/helpers";
 import styles from "../utils/styles";
+import { lightPurp } from "../utils/colors";
 import ListItem from "./ListItem";
 import { IconButton } from "./common";
+import Search from "react-native-search-box";
 
 class StudentsListView extends Component {
 	componentWillMount() {
@@ -18,20 +20,38 @@ class StudentsListView extends Component {
 	componentWillReceiveProps(nextProps) {
 		this.createDataSource(nextProps);
 	}
-	
-	createDataSource({ students }) {
+
+	createDataSource({ students, filter }) {
 		const ds = new ListView.DataSource({
 			rowHasChanged: (r1, r2) => r1 !== r2
 		});
 
+		if (students.length > 0) {
+			students = students.filter(student => {
+				const name = `${student.firstName} ${student.lastName}`.toLowerCase();
+				return name.indexOf(filter.toLowerCase()) != -1;
+			});
+		}
+
 		this.dataSource = ds.cloneWithRows(students);
 	}
+
+	onChangeText = text => {
+		return new Promise((resolve, reject) => {
+			this.props.filterStudents(text);
+			resolve();
+		});
+	};
 
 	render() {
 		const { loading, navigation, students } = this.props;
 
 		return (
 			<View style={{ flex: 1 }}>
+				<Search
+					backgroundColor={lightPurp}
+					onChangeText={text => this.onChangeText(text)}
+				/>
 				{loading ? (
 					<View
 						style={[
@@ -87,14 +107,19 @@ class StudentsListView extends Component {
 }
 
 const mapStateToProps = ({
-	studentList: { students, orderBy, sortDirection, loading }
+	studentList: { students, orderBy, sortDirection, loading, filter }
 }) => {
 	return {
-		students: students,
+		students,
 		orderBy,
 		sortDirection,
-		loading
+		loading,
+		filter
 	};
 };
 
-export default connect(mapStateToProps, { studentsFetch, appointmentsFetch })(StudentsListView);
+export default connect(mapStateToProps, {
+	studentsFetch,
+	appointmentsFetch,
+	filterStudents
+})(StudentsListView);
