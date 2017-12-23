@@ -7,7 +7,7 @@ import moment from "moment";
 // @TODO: use redux to update calendar
 // @TODO:
 
-class AgendaScreen extends Component {
+class AgendaView extends Component {
   state = {
     items: {}
   };
@@ -117,4 +117,4 @@ const mapStateToProps = ({ appointmentList }) => {
   };
 };
 
-export default connect(mapStateToProps, {})(AgendaScreen);
+export default connect(mapStateToProps, {})(AgendaView);
