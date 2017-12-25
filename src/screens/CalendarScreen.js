@@ -3,13 +3,19 @@ import { Text, View } from "react-native";
 import AgendaView from "../components/calendar/AgendaView";
 
 class CalendarScreen extends Component {
-  render() {
-    return (
-      <View style={{flex: 1}}>
-        <AgendaView />
-      </View>
-    );
-  }
+	static navigationOptions = ({ navigation }) => {
+		return {
+			title: "Calendar",
+			visible: true
+		};
+	};
+	render() {
+		return (
+			<View style={{ flex: 1 }}>
+				<AgendaView />
+			</View>
+		);
+	}
 }
 
 export default CalendarScreen;
