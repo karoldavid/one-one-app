@@ -4,16 +4,16 @@ import { Text, View, StyleSheet } from "react-native";
 import { Agenda } from "react-native-calendars";
 import moment from "moment";
 
-// @TODO: use redux to update calendar
-// @TODO:
-
 class AgendaView extends Component {
   state = {
     items: {}
   };
 
-  loadItems = (day) => {
-    const newItems = this.props.appointments.reduce((items, appointment) => {
+  loadItems = day => {
+    const appointmentsSortedByTime = this.props.appointments.sort(function(a, b) {
+      return Date.parse(a.timeDateUtc) - Date.parse(b.timeDateUtc);
+    });
+    const newItems = appointmentsSortedByTime.reduce((items, appointment) => {
       const { timeDateUtc, description, project } = appointment;
       const strDate = timeDateUtc.split("T")[0];
       const strTime = moment(timeDateUtc)
@@ -35,9 +35,9 @@ class AgendaView extends Component {
     this.setState({
       items: newItems
     });
-  }
+  };
 
-  renderItem = (item) => {
+  renderItem = item => {
     return (
       <View style={[styles.item, { height: item.height }]}>
         <Text style={{ color: "blue" }}>{item.time}</Text>
@@ -45,7 +45,7 @@ class AgendaView extends Component {
         <Text>{item.description}</Text>
       </View>
     );
-  }
+  };
 
   renderEmptyDate = () => {
     return (
@@ -53,11 +53,11 @@ class AgendaView extends Component {
         <Text>This is empty date!</Text>
       </View>
     );
-  }
+  };
 
   rowHasChanged = (r1, r2) => {
     return r1.name !== r2.name;
-  }
+  };
 
   timeToString(time) {
     const date = new Date(time);
@@ -83,9 +83,9 @@ class AgendaView extends Component {
         //    '2017-05-24': {startingDay: true, color: 'gray'},
         //    '2017-05-25': {color: 'gray'},
         //    '2017-05-26': {endingDay: true, color: 'gray'}}}
-        // monthFormat={'yyyy'}
+     //   monthFormat={'yyyy'}
         // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
-        //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
+       // renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
       />
     );
   }

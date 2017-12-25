@@ -1,7 +1,13 @@
 import moment from "moment";
-import { CALENDAR_ITEMS } from "../actions/types";
+import { CALENDAR_ITEMS, ACTIVE_MONTH } from "../actions/types";
 
-export default (state = {}, action) => {
+
+const INITIAL_CALENDAR_STATE = {
+	items: {},
+	month: 'December'
+}
+
+export default (state = INITIAL_CALENDAR_STATE, action) => {
 	switch (action.type) {
 		case CALENDAR_ITEMS:
 			return {
@@ -25,6 +31,8 @@ export default (state = {}, action) => {
 					return items;
 				}, {})
 			};
+		case ACTIVE_MONTH:
+			return { ...state, month: action.payload }
 		default:
 			return state;
 	}

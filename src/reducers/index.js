@@ -14,5 +14,5 @@ export default combineReducers({
 	appointment: AppointmentReducer,
 	appointmentList: AppointmentsReducer,
 	statistics: StatisticsReducer,
-	items: CalendarReducer
+	calendar: CalendarReducer
 });
