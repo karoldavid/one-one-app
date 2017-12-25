@@ -5,6 +5,7 @@ import StudentReducer from "./StudentReducer";
 import AppointmentReducer from "./AppointmentReducer";
 import AppointmentsReducer from "./AppointmentsReducer";
 import StatisticsReducer from "./StatisticsReducer";
+import CalendarReducer from "./CalendarReducer";
 
 export default combineReducers({
 	auth: AuthReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
 	student: StudentReducer,
 	appointment: AppointmentReducer,
 	appointmentList: AppointmentsReducer,
-	statistics: StatisticsReducer
+	statistics: StatisticsReducer,
+	items: CalendarReducer
 });

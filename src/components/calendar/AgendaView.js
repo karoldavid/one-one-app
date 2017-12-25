@@ -12,8 +12,59 @@ class AgendaView extends Component {
     items: {}
   };
 
-  render() {
+  loadItems(day) {
+    const newItems = this.props.appointments.reduce((items, appointment) => {
+      const { timeDateUtc, description, project } = appointment;
+      const strDate = timeDateUtc.split("T")[0];
+      const strTime = moment(timeDateUtc)
+        .local()
+        .format("HH:mm");
 
+      if (!items[strDate]) {
+        items[strDate] = [];
+      }
+
+      items[strDate].push({
+        time: strTime,
+        project: project,
+        description: description
+      });
+      return items;
+    }, {});
+
+    this.setState({
+      items: newItems
+    });
+  }
+
+  renderItem(item) {
+    return (
+      <View style={[styles.item, { height: item.height }]}>
+        <Text style={{ color: "blue" }}>{item.time}</Text>
+        <Text>{item.project}</Text>
+        <Text>{item.description}</Text>
+      </View>
+    );
+  }
+
+  renderEmptyDate() {
+    return (
+      <View style={styles.emptyDate}>
+        <Text>This is empty date!</Text>
+      </View>
+    );
+  }
+
+  rowHasChanged(r1, r2) {
+    return r1.name !== r2.name;
+  }
+
+  timeToString(time) {
+    const date = new Date(time);
+    return date.toISOString().split("T")[0];
+  }
+
+  render() {
     return (
       <Agenda
         items={this.state.items}
@@ -37,61 +88,6 @@ class AgendaView extends Component {
         //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
       />
     );
-  }
-
-  loadItems(day) {
-    const newItems = {};
-
-    this.props.appointments.map(appointment => {
-      const { timeDateUtc, description, project } = appointment;
-      const strDate = timeDateUtc.split("T")[0];
-      const strTime = moment(timeDateUtc).local().format('HH:mm')
-
-      if (!this.state.items[strDate]) {
-        this.state.items[strDate] = [];
-      }
-
-      this.state.items[strDate].push({
-        time: strTime,
-        project: project,
-        description: description
-      });
-    });
-    
-    Object.keys(this.state.items).forEach(key => {
-      newItems[key] = this.state.items[key];
-    });
-
-    this.setState({
-      items: newItems
-    });
-  }
-
-  renderItem(item) {
-    return (
-      <View style={[styles.item, { height: item.height }]}>
-        <Text style={{ color: "blue"}}>{item.time}</Text>
-        <Text>{item.project}</Text>
-        <Text>{item.description}</Text>
-      </View>
-    );
-  }
-
-  renderEmptyDate() {
-    return (
-      <View style={styles.emptyDate}>
-        <Text>This is empty date!</Text>
-      </View>
-    );
-  }
-
-  rowHasChanged(r1, r2) {
-    return r1.name !== r2.name;
-  }
-
-  timeToString(time) {
-    const date = new Date(time);
-    return date.toISOString().split("T")[0];
   }
 }
 
@@ -117,4 +113,4 @@ const mapStateToProps = ({ appointmentList }) => {
   };
 };
 
-export default connect(mapStateToProps, {})(AgendaView);
+export default connect(mapStateToProps)(AgendaView);
