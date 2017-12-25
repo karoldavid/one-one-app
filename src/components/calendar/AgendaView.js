@@ -12,7 +12,7 @@ class AgendaView extends Component {
     items: {}
   };
 
-  loadItems(day) {
+  loadItems = (day) => {
     const newItems = this.props.appointments.reduce((items, appointment) => {
       const { timeDateUtc, description, project } = appointment;
       const strDate = timeDateUtc.split("T")[0];
@@ -37,7 +37,7 @@ class AgendaView extends Component {
     });
   }
 
-  renderItem(item) {
+  renderItem = (item) => {
     return (
       <View style={[styles.item, { height: item.height }]}>
         <Text style={{ color: "blue" }}>{item.time}</Text>
@@ -47,7 +47,7 @@ class AgendaView extends Component {
     );
   }
 
-  renderEmptyDate() {
+  renderEmptyDate = () => {
     return (
       <View style={styles.emptyDate}>
         <Text>This is empty date!</Text>
@@ -55,7 +55,7 @@ class AgendaView extends Component {
     );
   }
 
-  rowHasChanged(r1, r2) {
+  rowHasChanged = (r1, r2) => {
     return r1.name !== r2.name;
   }
 
@@ -68,11 +68,11 @@ class AgendaView extends Component {
     return (
       <Agenda
         items={this.state.items}
-        loadItemsForMonth={this.loadItems.bind(this)}
+        loadItemsForMonth={this.loadItems}
         selected={"2016-12-10T07:30:00+01:00"}
-        renderItem={this.renderItem.bind(this)}
-        renderEmptyDate={this.renderEmptyDate.bind(this)}
-        rowHasChanged={this.rowHasChanged.bind(this)}
+        renderItem={this.renderItem}
+        renderEmptyDate={this.renderEmptyDate}
+        rowHasChanged={this.rowHasChanged}
         // markingType={'period'}
         // markedDates={{
         //    '2017-05-08': {textColor: '#666'},
