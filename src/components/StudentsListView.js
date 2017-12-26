@@ -8,9 +8,13 @@ import styles from "../utils/styles";
 import { lightPurp } from "../utils/colors";
 import ListItem from "./ListItem";
 import { IconButton } from "./common";
-import Search from "react-native-search-box";
+import { SearchBar } from "react-native-elements";
 
 class StudentsListView extends Component {
+	state = {
+		hasText: false
+	}
+
 	componentWillMount() {
 		this.props.studentsFetch();
 		this.props.appointmentsFetch();
@@ -28,7 +32,9 @@ class StudentsListView extends Component {
 
 		if (students.length > 0) {
 			students = students.filter(student => {
-				const name = `${student.firstName} ${student.lastName}`.toLowerCase();
+				const name = `${student.firstName} ${
+					student.lastName
+				}`.toLowerCase();
 				return name.indexOf(filter.toLowerCase()) != -1;
 			});
 		}
@@ -37,10 +43,10 @@ class StudentsListView extends Component {
 	}
 
 	onChangeText = text => {
-		return new Promise((resolve, reject) => {
-			this.props.filterStudents(text);
-			resolve();
-		});
+		this.props.filterStudents(text);
+		this.setState({
+			hasText: text.length > 0
+		})
 	};
 
 	render() {
@@ -48,10 +54,14 @@ class StudentsListView extends Component {
 
 		return (
 			<View style={{ flex: 1 }}>
-				<Search
-					backgroundColor={lightPurp}
-					onChangeText={text => this.onChangeText(text)}
+				<SearchBar
+					containerStyle={{ backgroundColor: lightPurp }}
+					lightTheme
+					onChangeText={this.onChangeText}
+					placeholder="Type Here..."
+					clearIcon={this.state.hasText}
 				/>
+
 				{loading ? (
 					<View
 						style={[
