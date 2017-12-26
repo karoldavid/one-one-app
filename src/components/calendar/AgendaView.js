@@ -8,7 +8,7 @@ class AgendaView extends Component {
 
   loadItems = day => {
     this.setState({
-      items: { ...this.props.makeCalendarItems(this.props.data) }
+      items: { ...this.props.makeCalendarItems(this.props.data, day) }
     });
   };
 
@@ -21,10 +21,12 @@ class AgendaView extends Component {
       <Agenda
         items={this.state.items}
         loadItemsForMonth={this.loadItems}
-        selected={"2016-12-10T07:30:00+01:00"}
+        selected={this.props.selected}
         renderItem={this.props.renderItem}
         renderEmptyDate={this.props.renderEmptyDate}
         rowHasChanged={this.rowHasChanged}
+        onDayPress={this.props.onDayPress}
+        onDayChange={this.props.onDayChange}
         // markingType={'period'}
         // markedDates={{
         //    '2017-05-08': {textColor: '#666'},
@@ -35,9 +37,9 @@ class AgendaView extends Component {
         //    '2017-05-24': {startingDay: true, color: 'gray'},
         //    '2017-05-25': {color: 'gray'},
         //    '2017-05-26': {endingDay: true, color: 'gray'}}}
-     //   monthFormat={'yyyy'}
+        //   monthFormat={'yyyy'}
         // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
-       // renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
+        // renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
       />
     );
   }

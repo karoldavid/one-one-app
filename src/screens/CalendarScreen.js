@@ -3,16 +3,23 @@ import { connect } from "react-redux";
 import moment from "moment";
 import { StyleSheet, Text, View } from "react-native";
 import AgendaView from "../components/calendar/AgendaView";
+import { setActiveMonth } from "../actions";
+import { monthToString } from "../utils/helpers";
 
 class CalendarScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
+		const { params } = navigation.state;
 		return {
-			title: "Calendar",
+			title: `Calendar - ${params ? monthToString(params.month) : ""}`,
 			visible: true
 		};
 	};
 
-	makeCalendarItems = data => {
+	componentWillMount() {
+		this.props.navigation.setParams({ month: this.props.month });
+	}
+
+	makeCalendarItems = (data, day) => {
 		return data
 			.sort(function(a, b) {
 				return Date.parse(a.timeDateUtc) - Date.parse(b.timeDateUtc);
@@ -55,6 +62,14 @@ class CalendarScreen extends Component {
 		);
 	};
 
+	onDayPress = ({ month }) => {
+		this.props.navigation.setParams({ month });
+	};
+
+	onDayChange = ({ month }) => {
+		this.props.navigation.setParams({ month });
+	};
+
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
@@ -63,19 +78,14 @@ class CalendarScreen extends Component {
 					makeCalendarItems={this.makeCalendarItems}
 					renderItem={this.renderItem}
 					renderEmptyDate={this.renderEmptyDate}
+					selected={this.props.selected}
+					onDayPress={this.onDayPress}
+					onDayChange={this.onDayChange}
 				/>
 			</View>
 		);
 	}
 }
-
-const mapStateToProps = ({ appointmentList }) => {
-	return {
-		appointments: appointmentList.appointments
-	};
-};
-
-export default connect(mapStateToProps)(CalendarScreen);
 
 const styles = StyleSheet.create({
 	item: {
@@ -92,3 +102,14 @@ const styles = StyleSheet.create({
 		paddingTop: 30
 	}
 });
+
+const mapStateToProps = ({ appointmentList, calendar }) => {
+	console.log(calendar.month);
+	return {
+		appointments: appointmentList.appointments,
+		month: calendar.month,
+		selected: calendar.selected
+	};
+};
+
+export default connect(mapStateToProps, { setActiveMonth })(CalendarScreen);
