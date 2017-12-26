@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import AgendaView from "../components/calendar/AgendaView";
 
 class CalendarScreen extends Component {
@@ -47,6 +47,14 @@ class CalendarScreen extends Component {
 		);
 	};
 
+	renderEmptyDate = () => {
+		return (
+			<View style={styles.emptyDate}>
+				<Text>This is empty date!</Text>
+			</View>
+		);
+	};
+
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
@@ -54,6 +62,7 @@ class CalendarScreen extends Component {
 					data={this.props.appointments}
 					makeCalendarItems={this.makeCalendarItems}
 					renderItem={this.renderItem}
+					renderEmptyDate={this.renderEmptyDate}
 				/>
 			</View>
 		);
@@ -67,3 +76,19 @@ const mapStateToProps = ({ appointmentList }) => {
 };
 
 export default connect(mapStateToProps)(CalendarScreen);
+
+const styles = StyleSheet.create({
+	item: {
+		backgroundColor: "white",
+		flex: 1,
+		borderRadius: 5,
+		padding: 10,
+		marginRight: 10,
+		marginTop: 17
+	},
+	emptyDate: {
+		height: 15,
+		flex: 1,
+		paddingTop: 30
+	}
+});
