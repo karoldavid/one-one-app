@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Text, View, StyleSheet } from "react-native";
 import { Agenda } from "react-native-calendars";
-import moment from "moment";
 
 class AgendaView extends Component {
   state = {
@@ -10,41 +8,9 @@ class AgendaView extends Component {
   };
 
   loadItems = day => {
-    const appointmentsSortedByTime = this.props.appointments.sort(function(a, b) {
-      return Date.parse(a.timeDateUtc) - Date.parse(b.timeDateUtc);
-    });
-    const newItems = appointmentsSortedByTime.reduce((items, appointment) => {
-      const { timeDateUtc, description, project } = appointment;
-      const strDate = timeDateUtc.split("T")[0];
-      const strTime = moment(timeDateUtc)
-        .local()
-        .format("HH:mm");
-
-      if (!items[strDate]) {
-        items[strDate] = [];
-      }
-
-      items[strDate].push({
-        time: strTime,
-        project: project,
-        description: description
-      });
-      return items;
-    }, {});
-
     this.setState({
-      items: newItems
+      items: { ...this.props.makeCalendarItems(this.props.data) }
     });
-  };
-
-  renderItem = item => {
-    return (
-      <View style={[styles.item, { height: item.height }]}>
-        <Text style={{ color: "blue" }}>{item.time}</Text>
-        <Text>{item.project}</Text>
-        <Text>{item.description}</Text>
-      </View>
-    );
   };
 
   renderEmptyDate = () => {
@@ -59,18 +25,13 @@ class AgendaView extends Component {
     return r1.name !== r2.name;
   };
 
-  timeToString(time) {
-    const date = new Date(time);
-    return date.toISOString().split("T")[0];
-  }
-
   render() {
     return (
       <Agenda
         items={this.state.items}
         loadItemsForMonth={this.loadItems}
         selected={"2016-12-10T07:30:00+01:00"}
-        renderItem={this.renderItem}
+        renderItem={this.props.renderItem}
         renderEmptyDate={this.renderEmptyDate}
         rowHasChanged={this.rowHasChanged}
         // markingType={'period'}
@@ -107,10 +68,4 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = ({ appointmentList }) => {
-  return {
-    appointments: appointmentList.appointments
-  };
-};
-
-export default connect(mapStateToProps)(AgendaView);
+export default AgendaView;
