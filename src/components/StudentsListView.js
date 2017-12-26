@@ -11,11 +11,29 @@ import { IconButton } from "./common";
 import { SearchBar } from "react-native-elements";
 
 class StudentsListView extends Component {
+	static navigationOptions = ({ navigation }) => {
+		return {
+			headerRight: (
+				<IconButton
+					onPress={() => navigation.state.params.toggleSearchBar()}
+					ionicon="md-search"
+					size={30}
+					color="white"
+				/>
+			)
+		};
+	};
+
 	state = {
-		hasText: false
-	}
+		hasText: false,
+		visible: false
+	};
 
 	componentWillMount() {
+		const { toggleSearchBar } = this;
+		this.props.navigation.setParams({
+			toggleSearchBar
+		});
 		this.props.studentsFetch();
 		this.props.appointmentsFetch();
 		this.createDataSource(this.props);
@@ -24,6 +42,12 @@ class StudentsListView extends Component {
 	componentWillReceiveProps(nextProps) {
 		this.createDataSource(nextProps);
 	}
+
+	toggleSearchBar = () => {
+		this.setState({
+			visible: !this.state.visible
+		});
+	};
 
 	createDataSource({ students, filter }) {
 		const ds = new ListView.DataSource({
@@ -46,7 +70,7 @@ class StudentsListView extends Component {
 		this.props.filterStudents(text);
 		this.setState({
 			hasText: text.length > 0
-		})
+		});
 	};
 
 	render() {
@@ -54,13 +78,16 @@ class StudentsListView extends Component {
 
 		return (
 			<View style={{ flex: 1 }}>
-				<SearchBar
-					containerStyle={{ backgroundColor: lightPurp }}
-					lightTheme
-					onChangeText={this.onChangeText}
-					placeholder="Type Here..."
-					clearIcon={this.state.hasText}
-				/>
+				{this.state.visible && (
+					<SearchBar
+						value={this.props.filter}
+						containerStyle={{ backgroundColor: lightPurp }}
+						lightTheme
+						onChangeText={this.onChangeText}
+						placeholder="Type Here..."
+						clearIcon={this.state.hasText}
+					/>
+				)}
 
 				{loading ? (
 					<View

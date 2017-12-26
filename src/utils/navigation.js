@@ -45,7 +45,7 @@ const DrawerNavigation = StackNavigator({
       headerStyle: { backgroundColor: lightPurp },
       headerTintColor: white,
       gesturesEnabled: false,
-      headerRight: <DrawerButton navigation={navigation} />
+      headerLeft: <DrawerButton navigation={navigation} />
     })
   }
 });
