@@ -54,11 +54,7 @@ export const MainNavigator = StackNavigator({
   login: {
     screen: LoginScreen,
     navigationOptions: {
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: blue
-      },
-      headerLeft: null
+      header: null
     }
   },
   DrawerView: {

@@ -3,13 +3,14 @@ import { blueMagenta, red, white } from "./colors";
 
 const container = {
 	flex: 1,
-	backgroundColor: white,
+	backgroundColor: "#E1D7D8",
 	alignItems: "center",
 	justifyContent: "space-around"
 };
 
 const header = {
-	fontWeight: "bold",
+	marginTop: 40,
+	marginBottom: 40,
 	color: blueMagenta,
 	fontSize: 24
 };

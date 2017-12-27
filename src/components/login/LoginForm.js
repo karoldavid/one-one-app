@@ -9,6 +9,12 @@ import {
   ActivityIndicator
 } from "react-native";
 import {
+  Button,
+  FormLabel,
+  FormInput,
+  FormValidationMessage
+} from "react-native-elements";
+import {
   loggedIn,
   removeFromStorage,
   emailChanged,
@@ -17,7 +23,7 @@ import {
 } from "../../actions";
 import { resetNavigation } from "../../utils/helpers";
 import styles from "../../utils/styles";
-import { Button } from "../common";
+//import { Button } from "../common";
 
 class LoginForm extends Component {
   componentWillMount() {
@@ -33,7 +39,8 @@ class LoginForm extends Component {
     }
     return (
       <Button
-        title={"Submit"}
+        title={"LOGIN"}
+        large
         onPress={() =>
           loginUser({ email, password }, () => {
             resetNavigation(navigation, "DrawerView");
@@ -53,34 +60,55 @@ class LoginForm extends Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
-        <Text style={styles.header}>1:1 Appointments</Text>
-        <KeyboardAvoidingView style={{ flex: 0.8 }}>
-          <TextInput
-            style={styles.input}
-            underlineColorAndroid="transparent"
-            placeholder="Email"
-            placeholderTextColor="#9a73ef"
-            autoCapitalize="none"
-            value={email}
-            onChangeText={emailChanged}
-          />
+      <KeyboardAvoidingView>
+        <FormValidationMessage labelStyle={styles.loginError}>
+          {error}
+        </FormValidationMessage>
+        <FormLabel
+          labelStyle={{
+            fontSize: 20,
+            fontWeight: "bold",
+            marginBottom: 10,
+            color: "#595856"
+          }}
+        >
+          EMAIL
+        </FormLabel>
+        <FormInput
+          inputStyle={{
+            fontSize: 18
+          }}
+          value={email}
+          placeholder="Please enter your email address..."
+          underlineColorAndroid="#3B5699"
+          placeholderTextColor="#9a73ef"
+          onChangeText={emailChanged}
+        />
 
-          <TextInput
-            style={styles.input}
-            underlineColorAndroid="transparent"
-            placeholder="Password"
-            placeholderTextColor="#9a73ef"
-            autoCapitalize="none"
-            secureTextEntry
-            value={password}
-            onChangeText={passwordChanged}
-          />
+        <FormLabel
+          labelStyle={{
+            fontSize: 20,
+            fontWeight: "bold",
+            marginBottom: 10,
+            color: "#595856"
+          }}
+        >
+          PASSWORD
+        </FormLabel>
+        <FormInput
+        inputStyle={{
+            fontSize: 18
+          }}
+          value={password}
+          secureTextEntry
+          placeholder="Please enter your password..."
+          underlineColorAndroid="#3B5699"
+          placeholderTextColor="#9a73ef"
+          onChangeText={passwordChanged}
+        />
 
-          <View>{this.renderLoginButton()}</View>
-          <Text style={styles.loginError}>{error}</Text>
-        </KeyboardAvoidingView>
-      </View>
+        <View style={{ marginTop: 40 }}>{this.renderLoginButton()}</View>
+      </KeyboardAvoidingView>
     );
   }
 }

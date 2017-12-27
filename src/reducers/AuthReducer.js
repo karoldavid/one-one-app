@@ -9,7 +9,7 @@ import {
 
 const INITIAL_AUTH_STATE = {
 	user: null,
-	email: "@",
+	email: "",
 	password: "",
 	error: "",
 	loading: false
