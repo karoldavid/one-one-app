@@ -7,32 +7,36 @@ import { Deck } from "./common";
 import { getStudentAppointments } from "../actions";
 
 class StudentAppointmentsView extends Component {
-
 	componentWillMount() {
 		const { uid } = this.props.student;
-		this.props.getStudentAppointments(uid)
+		this.props.getStudentAppointments(uid);
 	}
 
 	renderCard(item) {
-		const { uid, timeDateUtc, project } = item;
-		console.log(item)
+		const { timeDateUtc, project } = item;
 		return (
-			<Card key={uid} title={project}>
-				<Text style={styles.text}>{moment(timeDateUtc).format("LLLL")}</Text>
+			<Card title={project}>
+				<Text style={styles.text}>
+					{moment(timeDateUtc).format("LLLL")}
+				</Text>
 				<Button
 					icon={{ name: "code" }}
 					backgroundColor="#03A9F4"
-					title="More"
+					title="Show More"
+					onPress={() => console.log("pressed")}
 				/>
 			</Card>
 		);
 	}
 
 	render() {
-		const { studentAppointments } = this.props;
 		return (
 			<ScrollView style={styles.container}>
-				<Deck data={studentAppointments} renderCard={this.renderCard} />
+				<Deck
+					data={this.props.studentAppointments}
+					renderCard={this.renderCard}
+					keyProp="uid"
+				/>
 			</ScrollView>
 		);
 	}
@@ -49,10 +53,10 @@ const styles = StyleSheet.create({
 	}
 });
 
-const mapStateToProps = ({ student, appointmentList }) => {
+const mapStateToProps = ({ student, appointmentList: { studentAppointments} }) => {
 	return {
 		student,
-		studentAppointments: appointmentList.studentAppointments
+		studentAppointments
 	};
 };
 

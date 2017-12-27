@@ -1,13 +1,18 @@
 import React, { Component } from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions, View, StyleSheet } from "react-native";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 class Deck extends Component {
+	static defaultProps = {
+		keyProp: "id"
+	};
+
 	renderCards() {
+
 		return this.props.data.map(item => {
 			return (
-				<View key={item.uid} style={styles.cardStyle}>
+				<View key={item[this.props.keyProp]} style={styles.cardStyle}>
 					{this.props.renderCard(item)}
 				</View>
 			);
@@ -19,10 +24,10 @@ class Deck extends Component {
 	}
 }
 
-const styles = {
+const styles = StyleSheet.create({
 	cardStyle: {
 		width: SCREEN_WIDTH
 	}
-};
+});
 
 export { Deck };
