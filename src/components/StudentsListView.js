@@ -99,7 +99,7 @@ class StudentsListView extends Component {
 							}
 						]}
 					>
-						<ActivityIndicator />
+						<ActivityIndicator size="large" color="#0000ff" />
 					</View>
 				) : (
 					<View

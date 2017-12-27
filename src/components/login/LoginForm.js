@@ -29,7 +29,7 @@ class LoginForm extends Component {
     const { email, password, loading, loginUser, navigation } = this.props;
 
     if (loading) {
-      return <ActivityIndicator />;
+      return <ActivityIndicator size="large" color="#0000ff" />;
     }
     return (
       <Button
