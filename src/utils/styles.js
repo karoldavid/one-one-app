@@ -40,6 +40,12 @@ const iconButton = {
 	paddingRight: 20
 };
 
+const iconBarHorizontal = {
+	flexDirection: "row",
+	marginTop: 20,
+	marginBottom: 20
+};
+
 const loginError = {
 	alignSelf: "center",
 	color: red
@@ -171,6 +177,7 @@ const styles = StyleSheet.create({
 	submitButton,
 	submitButtonText,
 	iconButton,
+	iconBarHorizontal,
 	loginError,
 	item,
 	text,

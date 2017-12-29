@@ -18,7 +18,7 @@ import styles from "../utils/styles";
 import { blueMagenta, white } from "../utils/colors";
 import { IconButton, ModalConfirm } from "./common";
 import Communications from "react-native-communications";
-import { Icon } from "react-native-elements";
+import { IconBar } from "./common";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SWIPE_THRESHOLD = 0.25 * SCREEN_WIDTH;
@@ -145,23 +145,6 @@ class StudentView extends Component {
 		return number;
 	}
 
-	makeIcons = icons => {
-		return icons.map((icon, index) => {
-			const { name, type, onPress } = icon;
-			return (
-				<Icon
-					key={index}
-					raised
-					name={name}
-					type={type}
-					containerStyle={{ backgroundColor: blueMagenta }}
-					color={white}
-					onPress={onPress}
-				/>
-			);
-		});
-	};
-
 	render() {
 		const {
 			firstName,
@@ -245,14 +228,8 @@ class StudentView extends Component {
 						</Text>
 					</View>
 				</Animated.View>
-				<View
-					style={{
-						flexDirection: "row",
-						marginTop: 20,
-						marginBottom: 20
-					}}
-				>
-					{this.makeIcons(ICONS)}
+				<View style={styles.iconBarHorizontal}>
+					<IconBar icons={ICONS} />
 				</View>
 				<View
 					style={{
