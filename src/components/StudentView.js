@@ -15,8 +15,10 @@ import {
 	studentAppointmentsNumber
 } from "../actions";
 import styles from "../utils/styles";
-import { Button, IconButton, ModalConfirm } from "./common";
+import { blueMagenta, white } from "../utils/colors";
+import { IconButton, ModalConfirm } from "./common";
 import Communications from "react-native-communications";
+import { Icon } from "react-native-elements";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SWIPE_THRESHOLD = 0.25 * SCREEN_WIDTH;
@@ -70,7 +72,7 @@ class StudentView extends Component {
 		navigation.setParams({
 			deselectStudent
 		});
-		this.props.numberOfAppointments(this.props.student.uid)
+		this.props.numberOfAppointments(this.props.student.uid);
 	}
 
 	showModal() {
@@ -143,6 +145,23 @@ class StudentView extends Component {
 		return number;
 	}
 
+	makeIcons = icons => {
+		return icons.map((icon, index) => {
+			const { name, type, onPress } = icon;
+			return (
+				<Icon
+					key={index}
+					raised
+					name={name}
+					type={type}
+					containerStyle={{ backgroundColor: blueMagenta }}
+					color={white}
+					onPress={onPress}
+				/>
+			);
+		});
+	};
+
 	render() {
 		const {
 			firstName,
@@ -152,6 +171,45 @@ class StudentView extends Component {
 			image,
 			uid
 		} = this.props.student;
+
+		const ICONS = [
+			{
+				name: "list",
+				type: "material-icons",
+				onPress: () => {
+					this.props.navigation.navigate("StudentAppointmentsView");
+				}
+			},
+			{
+				name: "add-to-list",
+				type: "entypo",
+				onPress: () => {
+					this.props.navigation.navigate("CreateAppointmentView");
+				}
+			},
+			{
+				name: "email",
+				type: "material-icons",
+				onPress: () => {
+					this.sendEmail();
+				}
+			},
+			{
+				name: "edit",
+				type: "material-icons",
+				onPress: () => {
+					this.props.navigation.navigate("EditStudentView");
+				}
+			},
+			{
+				name: "delete",
+				type: "material-icons",
+				onPress: () => {
+					this.showModal();
+				}
+			}
+		];
+
 		return (
 			<View
 				style={[
@@ -182,43 +240,26 @@ class StudentView extends Component {
 							Program: {program || "-"}
 						</Text>
 						<Text style={styles.viewText}>
-							Appointments: { this.props.currentStudentAppointments }
+							Appointments:{" "}
+							{this.props.currentStudentAppointments}
 						</Text>
 					</View>
 				</Animated.View>
+				<View
+					style={{
+						flexDirection: "row",
+						marginTop: 20,
+						marginBottom: 20
+					}}
+				>
+					{this.makeIcons(ICONS)}
+				</View>
 				<View
 					style={{
 						alignSelf: "center",
 						width: Dimensions.get("window").width
 					}}
 				>
-					<Button
-						title={"All Appointments"}
-						onPress={() =>
-							this.props.navigation.navigate(
-								"StudentAppointmentsView"
-							)
-						}
-					/>
-					<Button
-						title={"New Appointment"}
-						onPress={() =>
-							this.props.navigation.navigate(
-								"CreateAppointmentView"
-							)
-						}
-					/>
-					<Button
-						title={"Send Email"}
-						onPress={() => this.sendEmail()}
-					/>
-					<Button
-						title={"Edit"}
-						onPress={() =>
-							this.props.navigation.navigate("EditStudentView")
-						}
-					/>
-					<Button title={"Delete"} onPress={() => this.showModal()} />
 					<ModalConfirm
 						modalVisible={this.state.modalVisible}
 						onConfirm={this.deleteStudent.bind(this)}
