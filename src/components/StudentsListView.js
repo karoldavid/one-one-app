@@ -2,13 +2,17 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { ActivityIndicator, ListView, View, Text } from "react-native";
-import { studentsFetch, appointmentsFetch, filterStudents } from "../actions";
+import { List, ListItem, SearchBar } from "react-native-elements";
+import {
+	studentsFetch,
+	appointmentsFetch,
+	filterStudents,
+	selectStudent
+} from "../actions";
 import { makeArray } from "../utils/helpers";
 import styles from "../utils/styles";
 import { blueMagenta, lightPurp, white } from "../utils/colors";
-import ListItem from "./ListItem";
 import { IconButton } from "./common";
-import { SearchBar } from "react-native-elements";
 
 class StudentsListView extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -73,6 +77,26 @@ class StudentsListView extends Component {
 		});
 	};
 
+	showStudent(student) {
+		this.props.selectStudent(student);
+		this.props.navigation.navigate("StudentView");
+	}
+
+	renderRow = (rowData, sectionID) => {
+		return (
+			<ListItem
+				roundAvatar
+				key={sectionID}
+				title={rowData.lastName}
+				subtitle={rowData.firstName}
+				avatar={{
+					uri: rowData.image || "http://via.placeholder.com/100x150"
+				}}
+				onPress={() => this.showStudent(rowData)}
+			/>
+		);
+	};
+
 	render() {
 		const { loading, navigation, students } = this.props;
 
@@ -102,27 +126,15 @@ class StudentsListView extends Component {
 						<ActivityIndicator size="large" color={blueMagenta} />
 					</View>
 				) : (
-					<View
-						style={[
-							styles.container,
-							{
-								flexDirection: "row",
-								alignItems: "flex-start",
-								padding: 12
-							}
-						]}
-					>
+					<View style={{ flex: 1 }}>
 						{students.length > 0 ? (
-							<ListView
-								enableEmptySections
-								dataSource={this.dataSource}
-								renderRow={student => (
-									<ListItem
-										student={student}
-										navigation={this.props.navigation}
-									/>
-								)}
-							/>
+							<List containerStyle={{ marginTop: 0 }}>
+								<ListView
+									enableEmptySections
+									dataSource={this.dataSource}
+									renderRow={this.renderRow}
+								/>
+							</List>
 						) : (
 							<Text>no data</Text>
 						)}
@@ -158,5 +170,6 @@ const mapStateToProps = ({
 export default connect(mapStateToProps, {
 	studentsFetch,
 	appointmentsFetch,
-	filterStudents
+	filterStudents,
+	selectStudent
 })(StudentsListView);
