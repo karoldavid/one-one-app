@@ -5,7 +5,7 @@ import { ActivityIndicator, ListView, View, Text } from "react-native";
 import { studentsFetch, appointmentsFetch, filterStudents } from "../actions";
 import { makeArray } from "../utils/helpers";
 import styles from "../utils/styles";
-import { lightPurp } from "../utils/colors";
+import { blueMagenta, lightPurp, white } from "../utils/colors";
 import ListItem from "./ListItem";
 import { IconButton } from "./common";
 import { SearchBar } from "react-native-elements";
@@ -18,7 +18,7 @@ class StudentsListView extends Component {
 					onPress={() => navigation.state.params.toggleSearchBar()}
 					ionicon="md-search"
 					size={30}
-					color="white"
+					color={white}
 				/>
 			)
 		};
@@ -81,7 +81,7 @@ class StudentsListView extends Component {
 				{this.state.visible && (
 					<SearchBar
 						value={this.props.filter}
-						containerStyle={{ backgroundColor: lightPurp }}
+						containerStyle={{ backgroundColor: blueMagenta }}
 						lightTheme
 						onChangeText={this.onChangeText}
 						placeholder="Type Here..."
@@ -99,7 +99,7 @@ class StudentsListView extends Component {
 							}
 						]}
 					>
-						<ActivityIndicator size="large" color="#0000ff" />
+						<ActivityIndicator size="large" color={blueMagenta} />
 					</View>
 				) : (
 					<View
@@ -130,7 +130,7 @@ class StudentsListView extends Component {
 							<IconButton
 								ionicon="md-add-circle"
 								size={50}
-								color="blue"
+								color={blueMagenta}
 								onPress={() =>
 									navigation.navigate("CreateStudentView")
 								}

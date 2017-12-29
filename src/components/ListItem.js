@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { StyleSheet, Image, View, Text, TouchableOpacity } from "react-native";
-import { blue } from "../utils/colors";
+import { black, suvaGray } from "../utils/colors";
 import { selectStudent } from "../actions"
 
 class ListItem extends Component {
@@ -31,12 +31,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderBottomWidth: 1,
-    borderBottomColor: blue
+    borderBottomColor: suvaGray
   },
   text: {
     marginLeft: 12,
     fontSize: 16,
-    color: blue
+    color: black
   },
   photo: {
     height: 40,

@@ -2,7 +2,7 @@ import React from "react";
 import { StackNavigator, DrawerNavigator } from "react-navigation";
 
 import { Animated, Text } from "react-native";
-import { blue, lightPurp, purple, white } from "./colors";
+import { blue, blueMagenta, lightPurp, purple, white } from "./colors";
 import { Ionicons } from "@expo/vector-icons";
 import { DrawerButton } from "../components/common";
 
@@ -22,7 +22,7 @@ import StatsScreen from "../screens/StatsScreen";
 
 const DrawerStack = DrawerNavigator(
   {
-    StudentsListView: {
+    students: {
       screen: StudentsListView,
       navigationOptions: {
         title: "All Students"
@@ -42,7 +42,7 @@ const DrawerNavigation = StackNavigator({
   DrawerStack: {
     screen: DrawerStack,
     navigationOptions: ({ navigation }) => ({
-      headerStyle: { backgroundColor: lightPurp },
+      headerStyle: { backgroundColor: blueMagenta },
       headerTintColor: white,
       gesturesEnabled: false,
       headerLeft: <DrawerButton navigation={navigation} />
@@ -69,7 +69,7 @@ export const MainNavigator = StackNavigator({
       title: "Student",
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: blue
+        backgroundColor: blueMagenta
       }
     }
   },
@@ -79,7 +79,7 @@ export const MainNavigator = StackNavigator({
       title: "Add",
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: blue
+        backgroundColor: blueMagenta
       }
     }
   },
@@ -89,7 +89,7 @@ export const MainNavigator = StackNavigator({
       title: "Add",
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: blue
+        backgroundColor: blueMagenta
       }
     }
   },
@@ -99,7 +99,7 @@ export const MainNavigator = StackNavigator({
       title: "New Appointment",
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: blue
+        backgroundColor: blueMagenta
       }
     }
   },
@@ -109,7 +109,7 @@ export const MainNavigator = StackNavigator({
       title: "All Appointments",
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: blue
+        backgroundColor: blueMagenta
       }
     }
   }

@@ -1,9 +1,9 @@
 import { Dimensions, StyleSheet } from "react-native";
-import { blueMagenta, red, white } from "./colors";
+import { black, blueMagenta, paleRose, red, white } from "./colors";
 
 const container = {
 	flex: 1,
-	backgroundColor: "#E1D7D8",
+	backgroundColor: paleRose,
 	alignItems: "center",
 	justifyContent: "space-around"
 };
@@ -94,7 +94,7 @@ const viewText = {
 	marginLeft: 12,
 	paddingBottom: 10,
 	fontSize: 16,
-	color: blueMagenta
+	color: black
 };
 
 const photo = {

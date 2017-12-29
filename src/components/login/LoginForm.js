@@ -23,7 +23,7 @@ import {
 } from "../../actions";
 import { resetNavigation } from "../../utils/helpers";
 import styles from "../../utils/styles";
-//import { Button } from "../common";
+import { blueMagenta, darkOrangishGray, lightSlateBlue, suvaGray } from "../../utils/colors";
 
 class LoginForm extends Component {
   componentWillMount() {
@@ -35,7 +35,7 @@ class LoginForm extends Component {
     const { email, password, loading, loginUser, navigation } = this.props;
 
     if (loading) {
-      return <ActivityIndicator size="large" color="#0000ff" />;
+      return <ActivityIndicator size="large" color={blueMagenta} />;
     }
     return (
       <Button
@@ -69,7 +69,7 @@ class LoginForm extends Component {
             fontSize: 20,
             fontWeight: "bold",
             marginBottom: 10,
-            color: "#595856"
+            color: darkOrangishGray
           }}
         >
           EMAIL
@@ -80,8 +80,8 @@ class LoginForm extends Component {
           }}
           value={email}
           placeholder="Please enter your email address..."
-          underlineColorAndroid="#3B5699"
-          placeholderTextColor="#9a73ef"
+          underlineColorAndroid={suvaGray}
+          placeholderTextColor={lightSlateBlue}
           onChangeText={emailChanged}
         />
 
@@ -90,20 +90,20 @@ class LoginForm extends Component {
             fontSize: 20,
             fontWeight: "bold",
             marginBottom: 10,
-            color: "#595856"
+            color: darkOrangishGray
           }}
         >
           PASSWORD
         </FormLabel>
         <FormInput
-        inputStyle={{
+          inputStyle={{
             fontSize: 18
           }}
           value={password}
           secureTextEntry
           placeholder="Please enter your password..."
-          underlineColorAndroid="#3B5699"
-          placeholderTextColor="#9a73ef"
+          underlineColorAndroid={suvaGray}
+          placeholderTextColor={lightSlateBlue}
           onChangeText={passwordChanged}
         />
 

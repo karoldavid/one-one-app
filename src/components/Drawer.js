@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Text, View } from "react-native";
 import styles from "../utils/styles";
+import { white } from "../utils/colors";
 import { logOut } from "../actions";
 import { DrawerIcon } from "./common";
 import { resetNavigation } from "../utils/helpers";
 
 const VIEWS = [
-  { StudentsListView: "Students", icon: "md-list" },
+  { students: "Students", icon: "md-list" },
   { CalendarScreen: "Calendar", icon: "md-people" },
   { StatsScreen: "Stats", icon: "md-stats"},
   { UserView: "User", icon: "md-body" },
@@ -24,7 +25,7 @@ class Drawer extends Component {
         onPress={() => navigation.navigate(key)}
         ionicon={item.icon}
         size={30}
-        color={"white"}
+        color={white}
         title={item[key]}
       />
     );
@@ -42,7 +43,7 @@ class Drawer extends Component {
           }}
           ionicon={"ios-log-out"}
           size={30}
-          color={"white"}
+          color={white}
           title={"Log Out"}
         />
       </View>
