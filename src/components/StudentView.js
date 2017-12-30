@@ -15,7 +15,7 @@ import {
 	studentAppointmentsNumber
 } from "../actions";
 import styles from "../utils/styles";
-import { blueMagenta, white } from "../utils/colors";
+import { blueMagenta, paleRose, white } from "../utils/colors";
 import { IconButton, ModalConfirm } from "./common";
 import Communications from "react-native-communications";
 import { IconBar } from "./common";
@@ -233,8 +233,7 @@ class StudentView extends Component {
 				</View>
 				<View
 					style={{
-						alignSelf: "center",
-						width: Dimensions.get("window").width
+						backgroundColor: paleRose
 					}}
 				>
 					<ModalConfirm

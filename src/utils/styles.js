@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
-import { black, blueMagenta, paleRose, red, white } from "./colors";
+import { black, blueMagenta, paleRose, red, transparent, white } from "./colors";
 
 const container = {
 	flex: 1,
@@ -110,10 +110,14 @@ const overlay = {
 
 const modal = {
 	flex: 1,
+	alignItems: "center",
 	justifyContent: "center",
-	backgroundColor: white,
+	backgroundColor: transparent,
 	padding: 15,
-	width: Dimensions.get("window").width
+	width: Dimensions.get("screen").width,
+	position: "absolute",
+	bottom: 0
+
 };
 
 const modalText = {
@@ -121,7 +125,7 @@ const modalText = {
 	fontSize: 18,
 	lineHeight: 40,
 	paddingBottom: 20,
-	color: blueMagenta
+	color: white
 };
 
 const drawerContainer = {
