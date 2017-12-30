@@ -68,26 +68,26 @@ class StudentView extends Component {
 	}
 
 	componentWillMount() {
-		const { deselectStudent, navigation } = this.props;
+		const { deselectStudent, navigation, student } = this.props;
 		navigation.setParams({
 			deselectStudent
 		});
-		this.props.numberOfAppointments(this.props.student.uid);
+		this.props.studentAppointmentsNumber(student.uid);
 	}
 
 	showModal = () => {
 		this.setState({ modalVisible: true });
-	}
+	};
 
 	hideModal = () => {
 		this.setState({ modalVisible: false });
-	}
+	};
 
 	removeStudent = () => {
 		const { deleteStudent, navigation, student } = this.props;
 		this.setState({ modalVisible: false });
 		deleteStudent(student.uid, () => navigation.navigate("DrawerView"));
-	}
+	};
 
 	sendEmail() {
 		const { email, firstName, lastName } = this.props.student;
@@ -258,13 +258,9 @@ const mapStateToProps = ({ student, auth, studentList, appointmentList }) => {
 	};
 };
 
-const mapDispatchToProps = dispatch => {
-	return {
-		deleteStudent,
-		deselectStudent,
-		selectStudent,
-		numberOfAppointments: uid => dispatch(studentAppointmentsNumber(uid))
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(StudentView);
+export default connect(mapStateToProps, {
+	studentAppointmentsNumber,
+	deleteStudent,
+	deselectStudent,
+	selectStudent
+})(StudentView);

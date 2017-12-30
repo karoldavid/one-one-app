@@ -67,6 +67,9 @@ export const deleteStudent = (uid, callback) => {
 			.then(() => {
 				dispatch({ type: STUDENT_DELETE_SUCCESS });
 				callback();
+			})
+			.catch(function(error) {
+				console.log(error);
 			});
 	};
 };
