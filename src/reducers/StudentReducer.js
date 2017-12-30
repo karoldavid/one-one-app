@@ -10,7 +10,7 @@ import {
 const INITIAL_STUDENT_STATE = {
 	firstName: "",
 	lastName: "",
-	email: "@",
+	email: "",
 	program: "",
 	github: "",
 	slack: "",
@@ -30,7 +30,7 @@ export default (state = INITIAL_STUDENT_STATE, action) => {
 		case STUDENT_DELETE_SUCCESS:
 			return INITIAL_STUDENT_STATE;
 		case STUDENT_DESELECT:
-			return INITIAL_STUDENT_STATE
+			return INITIAL_STUDENT_STATE;
 		default:
 			return state;
 	}

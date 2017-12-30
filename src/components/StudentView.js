@@ -75,15 +75,15 @@ class StudentView extends Component {
 		this.props.numberOfAppointments(this.props.student.uid);
 	}
 
-	showModal() {
+	showModal = () => {
 		this.setState({ modalVisible: true });
 	}
 
-	hideModal() {
+	hideModal = () => {
 		this.setState({ modalVisible: false });
 	}
 
-	deleteStudent() {
+	removeStudent = () => {
 		const { deleteStudent, navigation, student } = this.props;
 		this.setState({ modalVisible: false });
 		deleteStudent(student.uid, () => navigation.navigate("DrawerView"));
@@ -238,8 +238,8 @@ class StudentView extends Component {
 				>
 					<ModalConfirm
 						modalVisible={this.state.modalVisible}
-						onConfirm={this.deleteStudent.bind(this)}
-						onDecline={this.hideModal.bind(this)}
+						onConfirm={this.removeStudent}
+						onDecline={this.hideModal}
 					>
 						Do you really want to delete this student?
 					</ModalConfirm>

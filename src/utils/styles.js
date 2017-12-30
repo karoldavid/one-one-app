@@ -78,9 +78,10 @@ const formInput = {
 };
 
 const picker = {
-	width: Dimensions.get("window").width * 0.5,
+	width: Dimensions.get("window").width * 0.3,
 	backgroundColor: blueMagenta,
-	color: white
+	color: white,
+	marginLeft: 15
 };
 
 const pickerItem = {
