@@ -76,7 +76,7 @@ export const MainNavigator = StackNavigator({
   CreateStudentView: {
     screen: CreateStudentView,
     navigationOptions: {
-      title: "Add",
+      title: "Add Student",
       headerTintColor: white,
       headerStyle: {
         backgroundColor: blueMagenta
