@@ -86,7 +86,7 @@ export const MainNavigator = StackNavigator({
   EditStudentView: {
     screen: EditStudentView,
     navigationOptions: {
-      title: "Add",
+      title: "Edit Student",
       headerTintColor: white,
       headerStyle: {
         backgroundColor: blueMagenta
