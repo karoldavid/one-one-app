@@ -2,13 +2,14 @@ import _ from "lodash";
 import {
 	STUDENTS_FETCH,
 	STUDENTS_FETCH_SUCCESS,
-	FILTER_STUDENTS
+	FILTER_STUDENTS,
+	RESET_STUDENTS
 } from "../actions/types";
 import { makeArray } from "../utils/helpers";
 
 const INITIAL_STUDENTS_STATE = {
-	students: {},
-	orderBy: "firstName",
+	students: [],
+	orderBy: "lastName",
 	sortDirection: "asc",
 	loading: false,
 	filter: ""
@@ -22,6 +23,7 @@ export default (state = INITIAL_STUDENTS_STATE, action) => {
 				loading: true
 			};
 		case STUDENTS_FETCH_SUCCESS:
+			console.log(action.type)
 			return {
 				...state,
 				students: _.orderBy(
@@ -36,6 +38,8 @@ export default (state = INITIAL_STUDENTS_STATE, action) => {
 				...state,
 				filter: action.payload
 			};
+		case RESET_STUDENTS:
+			return INITIAL_STUDENTS_STATE;
 		default:
 			return state;
 	}

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
-import { ActivityIndicator, ListView, View, Text } from "react-native";
+import { ActivityIndicator, FlatList, View, Text } from "react-native";
 import { List, ListItem, SearchBar } from "react-native-elements";
 import {
 	studentsFetch,
@@ -40,11 +40,10 @@ class StudentsListView extends Component {
 		});
 		this.props.studentsFetch();
 		this.props.appointmentsFetch();
-		this.createDataSource(this.props);
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.createDataSource(nextProps);
+		//this.createDataSource(nextProps);
 	}
 
 	toggleSearchBar = () => {
@@ -53,21 +52,16 @@ class StudentsListView extends Component {
 		});
 	};
 
-	createDataSource({ students, filter }) {
-		const ds = new ListView.DataSource({
-			rowHasChanged: (r1, r2) => r1 !== r2
-		});
-
-		if (students.length > 0) {
+	filter({ students, filter }) {
+		if (students.length > 0 && filter) {
 			students = students.filter(student => {
 				const name = `${student.firstName} ${
 					student.lastName
 				}`.toLowerCase();
 				return name.indexOf(filter.toLowerCase()) != -1;
 			});
+			a;
 		}
-
-		this.dataSource = ds.cloneWithRows(students);
 	}
 
 	onChangeText = text => {
@@ -82,17 +76,18 @@ class StudentsListView extends Component {
 		this.props.navigation.navigate("StudentView");
 	}
 
-	renderRow = (rowData, sectionID) => {
+	renderItem = ({ index, item }) => {
+		const { lastName, firstName, image } = item;
 		return (
 			<ListItem
 				roundAvatar
-				key={sectionID}
-				title={rowData.lastName}
-				subtitle={rowData.firstName}
+				keyExtractor={item => item.uid}
+				title={lastName}
+				subtitle={firstName}
 				avatar={{
-					uri: rowData.image || "http://via.placeholder.com/100x150"
+					uri: image || "http://via.placeholder.com/100x150"
 				}}
-				onPress={() => this.showStudent(rowData)}
+				onPress={() => this.showStudent(item)}
 			/>
 		);
 	};
@@ -129,10 +124,10 @@ class StudentsListView extends Component {
 					<View style={{ flex: 1 }}>
 						{students.length > 0 ? (
 							<List containerStyle={{ marginTop: 0 }}>
-								<ListView
-									enableEmptySections
-									dataSource={this.dataSource}
-									renderRow={this.renderRow}
+								<FlatList
+									data={students}
+									renderItem={this.renderItem}
+									keyExtractor={item => item.uid}
 								/>
 							</List>
 						) : (
