@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { KeyboardAvoidingView, View } from "react-native";
+import { Button } from "react-native-elements";
 import styles from "../utils/styles";
-import { Button } from "./common";
+import { blueMagenta } from "../utils/colors";
 import { saveStudent, updateStudent } from "../actions";
 import { resetNavigation } from "../utils/helpers";
 import StudentForm from "./StudentForm";
@@ -60,7 +61,9 @@ class EditStudentView extends Component {
 						onChange={this.onChange}
 					/>
 					<Button
-						title={"Update"}
+						title="Update"
+						backgroundColor={blueMagenta}
+						icon={{ name: "done" }}
 						onPress={() =>
 							this.props.saveStudent(student, () =>
 								resetNavigation(navigation, "DrawerView")
