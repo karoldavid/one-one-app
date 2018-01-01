@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { KeyboardAvoidingView, ScrollView, View, Picker } from "react-native";
+import {
+	KeyboardAvoidingView,
+	ScrollView,
+	TouchableOpacity,
+	View,
+	Picker
+} from "react-native";
 import { Button } from "react-native-elements";
 import styles from "../utils/styles";
 import { blueMagenta } from "../utils/colors";
@@ -92,17 +98,22 @@ class CreateStudentForm extends Component {
 							inputs={FORM_INPUTS}
 							onChange={this.onChange}
 						/>
-						<Button
-							title="Submit"
-							backgroundColor={blueMagenta}
-							containerViewStyle={{ marginBottom: 15 }}
-							icon={{ name: "send" }}
-							onPress={() =>
-								this.props.createStudent(student, () =>
-									resetNavigation(navigation, "DrawerView")
-								)
-							}
-						/>
+						<TouchableOpacity>
+							<Button
+								title="Submit"
+								backgroundColor={blueMagenta}
+								containerViewStyle={{ marginBottom: 15 }}
+								icon={{ name: "send" }}
+								onPress={() =>
+									this.props.createStudent(student, () =>
+										resetNavigation(
+											navigation,
+											"StudentView"
+										)
+									)
+								}
+							/>
+						</TouchableOpacity>
 					</ScrollView>
 				</KeyboardAvoidingView>
 			</View>

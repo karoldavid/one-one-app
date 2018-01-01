@@ -32,7 +32,7 @@ class StudentView extends Component {
 				size={30}
 				color="white"
 				onPress={() => {
-					navigation.goBack();
+					navigation.navigate("DrawerView");
 					navigation.state.params.deselectStudent();
 				}}
 			/>

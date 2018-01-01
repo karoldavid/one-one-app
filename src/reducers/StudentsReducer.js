@@ -31,6 +31,7 @@ export default (state = INITIAL_STUDENTS_STATE, action) => {
 					[student => student[state.orderBy].toLowerCase()],
 					[state.sortDirection]
 				),
+				filter: "",
 				loading: false
 			};
 		case FILTER_STUDENTS:

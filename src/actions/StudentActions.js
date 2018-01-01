@@ -38,6 +38,7 @@ export const createStudent = (student, callback) => {
 			.push(student)
 			.then(() => {
 				dispatch({ type: STUDENT_CREATE });
+				dispatch(selectStudent(student));
 				callback();
 			});
 	};

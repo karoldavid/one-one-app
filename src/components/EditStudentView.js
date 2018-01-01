@@ -68,7 +68,7 @@ class EditStudentView extends Component {
 							icon={{ name: "done" }}
 							onPress={() =>
 								this.props.saveStudent(student, () =>
-									resetNavigation(navigation, "DrawerView")
+									resetNavigation(navigation, "StudentView")
 								)
 							}
 						/>

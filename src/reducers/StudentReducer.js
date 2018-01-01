@@ -26,7 +26,7 @@ export default (state = INITIAL_STUDENT_STATE, action) => {
 		case STUDENT_CREATE:
 			return INITIAL_STUDENT_STATE;
 		case STUDENT_SAVE_SUCCESS:
-			return INITIAL_STUDENT_STATE;
+			return state;
 		case STUDENT_DELETE_SUCCESS:
 			return INITIAL_STUDENT_STATE;
 		case STUDENT_DESELECT:

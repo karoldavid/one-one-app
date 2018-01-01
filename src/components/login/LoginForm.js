@@ -19,7 +19,9 @@ import {
   removeFromStorage,
   emailChanged,
   passwordChanged,
-  loginUser
+  loginUser,
+  studentsFetch,
+  appointmentsFetch
 } from "../../actions";
 import { resetNavigation } from "../../utils/helpers";
 import styles from "../../utils/styles";
@@ -43,6 +45,8 @@ class LoginForm extends Component {
         large
         onPress={() =>
           loginUser({ email, password }, () => {
+            this.props.studentsFetch();
+            this.props.appointmentsFetch();
             resetNavigation(navigation, "DrawerView");
           })
         }
@@ -129,5 +133,7 @@ export default connect(mapStateToProps, {
   loggedIn,
   emailChanged,
   passwordChanged,
-  loginUser
+  loginUser,
+  studentsFetch,
+  appointmentsFetch
 })(LoginForm);

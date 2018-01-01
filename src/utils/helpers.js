@@ -11,17 +11,17 @@ export const resetNavigation = (navigation, targetRoute) => {
 };
 
 export const makeArray = object => {
-	const students = _.map(object, (val, uid) => {
+	const data = _.map(object, (val, uid) => {
 		return {
 			...val,
 			uid
 		};
 	});
-	return students;
+
+	return data;
 };
 
 export const monthToString = month => {
-
 	switch (month - 1) {
 		case 0:
 			return "Jan";
