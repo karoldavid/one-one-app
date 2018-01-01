@@ -81,7 +81,8 @@ const picker = {
 	width: Dimensions.get("window").width * 0.3,
 	backgroundColor: blueMagenta,
 	color: white,
-	marginLeft: 15
+	marginLeft: 15,
+	marginBottom: 15
 };
 
 const pickerItem = {

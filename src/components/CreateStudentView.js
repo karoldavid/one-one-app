@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { KeyboardAvoidingView, ScrollView, View, Picker } from "react-native";
+import { Button } from "react-native-elements";
 import styles from "../utils/styles";
-import { Button } from "./common";
+import { blueMagenta } from "../utils/colors";
 import StudentForm from "./StudentForm";
 import { createStudent, updateStudent } from "../actions";
 import { resetNavigation } from "../utils/helpers";
@@ -31,14 +32,14 @@ class CreateStudentForm extends Component {
 				})}
 			</Picker>
 		);
-	}
+	};
 
 	onChange = (propName, value) => {
 		this.props.updateStudent({
 			prop: propName,
 			value
 		});
-	}
+	};
 
 	render() {
 		const { navigation, student } = this.props;
@@ -86,9 +87,16 @@ class CreateStudentForm extends Component {
 			<View style={styles.container}>
 				<KeyboardAvoidingView behavior="padding">
 					<ScrollView>
-						<StudentForm data={student} inputs={FORM_INPUTS} onChange={this.onChange} />
+						<StudentForm
+							data={student}
+							inputs={FORM_INPUTS}
+							onChange={this.onChange}
+						/>
 						<Button
-							title={"Submit"}
+							title="Submit"
+							backgroundColor={blueMagenta}
+							containerViewStyle={{ marginBottom: 15 }}
+							icon={{ name: "send" }}
 							onPress={() =>
 								this.props.createStudent(student, () =>
 									resetNavigation(navigation, "DrawerView")
@@ -108,4 +116,6 @@ const mapStateToProps = ({ student }) => {
 	};
 };
 
-export default connect(mapStateToProps, { createStudent, updateStudent })(CreateStudentForm);
+export default connect(mapStateToProps, { createStudent, updateStudent })(
+	CreateStudentForm
+);
