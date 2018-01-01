@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { KeyboardAvoidingView, View } from "react-native";
+import { KeyboardAvoidingView, ScrollView, View } from "react-native";
 import { Button } from "react-native-elements";
 import styles from "../utils/styles";
 import { blueMagenta } from "../utils/colors";
@@ -55,21 +55,24 @@ class EditStudentView extends Component {
 		return (
 			<View style={styles.container}>
 				<KeyboardAvoidingView behavior="padding">
-					<StudentForm
-						data={this.props.student}
-						inputs={FORM_INPUTS}
-						onChange={this.onChange}
-					/>
-					<Button
-						title="Update"
-						backgroundColor={blueMagenta}
-						icon={{ name: "done" }}
-						onPress={() =>
-							this.props.saveStudent(student, () =>
-								resetNavigation(navigation, "DrawerView")
-							)
-						}
-					/>
+					<ScrollView>
+						<StudentForm
+							data={this.props.student}
+							inputs={FORM_INPUTS}
+							onChange={this.onChange}
+						/>
+						<Button
+							title="Update"
+							backgroundColor={blueMagenta}
+							containerViewStyle={{ marginBottom: 15 }}
+							icon={{ name: "done" }}
+							onPress={() =>
+								this.props.saveStudent(student, () =>
+									resetNavigation(navigation, "DrawerView")
+								)
+							}
+						/>
+					</ScrollView>
 				</KeyboardAvoidingView>
 			</View>
 		);

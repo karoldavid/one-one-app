@@ -72,7 +72,8 @@ export const MainNavigator = StackNavigator({
       title: "Student",
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: blueMagenta
+        backgroundColor: blueMagenta,
+        marginTop: Platform.OS === "android" ? 24 : 0
       }
     }
   },
@@ -82,8 +83,9 @@ export const MainNavigator = StackNavigator({
       title: "Add Student",
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: blueMagenta
-      }
+        backgroundColor: blueMagenta,
+        marginTop: Platform.OS === "android" ? 24 : 0
+      },
     }
   },
   EditStudentView: {
@@ -92,7 +94,8 @@ export const MainNavigator = StackNavigator({
       title: "Edit Student",
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: blueMagenta
+        backgroundColor: blueMagenta,
+        marginTop: Platform.OS === "android" ? 24 : 0
       }
     }
   },
@@ -102,7 +105,8 @@ export const MainNavigator = StackNavigator({
       title: "New Appointment",
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: blueMagenta
+        backgroundColor: blueMagenta,
+        marginTop: Platform.OS === "android" ? 24 : 0
       }
     }
   },
@@ -112,7 +116,8 @@ export const MainNavigator = StackNavigator({
       title: "All Appointments",
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: blueMagenta
+        backgroundColor: blueMagenta,
+        marginTop: Platform.OS === "android" ? 24 : 0
       }
     }
   }
