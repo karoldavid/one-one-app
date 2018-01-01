@@ -1,7 +1,7 @@
 import React from "react";
 import { StackNavigator, DrawerNavigator } from "react-navigation";
 
-import { Animated, Text } from "react-native";
+import { Animated, Platform, Text } from "react-native";
 import { blue, blueMagenta, lightPurp, purple, white } from "./colors";
 import { Ionicons } from "@expo/vector-icons";
 import { DrawerButton } from "../components/common";
@@ -42,7 +42,10 @@ const DrawerNavigation = StackNavigator({
   DrawerStack: {
     screen: DrawerStack,
     navigationOptions: ({ navigation }) => ({
-      headerStyle: { backgroundColor: blueMagenta },
+      headerStyle: {
+        backgroundColor: blueMagenta,
+        marginTop: Platform.OS === "android" ? 24 : 0
+      },
       headerTintColor: white,
       gesturesEnabled: false,
       headerLeft: <DrawerButton navigation={navigation} />
