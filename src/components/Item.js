@@ -15,6 +15,7 @@ export default class Item extends PureComponent {
 					uri: image || "http://via.placeholder.com/100x150"
 				}}
 				onPress={this.props.onPress}
+				containerStyle={{ borderBottomWidth: 0 }}
 			/>
 		);
 	}

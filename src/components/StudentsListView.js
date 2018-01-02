@@ -63,7 +63,7 @@ class StudentsListView extends Component {
 		});
 	};
 
-	showStudent(student) {
+	showStudent(student) {g
 		this.props.selectStudent(student);
 		this.props.navigation.navigate("StudentView");
 	}
@@ -77,6 +77,19 @@ class StudentsListView extends Component {
 		offset: ITEM_HEIGHT * index,
 		index
 	});
+
+	renderSeparator = () => {
+		return (
+			<View
+				style={{
+					height: 1,
+					width: "86%",
+					backgroundColor: "#CED0CE",
+					marginLeft: "14%"
+				}}
+			/>
+		);
+	};
 
 	render() {
 		const { loading, navigation, students, filter } = this.props;
@@ -115,6 +128,7 @@ class StudentsListView extends Component {
 								getItemLayout={this.getItemLayout}
 								renderItem={this.renderItem}
 								keyExtractor={item => item.uid}
+								ItemSeparatorComponent={this.renderSeparator}
 							/>
 						</List>
 						{students.length === 0 && <Text>no data</Text>}
