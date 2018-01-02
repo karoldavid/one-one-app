@@ -64,7 +64,6 @@ class StudentsListView extends Component {
 	};
 
 	showStudent(student) {
-		g;
 		this.props.selectStudent(student);
 		this.props.navigation.navigate("StudentView");
 	}
