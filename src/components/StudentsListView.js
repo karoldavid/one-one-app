@@ -79,7 +79,7 @@ class StudentsListView extends Component {
 		index
 	});
 
-	renderSeparator()  {
+	renderSeparator = () => {
 		return (
 			<View
 				style={{
@@ -88,20 +88,6 @@ class StudentsListView extends Component {
 					backgroundColor: "#CED0CE",
 					marginLeft: "14%"
 				}}
-			/>
-		);
-	};
-
-	renderHeader = () => {
-		if (!this.state.visible) return null;
-		return (
-			<SearchBar
-				value={this.props.filter}
-				containerStyle={{ backgroundColor: blueMagenta }}
-				lightTheme
-				onChangeText={this.onChangeText}
-				placeholder="Type Here..."
-				clearIcon={this.state.hasText}
 			/>
 		);
 	};
@@ -125,6 +111,17 @@ class StudentsListView extends Component {
 
 		return (
 			<View style={{ flex: 1 }}>
+				{this.state.visible && (
+					<SearchBar
+						value={this.props.filter}
+						containerStyle={{ backgroundColor: blueMagenta }}
+						lightTheme
+						onChangeText={this.onChangeText}
+						placeholder="Type Here..."
+						clearIcon={this.state.hasText}
+					/>
+				)}
+
 				{loading ? (
 					<View
 						style={[
@@ -147,7 +144,6 @@ class StudentsListView extends Component {
 								renderItem={this.renderItem}
 								keyExtractor={item => item.uid}
 								ItemSeparatorComponent={this.renderSeparator}
-								ListHeaderComponent={this.renderHeader}
 								//ListFooterComponent={this.renderFooter}
 							/>
 						</List>
