@@ -63,7 +63,8 @@ class StudentsListView extends Component {
 		});
 	};
 
-	showStudent(student) {g
+	showStudent(student) {
+		g;
 		this.props.selectStudent(student);
 		this.props.navigation.navigate("StudentView");
 	}
@@ -78,7 +79,7 @@ class StudentsListView extends Component {
 		index
 	});
 
-	renderSeparator = () => {
+	renderSeparator()  {
 		return (
 			<View
 				style={{
@@ -91,22 +92,39 @@ class StudentsListView extends Component {
 		);
 	};
 
+	renderHeader = () => {
+		if (!this.state.visible) return null;
+		return (
+			<SearchBar
+				value={this.props.filter}
+				containerStyle={{ backgroundColor: blueMagenta }}
+				lightTheme
+				onChangeText={this.onChangeText}
+				placeholder="Type Here..."
+				clearIcon={this.state.hasText}
+			/>
+		);
+	};
+
+	renderFooter = () => {
+		return (
+			<View
+				style={{
+					paddingVertical: 20,
+					borderTopWidth: 1,
+					borderTopColor: "#CED0CE"
+				}}
+			>
+				<ActivityIndicator animating size="large" color={blueMagenta} />
+			</View>
+		);
+	};
+
 	render() {
 		const { loading, navigation, students, filter } = this.props;
 
 		return (
 			<View style={{ flex: 1 }}>
-				{this.state.visible && (
-					<SearchBar
-						value={this.props.filter}
-						containerStyle={{ backgroundColor: blueMagenta }}
-						lightTheme
-						onChangeText={this.onChangeText}
-						placeholder="Type Here..."
-						clearIcon={this.state.hasText}
-					/>
-				)}
-
 				{loading ? (
 					<View
 						style={[
@@ -129,6 +147,8 @@ class StudentsListView extends Component {
 								renderItem={this.renderItem}
 								keyExtractor={item => item.uid}
 								ItemSeparatorComponent={this.renderSeparator}
+								ListHeaderComponent={this.renderHeader}
+								//ListFooterComponent={this.renderFooter}
 							/>
 						</List>
 						{students.length === 0 && <Text>no data</Text>}
