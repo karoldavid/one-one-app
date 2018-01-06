@@ -34,18 +34,15 @@ class StatsScreen extends Component {
 
 	makePieData() {
 		const { attendance } = this.props.statistics;
-		let data = [];
 
 		if (attendance) {
-			Object.keys(attendance).map(key => {
-					data.push({
-					name: key,
-					times: attendance[key]
-				});
-			});
+			return Object.keys(attendance).map(key => ({
+				name: key,
+				times: attendance[key]
+			}));
 		}
 
-		return data;
+		return [];
 	}
 
 	makeBarData() {
