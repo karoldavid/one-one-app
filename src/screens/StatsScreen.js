@@ -47,20 +47,17 @@ class StatsScreen extends Component {
 
 	makeBarData() {
 		const { studentsPerProject } = this.props.statistics;
-		let data = [];
 
 		if (studentsPerProject) {
-			Object.keys(studentsPerProject).map(key => {
-				let bar = [];
-				bar.push({
+			return Object.keys(studentsPerProject).map(key => [
+				{
 					name: key,
 					students: studentsPerProject[key]
-				});
-				data.push(bar);
-			});
+				}
+			]);
 		}
 
-		return data;
+		return [];
 	}
 
 	makeSmoothLineData() {
