@@ -104,7 +104,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ appointmentList, calendar }) => {
-	console.log(calendar.month);
 	return {
 		appointments: appointmentList.appointments,
 		month: calendar.month,

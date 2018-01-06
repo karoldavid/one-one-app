@@ -5,7 +5,8 @@ import {
 	LOGIN_USER_FAIL,
 	LOGIN_USER,
 	LOGGED_IN,
-	RESET_STUDENTS
+	RESET_STUDENTS,
+	RESET_APPOINTMENTS
 } from "./types";
 import { getUser, saveUser, removeUser } from "../utils/api";
 import firebase from "firebase";
@@ -39,6 +40,7 @@ export const logOut = () => {
 			.then(
 				() => {
 					dispatch({ type: RESET_STUDENTS });
+					dispatch({ type: RESET_APPOINTMENTS });
 					console.log("signed out");
 				},
 				err => console.log("err:", err)

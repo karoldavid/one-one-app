@@ -19,9 +19,16 @@ import UserView from "../components/UserView";
 import AboutView from "../components/AboutView";
 import CalendarScreen from "../screens/CalendarScreen";
 import StatsScreen from "../screens/StatsScreen";
+import OverviewScreen from "../screens/OverviewScreen";
 
 const DrawerStack = DrawerNavigator(
   {
+    welcome: {
+      screen: OverviewScreen,
+      navigationOptions: {
+        title: "Overview"
+      }
+    },
     students: {
       screen: StudentsListView,
       navigationOptions: {
@@ -85,7 +92,7 @@ export const MainNavigator = StackNavigator({
       headerStyle: {
         backgroundColor: blueMagenta,
         marginTop: Platform.OS === "android" ? 24 : 0
-      },
+      }
     }
   },
   EditStudentView: {

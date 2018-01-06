@@ -38,7 +38,7 @@ class StatsScreen extends Component {
 
 		if (attendance) {
 			Object.keys(attendance).map(key => {
-				data.push({
+					data.push({
 					name: key,
 					times: attendance[key]
 				});

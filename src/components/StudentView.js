@@ -32,7 +32,7 @@ class StudentView extends Component {
 				size={30}
 				color="white"
 				onPress={() => {
-					navigation.navigate("DrawerView");
+					navigation.navigate("students");
 					navigation.state.params.deselectStudent();
 				}}
 			/>
@@ -86,7 +86,7 @@ class StudentView extends Component {
 	removeStudent = () => {
 		const { deleteStudent, navigation, student } = this.props;
 		this.setState({ modalVisible: false });
-		deleteStudent(student.uid, () => navigation.navigate("DrawerView"));
+		deleteStudent(student.uid, () => navigation.navigate("students"));
 	};
 
 	sendEmail() {

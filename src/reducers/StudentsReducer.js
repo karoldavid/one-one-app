@@ -23,7 +23,6 @@ export default (state = INITIAL_STUDENTS_STATE, action) => {
 				loading: true
 			};
 		case STUDENTS_FETCH_SUCCESS:
-			console.log(action.type)
 			return {
 				...state,
 				students: _.orderBy(

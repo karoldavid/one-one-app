@@ -2,7 +2,8 @@ import {
 	APPOINTMENTS_FETCH,
 	APPOINTMENTS_FETCH_SUCCESS,
 	APPOINTMENTS_STUDENT_NUMBER,
-	APPOINTMENTS_STUDENT
+	APPOINTMENTS_STUDENT,
+	RESET_APPOINTMENTS,
 } from "../actions/types";
 import { makeArray } from "../utils/helpers";
 
@@ -46,6 +47,8 @@ export default (state = INITIAL_APPOINTMENTS_STATE, action) => {
 					return appointment.studentUid === action.payload;
 				})
 			};
+		case RESET_APPOINTMENTS:
+			return INITIAL_APPOINTMENTS_STATE;
 		default:
 			return state;
 	}
