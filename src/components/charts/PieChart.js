@@ -1,18 +1,14 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Dimensions } from "react-native";
 import { Pie } from "react-native-pathjs-charts";
+
+const WIDTH = Dimensions.get("window").width
 
 export const PieChart = ({ data, accessorKey }) => {
   let options = {
-    margin: {
-      top: 20,
-      left: 20,
-      right: 20,
-      bottom: 20
-    },
     width: 350,
     height: 350,
-    color: "#551a8b",
+    color: "#03A9F4",
     r: 50,
     R: 150,
     legendPosition: "topLeft",
@@ -23,7 +19,7 @@ export const PieChart = ({ data, accessorKey }) => {
     },
     label: {
       fontFamily: "Arial",
-      fontSize: 8,
+      fontSize: 12,
       fontWeight: true,
       color: "#ECF0F1"
     }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Text, View } from "react-native";
 import styles from "../utils/styles";
+import { paleRose } from "../utils/colors";
 import {
 	getNumberOfAppointments,
 	getProjectTypes,
@@ -69,10 +70,10 @@ class StatsScreen extends Component {
 			Object.keys(studentsPerMonth).map(key => {
 				const year = key.slice(0, 4);
 				if (!years.includes(year)) {
-					years.push(year);
+					years = [ ...years, year ]
 				}
 			});
-			years.forEach(function(year) {
+			years.map(year => {
 				let months = [];
 				Object.keys(studentsPerMonth).map(key => {
 					if (key.indexOf(year) > -1) {
@@ -98,7 +99,8 @@ class StatsScreen extends Component {
 		let slideData = [
 			{
 				text: "Appointments/ Month",
-				color: "#03A9F4",
+				//color: "#03A9F4",
+				color: paleRose,
 				data: this.makeSmoothLineData(),
 				makeChart: smoothLineData => {
 					return (
@@ -112,7 +114,8 @@ class StatsScreen extends Component {
 			},
 			{
 				text: "Student Attendance",
-				color: "#009688",
+			//	color: "#009688",
+				color: paleRose,
 				data: this.makePieData(),
 				makeChart: pieData => {
 					return <PieChart data={pieData} accessorKey="times" />;
@@ -120,7 +123,8 @@ class StatsScreen extends Component {
 			},
 			{
 				text: "Students/ Project",
-				color: "#03A9F4",
+			//	color: "#03A9F4",
+				color: paleRose,
 				data: this.makeBarData(),
 				makeChart: barData => {
 					return <BarChart data={barData} accessorKey="students" />;

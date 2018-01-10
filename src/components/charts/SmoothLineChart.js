@@ -9,7 +9,7 @@ export const SmoothLineChart = ({ data, xKey, yKey }) => {
     height: 280,
     color: "#2980B9",
     margin: {
-      top: 20,
+      top: 40,
       left: 45,
       bottom: 25,
       right: 20

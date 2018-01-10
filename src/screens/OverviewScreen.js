@@ -60,7 +60,7 @@ class OverviewScreen extends Component {
 					</View>
 				) : (
 					<ScrollView style={styles.container}>
-						<Text>All Appointments Today</Text>
+						<Text style={styles.text}>All Appointments Today</Text>
 
 						<Deck
 							data={today}

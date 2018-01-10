@@ -12,7 +12,7 @@ export const BarChart = ({ data, accessorKey }) => {
       bottom: 50,
       right: 20
     },
-    color: "#2980B9",
+    color: "#03A9F4",
     gutter: 20,
     animate: {
       type: "oneByOne",
@@ -28,7 +28,7 @@ export const BarChart = ({ data, accessorKey }) => {
       orient: "bottom",
       label: {
         fontFamily: "Arial",
-        fontSize: 8,
+        fontSize: 12,
         fontWeight: true,
         fill: "#34495E"
       }
@@ -42,7 +42,7 @@ export const BarChart = ({ data, accessorKey }) => {
       orient: "left",
       label: {
         fontFamily: "Arial",
-        fontSize: 8,
+        fontSize: 12,
         fontWeight: true,
         fill: "#34495E"
       }
